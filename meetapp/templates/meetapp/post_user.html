@@ -1,0 +1,30 @@
+{% extends 'meetapp/base.html' %}
+{% block content %}
+<hr>
+<p>{{ post.user }}</p>
+<hr>
+<p>후기</p>
+
+<ul>
+
+{% for review in post.review_set.all %}
+    
+    <li>
+        {{ review.user }}
+        {{ review.message }}
+        {{ review.created_at }}
+        {% if review.user == request.user %}
+            <a href="{{ review.get_edit_url }}">
+                수정
+            </a>
+            <a href="{{ review.get_delete_url }}">
+                삭제
+            </a>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+<div class="footer">
+    <a href="{% url 'meetapp:review_new' post.id %}" class='btn btn-primary float-end'>후기 작성</a>
+</div>
+{% endblock content %}

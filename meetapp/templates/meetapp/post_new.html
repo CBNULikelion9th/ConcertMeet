@@ -1,0 +1,11 @@
+{% extends 'meetapp/base.html' %}
+
+{% block content %}
+<h1>콘서트메이트 구하기</h1>
+
+<form action="{% url 'meetapp:post_new' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value='완료'>
+</form>
+{% endblock content %}

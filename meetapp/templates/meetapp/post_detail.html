@@ -1,0 +1,49 @@
+{% extends 'meetapp/base.html' %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<br>
+<p>
+    <a href="{% url 'meetapp:post_user' post.id %}">{{ post.user }}</a>
+</p>
+<p>
+    {{ post.created_at }}
+</p>
+<p>
+    {{ post.content }}
+</p>
+
+<br>
+<br>
+{% if post.user == request.user %}
+    <a href="{% url 'meetapp:post_edit' post.id %}"><input type="button" value ='수정'></a>
+    <a href="{% url 'meetapp:post_list' %}"><input type="button" value ='목록'></a>
+    <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value ='삭제'></a>
+{% endif %}
+
+<br>
+<br>
+댓글
+<ul>
+
+{% for comment in post.comment_set.all %}
+    
+    <li>
+        {{ comment.user }}
+        {{ comment.message }}
+        {{ comment.created_at }}
+        {% if comment.user == request.user %}
+            <a href="{{ comment.get_edit_url }}">
+                수정
+            </a>
+            <a href="{{ comment.get_delete_url }}">
+                삭제
+            </a>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+<div class="footer">
+    <a href="{% url 'meetapp:comment_new' post.id %}" class='btn btn-primary float-end'>댓글 작성</a>
+</div>
+{% endblock content %}
