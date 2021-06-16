@@ -39,7 +39,7 @@ def post_new(request):
             post = form.save(commit=False) #post.id 없음
             post.user = request.user 
             post.save() #post.id 저장
-            return redirect('post_detail', post_id=post.id)
+            return redirect('meetapp:post_detail', post_id=post.id)
 
     return render(request, 'meetapp/post_new.html', {
         'form': form,
@@ -55,7 +55,7 @@ def post_edit(request, post_id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save()
-            return redirect('post_detail', post_id=post.id)
+            return redirect('meetapp:post_detail', post_id=post.id)
 
     return render(request, 'meetapp/post_edit.html', {
         'form': form,
@@ -63,9 +63,10 @@ def post_edit(request, post_id):
     })
 
 def post_delete(request, post_id):
-    post = Post.objects.get(id=post_id)
+    # post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     post.delete()
-    return redirect('post_list')
+    return redirect('meetapp:post_list')
 
 @login_required
 def comment_new(request, post_id):
