@@ -1,10 +1,15 @@
 {% extends 'meetapp/base.html' %}
 
 {% block content %}
+<br>
 <h1>콘서트메이트 구해요</h1>
+<div class="footer">
+    <a href="{% url 'meetapp:post_new' %}" class='btn btn-primary float-end'>새 글 쓰기</a>
+</div>
 
 {% for post in post_list %}
 <h2>
+    <br>
     <a href="{% url 'meetapp:post_detail' post.id %}">{{ post.title }}</a>
 </h2>
 {% endfor %}
