@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404,render,redirect
-from .forms import PostForm
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import authenticate, login
+from .forms import *
 from .models import Post,Comment,Review
 from .forms import CommentForm
 from .forms import ReviewForm
@@ -170,15 +171,20 @@ def post_user(request, post_id):
     return render(request, 'meetapp/post_user.html', context)
 
 def login(request):
-    login = Post.objects.all()
-    context = {
-        'login': login,
-    }
-    return render(request, 'meetapp/login.html', context)
+    return render(request, 'meetapp/login.html')
+
+def logout(request):
+    return render(request, 'meetapp/post_home.html')
 
 def sign(request):
-    sign = Post.objects.all()
-    context = {
-        'sign': sign,
-    }
-    return render(request, 'meetapp/sign.html', context)
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username = username, password = raw_password)
+            return redirect('meetapp:login')
+    else:
+        form = UserForm()
+    return render(request, 'meetapp/sign.html', {'form': form})
