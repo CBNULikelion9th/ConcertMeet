@@ -19,14 +19,14 @@
     position: absolute;
     width: 436px;
     height: 95px;
-    left: 15%;
+    left: 20%;
     top: 70px;
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: bold;
     font-size: 25px;
     line-height: 36px;
-    text-align: center;
+    text-align: left;
 }
 
 .post_user{
@@ -40,31 +40,31 @@
 }
 
 .user_name{
-    position: relative;
+    position: absolute;
     width: 210px;
     height: 46px;
-    left: 0%;
+    left: 250%;
     top: 0px;
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
     line-height: 29px;
-    text-align: center;
+    text-align: left;
 }
 
 .post_content{
     position: absolute;
     width: 573px;
     height: 172px;
-    left: 10%;
+    left: 20%;
     top: 250px;
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: normal;
     font-size: 17px;
     line-height: 25px;
-    text-align: center;
+    text-align: left;
 }
 
 .count h3{

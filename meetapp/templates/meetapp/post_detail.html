@@ -53,7 +53,7 @@
                 {% for comment in post.comment_set.all %}    
             <li>
                 {{ comment.user }}
-                {{ comment.message }}
+                {{ comment.message }}<br>
                 {{ comment.created_at }}
                 {% if comment.user == request.user %}
                     <a href="{{ comment.get_edit_url }}">
@@ -63,7 +63,7 @@
                         삭제
                     </a>
                 {% endif %}
-            </li>
+            </li><br>
                 {% endfor %}
             </div>
         </section>                
