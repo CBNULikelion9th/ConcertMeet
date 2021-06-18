@@ -1,29 +1,51 @@
 {% extends 'meetapp/base.html' %}
 {% block content %}
 {% load static %}
-
+<br>
 <html>
     <head>
-        
+        <link rel="stylesheet" href="{% static 'blog/post_home.css' %}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" 
+        rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" 
+        rel="stylesheet">
     </head>
 
     <body>
-        <section id="today_concert">
-            <div class="concert_list">
-                <br><br>
-                <h1>오늘 진행되고 있는 콘서트</h1> <hr>
-
+        <section id="main">
+            <div class="today_concert">
+                오늘 진행되고 있는 콘서트
+            </div>
+            <div>
+                <img class="photo" src="{% static 'img1.jpg' %}"/>
+            </div>
+            <div class="concert_title">
+                <p>뮤지컬 <시카고></p>
+            </div>
+            <div class="concert_info">
+                <p>2021.07.09~2021.07.11 <br>
+                올림픽공원 올림픽홀</p>             
             </div>
         </section>
 
-        <section id="mate_list">
-            <div class="list">
-                <h1>콘서트메이트 구해요 </h1>
-                <div class="plus">
-                    <a href="{% url 'meetapp:post_list' %}">더보기</a>
-                </div>
+        <section id="greet">
+            <div class="concert_mate">
+                콘서트 메이트 구해요
             </div>
-            
+            <div class="concert_mate_more">
+                <a href="{% url 'meetapp:post_list' %}">더보기</a>
+            </div>
+            <div class="concert_mate_info">
+                
+            </div>
+            <div class="concert_mate_info1">
+                
+            </div>
+            <div class="concert_mate_info2">
+                
+            </div>
         </section>
     </body>
 </html>
