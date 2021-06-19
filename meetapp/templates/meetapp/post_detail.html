@@ -43,9 +43,6 @@
                     <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value ='삭제'></a>
                 {% endif %}
             </div>
-            <div class="comment_submit">
-                <a href="{% url 'meetapp:comment_new' post.id %}" class='btn btn-primary float-end'>댓글 작성</a>
-            </div>      
         </section>
         <section id="greet">
             <div class="comment">
@@ -63,9 +60,12 @@
                         삭제
                     </a>
                 {% endif %}
-            </li><br>
+            </li><br><hr>
                 {% endfor %}
             </div>
+            <div class="comment_submit">
+                <a href="{% url 'meetapp:comment_new' post.id %}" class='btn btn-primary float-end'>댓글 작성</a>
+            </div>      
         </section>                
     </body>
 </html>

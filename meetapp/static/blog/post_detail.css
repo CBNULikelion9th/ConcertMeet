@@ -11,7 +11,7 @@
     position: absolute;
     width: 43px;
     height: 42px;
-    left: 15%;
+    left: 20.25%;
     top: 78px;
 }
 
@@ -19,7 +19,7 @@
     position: absolute;
     width: 436px;
     height: 95px;
-    left: 20%;
+    left: 25%;
     top: 70px;
     font-family: Noto Sans KR;
     font-style: normal;
@@ -33,7 +33,7 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    left: 228px;
+    left: 20%;
     top: 170px;
     background: #C4C4C4;
     border-radius: 50%
@@ -57,7 +57,7 @@
     position: absolute;
     width: 573px;
     height: 172px;
-    left: 20%;
+    left: 25%;
     top: 250px;
     font-family: Noto Sans KR;
     font-style: normal;
@@ -69,7 +69,7 @@
 
 .count h3{
     position: absolute;
-    left: 65%;
+    left: 75%;
     top: 30%;
     font-family: Noto Sans KR;
     font-size: 70px;
@@ -77,29 +77,32 @@
 
 .post_manage{
     position: absolute;
-    left: 85%;
-    top: 15%;
-}
-
-.comment_submit{
-    position: absolute;
-    left: 85%;
-    top: 80%;
+    left: 20%;
+    top: 85%;
 }
 
 #greet{
     position: absolute;
-    width: 1535px;
-    height: 450px;
-    left: 0px;
-    top: 540px;
-    background: white;
+    width: 1536px;
+    height: 500px;
+    top: 72%;
+    background-color: white;
+}
+
+.comment_submit{
+    position: absolute;
+    top: 15%;
+    right: 18%;
 }
 
 .comment{
-    position: relative;
-    left: 20%;
-    top: 10%;
+    position: absolute;
+    left: 25%;
+    top: 15%;
+}
+
+.comment > li{
+    width: 573px;
 }
 
 .comment > p{
