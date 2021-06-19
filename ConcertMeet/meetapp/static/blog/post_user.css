@@ -1,0 +1,72 @@
+#main {
+    position: absolute;
+    width: 1440px;
+    height: 450px;
+    left: 0px;
+    top: 90px;
+    background-color: #E2E2E2;
+}
+
+.post_title{
+    position: absolute;
+    width: 436px;
+    height: 95px;
+    left: 15%;
+    top: 70px;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 36px;
+    text-align: left;
+}
+
+.follow {
+    position: absolute;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+    left:80%;
+    top:20%;
+}
+.follow_button {
+    position:absolute;
+    left:16%;
+    top:80%
+}
+
+#review {
+    position: absolute;
+    top:72%;
+    width: 1440px;
+    height: 450px;
+}
+.review_comment {
+    position: absolute;
+    left: 15%;
+    top: 15%;
+}
+
+.review_comment > p {
+    font-weight: bold;
+    font-size: 25px;
+}
+.comment{
+    position: absolute;
+    left: 15%;
+    top: 35%;
+}
+.comment >ul> li {
+    width: 1000px;
+    height: 100px;
+    background-color: #E2E2E2 ;
+    border-radius: 40px;
+}
+.write_review {
+    position : absolute;
+    top: 15%;
+    left : 80%;
+}
+
+

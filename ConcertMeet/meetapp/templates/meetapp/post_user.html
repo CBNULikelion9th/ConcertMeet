@@ -1,0 +1,67 @@
+{% extends 'meetapp/base.html' %}
+{% block content %}
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'blog/post_user.css' %}">
+    </head>
+    <body>
+        <section id="main">
+            <div class="post_title">
+                <p>{{ post.user }}</p>
+            </div>
+            <div class="follow">
+                <p>팔로잉수</p>
+                <p>14</p>
+                <hr>
+                <p>팔로워수</p>
+                <p>14</p>
+                <hr>
+                <p>다녀온공연</p>
+                <p>3</p>
+            </div>
+            <div class="follow_button">
+                <button type="button" class="btn btn-secondary btn-sm">팔로우</button>
+            </div>
+        </section>
+        <section id="review">
+            <div class="review_comment">
+                <p>후기</p>
+            </div>
+            <div class="comment">
+                <ul>
+                    {% for review in post.review_set.all %}    
+                        <li>
+                            {{ review.user }} 
+                            {{ review.created_at }} <br>
+                            <div class="message">
+                                {{ review.message }}
+
+                            </div>
+                        
+        
+                            {% if review.user == request.user %}
+                                <a href="{{ review.get_edit_url }}">
+                                    수정
+                                </a>
+                                <a href="{{ review.get_delete_url }}">
+                                    삭제
+                                </a>
+                            {% endif %}
+                        </li>
+                        <br>
+                    {% endfor %}
+                </ul>
+        
+            </div>
+            <div class="write_review">
+                <a href="{% url 'meetapp:review_new' post.id %}" class='btn btn-primary float-end'>후기 작성</a>
+            </div>
+        </section>
+    </body>
+
+</html>
+{% endblock content %}
+
+
+            
