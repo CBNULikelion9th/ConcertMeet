@@ -161,11 +161,11 @@ button {
     
 }
 
-.comment_date {
+/* .comment_date {
     position: absolute;
     left:9%;
     top:58%;
-}
+} */
 
 .message {
     left: 46%;
