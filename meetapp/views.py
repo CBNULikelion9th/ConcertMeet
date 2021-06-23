@@ -2,15 +2,17 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import *
-from .models import Post,Comment,Review
+from .models import Concert, Post,Comment,Review
 from .forms import CommentForm
 from .forms import ReviewForm
 
 
 def post_home(request):
     post_home = Post.objects.all()
+    concert_list = Concert.objects.all()
     context = {
         'post_home': post_home,
+        'concert_list' : concert_list,
     }
     return render(request, 'meetapp/post_home.html', context)
 
