@@ -13,6 +13,11 @@ class UserInfoForm(forms.ModelForm):
         model = UserInfo
         fields = ('username', 'name', 'email','phone', 'date_of_birth', 'gender', 'interest')
 
+class FollowForm(forms.ModelForm):
+    class Meta:
+        model: Follow
+        fields = "__all__"
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review

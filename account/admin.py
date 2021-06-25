@@ -9,3 +9,7 @@ class UserInfoAdmin(admin.ModelAdmin):
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Follow)
+class FollowAdmin(admin.ModelAdmin):
+    pass

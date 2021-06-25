@@ -17,7 +17,9 @@ class UserInfo(models.Model):
     gender = models.CharField(max_length=10, choices=gender_choice, null=True)
     interest_choice = (('ballad', 'Ballad'), ('hiphop', 'Hiphop'), ('pop', 'POP'))
     interest = models.CharField(max_length=20, choices=interest_choice, null=True)
+
     profpic = models.ImageField(blank=True, upload_to='user/profilepic')
+    introduction = models.TextField(blank=True)
     following = models.IntegerField(default=0)
     follower = models.IntegerField(default=0)
     concertnum = models.IntegerField(default=0)
@@ -25,13 +27,12 @@ class UserInfo(models.Model):
     def __str__(self):
         return self.username
 
-    def set_username(parusername):
-        username = parusername
-        return username
-
     def get_age(self):
         return timezone.now().year - self.date_of_birth.year + 1
 
+class Follow(models.Model):
+    follow_user_id = models.CharField(max_length=30)
+    followed_user_id = models.CharField(max_length=30)
 
 class Review(models.Model):
     user_id = models.CharField(max_length=30)

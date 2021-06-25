@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import *
 from .models import *
@@ -13,11 +13,26 @@ def user(request, user_id):
     except Review.DoesNotExist:
         reviews=""
     age = infos.get_age()
+
+    if request.user.username != user_id:
+        try:
+            following = Follow.objects.get(follow_user_id=request.user.username, followed_user_id=user_id)
+            if following:
+                isFollowed = 2
+            else:
+                isFollowed = 3
+        except:
+            isFollowed = 3
+    else:
+        isFollowed = -1
+
+
     context = {
             'user': users,
             'info': infos,
             'age':age,
-            'reviews': reviews
+            'reviews': reviews,
+            'isFollowed': isFollowed
         }
     return render(request, 'account/user.html', context)
 
@@ -45,6 +60,44 @@ def sign(request):
         infoForm = UserInfoForm()
     return render(request, 'account/sign.html', {'form': form, 'infoform': infoForm })
 
+def follow(request, user_id):
+    try:
+        user = UserInfo.objects.get(username=request.user.username)
+        tguser = UserInfo.objects.get(username=user_id)
+    except UserInfo.DoesNotExist:
+        return redirect('account:user', user_id)
+    user.following += 1
+    tguser.follower += 1
+    user.save()
+    tguser.save()
+
+    following = Follow.objects.create(follow_user_id=request.user.username, followed_user_id=user_id)
+    following.save()
+    return redirect('account:user', user_id)
+
+def unfollow(request, user_id):
+    userID = request.user.username
+    if not userID:
+        return redirect('account:user', user_id)
+
+    try:
+        user = UserInfo.objects.get(username=userID)
+        tguser = UserInfo.objects.get(username=user_id)
+    except UserInfo.DoesNotExist:
+        return redirect('account:user', user_id)
+    user.following -= 1
+    tguser.follower -= 1
+    if user.following < 0:
+        user.following = 0
+    if tguser.follower < 0:
+        tguser.follower = 0
+    user.save()
+    tguser.save()
+
+    unfollowing = Follow.objects.get(follow_user_id=userID, followed_user_id=user_id)
+    unfollowing.delete()
+
+    return redirect('account:user', user_id)
 
 def review_new(request, user_id):
     if request.method == 'POST':
@@ -61,30 +114,41 @@ def review_new(request, user_id):
         'form' : form,
     })
 
-def review_edit(request, review_id):
-    review = get_object_or_404(Review,id=review_id)
-    if review.user.id != request.user.id:
-        return redirect('meetapp:user')
+def review_edit(request, user_id, review_id):
+    try:
+        review = Review.objects.get(id=review_id)
+    except Review.DoesNotExist:
+        return redirect('account:user', user_id)
+
+    if review.user_id != request.user.username:
+        return redirect('account:user', user_id)
+
     if request.method == 'POST':
         form = ReviewForm(request.POST, request.FILES, instance=review)
         if form.is_valid():
             review = form.save()
             review.save()
-            return redirect('meetapp:user')
+            return redirect('account:user', user_id)
     else:
         form = ReviewForm(instance=review) 
-    return render(request, 'meetapp/review_form.html', {
+
+    return render(request, 'account/review_form.html', {
         'form' : form,
     })
 
-def review_delete(request, review_id):
-    review = get_object_or_404(Review,id=review_id)
-    if review.user != request.user:
-        return redirect('meetapp:user')
+def review_delete(request, user_id, review_id):
+    try:
+        review = Review.objects.get(id=review_id)
+    except Review.DoesNotExist:
+        return redirect('account:user', user_id)
+
+    if review.user_id != request.user.username:
+        return redirect('account:user', user_id)
+
     if request.method == 'POST':
         review.delete()
-        return redirect('meetapp:user')
+        return redirect('account:user', user_id)
     
-    return render(request, 'meetapp/review_confirm_delete.html', {
+    return render(request, 'account/review_confirm_delete.html', {
         'review' : review,
     })

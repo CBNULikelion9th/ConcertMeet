@@ -35,7 +35,7 @@
             <!-- 간단한 자기소개 -->
             <div class="self_content">
                 <br>
-                <p></p>
+                <p>{{ info.introduction }}</p>
             </div>
 
             <div class="follow">
@@ -50,7 +50,11 @@
             </div>
         
             <div class="follow_button">
-                <button>팔로우</button>
+                {% if isFollowed == 2 %}
+                <button><a href ="{% url 'account:unfollow' info.username %}">언팔로우</a></button>
+                {% elif isFollowed == 3 %}
+                <button><a href ="{% url 'account:follow' info.username %}">팔로우</a></button>
+                {% endif %}
             </div>
 
         </section>
