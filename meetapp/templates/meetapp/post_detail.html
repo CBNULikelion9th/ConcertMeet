@@ -18,14 +18,14 @@
         <section id="main">
             <span class="material-icons-outlined">
                 favorite_border
-            </span>
+            </span>≠
 
             <div class="post_title">
                 <p>{{ post.title }}</p>
             </div>
             <div class="post_user">
                 <p class="user_name">
-                    <a href="{% url 'meetapp:post_user' post.id %}">{{ post.user }}</a>
+                    <a href="{% url 'account:user' post.user.username %}">{{ post.user }}</a>
                 </p>
             </div> 
             <div class="post_content">

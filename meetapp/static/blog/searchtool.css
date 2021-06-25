@@ -1,0 +1,44 @@
+.container-fluid {
+    padding-top: 10px;
+}
+.pf-top-srch {
+    width: 400px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: #E2E2E2;
+    
+    
+}
+.fixed {
+    padding-left: 10px;
+    width: 25px;
+}
+/* .pf-top-srch input {
+    border : 5px solid transparent;
+    border-bottom: 1px solid #000; 
+    color: #333;
+} */
+
+.navbar-brand {
+    margin: 0px 40px 0px 120px;
+}
+
+.collapse-navbar-collapse {
+    margin-right: 120px;
+}
+
+.list h1 {
+    position: absolute;
+}
+.plus {
+    padding: 23px 0px 0px 400px;
+}
+
+
+  
+
+
+
+
+
+
