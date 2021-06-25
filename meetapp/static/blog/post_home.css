@@ -61,3 +61,19 @@ body{
   padding-left: 5.5%;
   padding-top: 3px;
 }
+
+/* 콘서트 메이트 */
+.concert_mate .title{
+  display: block;
+  font-size: var(--font-large);
+  font-weight: bold;
+  padding-left: 5.5%;
+  padding-top: 80px;
+} 
+
+.concert_mate .more_info{
+  display: block;
+  font-size: var(--font-small);
+  padding-left: 18%;
+  margin-top: -1.4%;
+}

@@ -19,7 +19,7 @@
         <span class="title">오늘 진행되고 있는 공연</span>
       </div>
       <div class="img">
-        <img src="{%static 'img1.jpg' %}">
+        <img src="{% static 'img1.jpg' %}">
       </div>
       <div class="info">
         <span class="title">뮤지컬 <시카고></span>
@@ -30,7 +30,8 @@
 
     <!-- 콘서트 메이트 -->
     <section class="concert_mate">
-      
+      <span class="title">콘서트 메이트 구해요</span>
+      <a href="{% url 'meetapp:post_list' %}"><span class="more_info">더보기</span></a>
     </section>
   </body>
 
