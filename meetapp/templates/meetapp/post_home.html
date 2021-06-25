@@ -4,47 +4,34 @@
   <head>
     <link rel="stylesheet" href="{% static 'blog/post_home.css' %}" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" 
+    rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
       rel="stylesheet"
     />
   </head>
-
   <body>
-    <section id="main" style="width: 100%">
-      <div class="today_concert">오늘 진행되고 있는 콘서트</div>
-      <!-- {% for concert in concert_list %} -->
-      <div>
-        <img class="photo" src="{% static 'img1.jpg' %}" />
+    <!-- 오늘 진행되고 있는 공연 -->
+    <section id="main" class="today_concert">
+      <div class="metadata">
+        <span class="title">오늘 진행되고 있는 공연</span>
       </div>
-      <div class="concert_title">
-        <a href="https://tickets.interpark.com/goods/21000894">
-          <p>뮤지컬 <시카고></p>
-        </a>
+      <div class="img">
+        <img src="{%static 'img1.jpg' %}">
       </div>
-      <div class="concert_info">
-        <p>
-          2021.07.09~2021.07.11 <br />
-          올림픽공원 올림픽홀
-        </p>
+      <div class="info">
+        <span class="title">뮤지컬 <시카고></span>
+        <span class="date">2021.07.09~2021.07.11</span>
+        <span class="location">올림픽공원 올림픽홀</span>
       </div>
-      <!-- {% endfor %} -->
     </section>
 
-    <section id="greet" style="width: 100%">
-      <div class="concert_mate">콘서트 메이트 구해요</div>
-      <div class="concert_mate_more">
-        <a href="{% url 'meetapp:post_list' %}">더보기</a>
-      </div>
-      <div class="concert_mate_info"></div>
-      <div class="concert_mate_info1"></div>
-      <div class="concert_mate_info2"></div>
+    <!-- 콘서트 메이트 -->
+    <section class="concert_mate">
+      
     </section>
   </body>
-</html>
+
 {% endblock content %}
