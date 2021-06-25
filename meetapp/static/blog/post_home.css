@@ -77,3 +77,44 @@ body{
   padding-left: 18%;
   margin-top: -1.4%;
 }
+
+/* 기준 */
+.concert_mate .list .all{
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  margin-left: 8%;
+  margin-top: 50px;
+  background: #C4C4C4;
+}
+
+/* 기준 */
+.concert_mate .list .hiphop{
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  float: right;
+  margin-right: 8%;
+  margin-top: -19.8%;
+  background: #C4C4C4;
+}
+
+.concert_mate .list .ballad{
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  margin-left: 8%;
+  margin-top: 50px;
+  background: #C4C4C4;
+}
+
+.concert_mate .list .indi{
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  float: right;
+  margin-right: 8%;
+  margin-top: -19.8%;
+  background: #C4C4C4;
+}
+}
