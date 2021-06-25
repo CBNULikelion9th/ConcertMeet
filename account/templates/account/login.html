@@ -7,12 +7,7 @@
   {% load static %}
   {% block extrahead %}
   <title>Login</title>
-  <link rel="stylesheet" href="{% static 'blog/login.css' %}">
-  <script>
-    function gojoin() {
-      location.href = "{% url 'sign' %}";
-    }
-  </script>
+  <link rel="stylesheet" href="{% static 'login.css' %}">
   {% endblock %}
 </head>
 
@@ -35,7 +30,7 @@
         </div>
 
         <!-- Login Form -->
-        <form action="{% url 'meetapp:login' %}" method="POST">
+        <form action="{% url 'account:login' %}" method="POST">
           {% csrf_token %}
           <div class="form-group">
             <label for="username">아이디</label>
@@ -53,6 +48,12 @@
             <input type="button" id="join" value="회원 가입하기" onclick="gojoin();">
           </div>
         </form>
+
+        <script>
+          function gojoin() {
+            location.href = "{% url 'account:sign' %}";
+          }
+        </script>
 
         <!-- Remind Passowrd -->
         <!-- <div id="formFooter">

@@ -1,10 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth import authenticate, login
 from .forms import *
-from .models import Concert, Post,Comment,Review
-from .forms import CommentForm
-from .forms import ReviewForm
+from .models import Post, Comment
 
 
 def post_home(request):
@@ -117,76 +114,3 @@ def comment_delete(request, post_id,id):
     return render(request, 'meetapp/comment_confirm_delete.html', {
         'comment' : comment,
     })
-
-@login_required
-def review_new(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    if request.method == 'POST':
-        form = ReviewForm(request.POST, request.FILES)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.post = post
-            review.user = request.user
-            review.save()
-            return redirect('meetapp:post_user',post.id)
-    else:
-        form = ReviewForm() 
-    return render(request, 'meetapp/review_form.html', {
-        'form' : form,
-    })
-
-@login_required
-def review_edit(request, post_id,id):
-    review = get_object_or_404(Review,id=id)
-    if review.user != request.user:
-        return redirect('meetapp:post_user', post_id)
-    if request.method == 'POST':
-        form = ReviewForm(request.POST, request.FILES, instance=review)
-        if form.is_valid():
-            review = form.save()
-            review.save()
-            return redirect('meetapp:post_user',post_id)
-    else:
-        form = ReviewForm(instance=review) 
-    return render(request, 'meetapp/review_form.html', {
-        'form' : form,
-    })
-
-@login_required
-def review_delete(request, post_id,id):
-    review = get_object_or_404(Review,id=id)
-    if review.user != request.user:
-        return redirect('meetapp:post_user', post_id)
-    if request.method == 'POST':
-        review.delete()
-        return redirect('meetapp:post_user', post_id)
-    
-    return render(request, 'meetapp/review_confirm_delete.html', {
-        'review' : review,
-    })
-
-def post_user(request, post_id):
-    post = Post.objects.get(id=post_id)
-    context = {
-            'post': post
-        }
-    return render(request, 'meetapp/post_user.html', context)
-
-def login(request):
-    return render(request, 'meetapp/login.html')
-
-def logout(request):
-    return render(request, 'meetapp/post_home.html')
-
-def sign(request):
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username = username, password = raw_password)
-            return redirect('meetapp:login')
-    else:
-        form = UserForm()
-    return render(request, 'meetapp/sign.html', {'form': form})

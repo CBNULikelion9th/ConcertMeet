@@ -1,0 +1,109 @@
+{% extends 'meetapp/base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Sign up</title>
+  <style>
+    .form-group {
+      padding-bottom: 15px;
+    }
+    b {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    function con() {
+      alert('비밀번호 확인되었습니다');
+      // 비밀번호 기준: 8자 이상, 간단한 비밀번호 X, 비밀번호 1 2의 내용 동일한지 체크..해야함
+    }
+  </script>
+  
+  <section>
+    <div class="container" style="display: flex; justify-content: center;">
+      <div style="width: 80%; border: solid 2px blueviolet; padding: 20px;">
+        <h1 style="text-align: center;">회원가입</h1>
+        <form action="{% url 'account:sign' %}" method="POST">
+          {% csrf_token %}
+          {% include "form_errors.html" %}
+          <div class="form-group">
+            <label>아이디 <b>*</b></label>
+            <div class="row">
+              <div class="col-sm-5">
+                <input type="text" class="form-control" name="username" id="username" placeholder="아이디 입력"
+                value="{{ form.username.value|default_if_none:'' }}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label>비밀번호 <b>*</b></label>
+                <input type="password" class="form-control" name="password1" id="password1" placeholder="8자 이상 입력"
+                value="{{ form.password1.value|default_if_none:'' }}">
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group">
+                <label>비밀번호 확인 <b>*</b></label>
+                <input type="password" class="form-control" name="password2" id="password2" placeholder="8자 이상 입력"
+                value="{{ form.password2.value|default_if_none:'' }}">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <br>
+              <input type="submit" id="confirm" class="btn btn-dark" value="확인" onclick="con()">
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label>이름 <b>*</b></label>
+            <input type="text" class="form-control" name="name" id="name" value="{{ infoform.name.value|default_if_none:'' }}">
+          </div>
+    
+          <div class="form-group">
+            <label>이메일 <b>*</b></label>
+            <input type="text" class="form-control" name="email" id="email"
+              value="{{ infoform.email.value|default_if_none:'' }}">
+          </div>
+          <div class="form-group">
+            <label>전화번호 <b>*</b></label>
+            <input type="tel" class="form-control" name="phone" id="phone" placeholder="010-****-****"
+              value="{{ infoform.phone.value|default_if_none:'' }}">
+          </div>
+          <div class="form-group">
+            <label>생년월일</label>
+            <br>
+            <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="2000-01-01"
+              value="{{ infoform.date_of_birth.value|default_if_none:'' }}">
+          </div>
+          <div class="form-group">
+            <label>성별</label>
+            <br>
+            {{ infoform.gender }}
+          </div>
+          <div class="form-group">
+            <label>관심사</label>
+            <br>
+            {{ infoform.interest }}
+          </div>
+          <br>
+          <div style="text-align: center;">
+            <input type="submit" id="submit" class="btn btn-dark" value="Join">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div style="height: 100px;"></div>
+  </section>
+
+
+</body>
+
+</html>
+{% endblock content %}

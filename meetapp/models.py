@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models.fields.files import ImageField
 from django.urls import reverse
 
-
 class Post(models.Model):
     title = models.CharField(max_length=100)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -28,21 +27,6 @@ class Comment(models.Model):
     
     def get_delete_url(self):
         return reverse('meetapp:comment_delete', args=[self.post.id, self.id])
-
-class Review(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey('Post',on_delete=models.CASCADE,)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['-id']
-
-    def get_edit_url(self):
-        return reverse('meetapp:review_edit', args=[self.post.id, self.id])
-    
-    def get_delete_url(self):
-        return reverse('meetapp:review_delete', args=[self.post.id, self.id])
 
 class Concert(models.Model):
     title = models.CharField(max_length=100)

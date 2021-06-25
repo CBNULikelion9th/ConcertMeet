@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <link rel="stylesheet" href="{% static 'blog/searchtool.css' %}">
+  <link rel="stylesheet" href="{% static 'searchtool.css' %}">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'meetapp:post_home' %}">ConcertMeet</a>
@@ -30,10 +30,10 @@
         <div class="collapse-navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'meetapp:logout' %}">로그아웃</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:logout' %}">로그아웃</a></li>
             {% else %}
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'meetapp:login' %}">로그인</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'meetapp:sign' %}">회원가입</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:login' %}">로그인</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:sign' %}">회원가입</a></li>
             {% endif %}
           </ul>
         </div>
