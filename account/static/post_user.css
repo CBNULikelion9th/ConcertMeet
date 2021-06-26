@@ -104,11 +104,15 @@ button:after {
   left: 0;
   bottom: 0;
 }
+.follow_button > button > a {
+  color: #000000;
+  text-decoration: none;
+}
 
 #review {
   position: absolute;
   top: 72%;
-  width: 1440px;
+  width: 100%;
   height: 450px;
 }
 .review_title {

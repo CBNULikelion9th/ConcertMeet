@@ -1,17 +1,17 @@
 .container-fluid {
-    padding-top: 10px;
+    padding-top:1%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10%;
 }
 .pf-top-srch {
     width: 400px;
     height: 30px;
     border-radius: 100px;
-    background-color: #E2E2E2;
-    
-    
+    background-color: #E2E2E2;    
 }
 .fixed {
-    padding-left: 10px;
-    width: 25px;
+    padding-left: 3%;
 }
 /* .pf-top-srch input {
     border : 5px solid transparent;
@@ -19,19 +19,8 @@
     color: #333;
 } */
 
-.navbar-brand {
-    margin: 0px 40px 0px 120px;
-}
-
 .collapse-navbar-collapse {
-    margin-right: 120px;
-}
-
-.list h1 {
-    position: absolute;
-}
-.plus {
-    padding: 23px 0px 0px 400px;
+    margin-right: 5%;
 }
 
 
