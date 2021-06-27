@@ -64,7 +64,7 @@ body{
 
 /* 콘서트 메이트 */
 .concert_mate .title{
-  display: block;
+  display: inline-block;
   font-size: var(--font-large);
   font-weight: bold;
   padding-left: 5.5%;
@@ -72,34 +72,36 @@ body{
 } 
 
 .concert_mate .more_info{
-  display: block;
+  display: inline-block;
   font-size: var(--font-small);
-  padding-left: 18%;
-  margin-top: -1.4%;
+  padding-left: 2%;  
 }
 
 /* 기준 */
 .concert_mate .list .all{
+  display: inline-block;
   width: 580px;
   height: 300px;
   border-radius: 5%;
   margin-left: 8%;
-  margin-top: 50px;
+  margin-top: 3%;
   background: #C4C4C4;
 }
 
 /* 기준 */
 .concert_mate .list .hiphop{
+  display: inline-block;
   width: 580px;
   height: 300px;
   border-radius: 5%;
   float: right;
   margin-right: 8%;
-  margin-top: -19.8%;
+  margin-top: 3%;
   background: #C4C4C4;
 }
 
 .concert_mate .list .ballad{
+  display: inline-block;
   width: 580px;
   height: 300px;
   border-radius: 5%;
@@ -109,12 +111,12 @@ body{
 }
 
 .concert_mate .list .indi{
+  display: inline-block;
   width: 580px;
   height: 300px;
   border-radius: 5%;
   float: right;
   margin-right: 8%;
-  margin-top: -19.8%;
+  margin-top: 50px;
   background: #C4C4C4;
-}
 }
