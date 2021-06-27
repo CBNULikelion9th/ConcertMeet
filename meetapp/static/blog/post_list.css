@@ -1,7 +1,14 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .title > h1 {
     position:relative;
     font-family: notosans;
-    font-size:30px;
+    font-size:20px;
+    font-weight: bold;
     display:inline-flex;
     margin: 5% 0% 0% 10%;
 }
@@ -15,9 +22,10 @@
 }
 .post > h2 > a{
     position:relative;
-    font-size:18px;
+    font-size:15px;
+    font-weight: bold;
     display:inline;
-    padding-left: 7%;
+    padding-left: 11%;
     text-align: center;
     font-style: normal;
     line-height: 18px;
@@ -30,10 +38,10 @@
     font-family: notosans;
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
-    line-height: 23px;
+    font-size: 30px;
+    line-height: 30px;
     color: #000000;
-    padding-left:53%;
+    padding-left: 47%;
     transform: translate(50%,-30%);
     width: 35px;
     height: 35px;
@@ -41,19 +49,19 @@
 
 .hashtag {
     position: absolute; 
-    width: 70px;
+    width: 56px;
     height: 20px;
     background: #ADC4FF;
     border-radius: 11px;
-    margin-left:20%;
-    margin-top:0.7%;
+    margin-left:21.8%;
+    margin-top:1%;
 }
 
 .hashtag > p {
     font-family: notosans;
     font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
+    font-weight: bold;
+    font-size: 13px;
     line-height: 18px;
     position: absolute;
     transform: translate(24%,0%);
@@ -63,10 +71,10 @@
     font-family: notosans;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 13px;
     position: absolute;
-    margin-left:26%;
-    margin-top:0.3%;
+    margin-left:26.5%;
+    margin-top:1%;
 }
 
 .heart {
@@ -75,7 +83,7 @@
     background: #C4C4C4;
     position: relative;
     transform: rotate(45deg);
-    margin: -3.5% 0% 0% 17%;
+    margin-left: 18%;
 }
 
 .heart:hover:before,
@@ -99,3 +107,6 @@
     top: -60%;
 }
 
+.button{
+    margin-right: 21%;
+}
