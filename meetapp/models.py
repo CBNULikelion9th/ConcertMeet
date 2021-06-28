@@ -9,6 +9,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     content = models.TextField()
+    view_count = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return f'{self.title}'

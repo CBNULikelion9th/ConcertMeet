@@ -1,122 +1,147 @@
-#main {
-  background-color: #e2e2e2;
-  width: 100%;
-  height: 452px;
+:root {
+  /* size */
+
+  /* Font size */
+  --font-large: 20px;
+  --font-medium: 15px;
+  --font-small: 13px;
+  --font-micro: 10px;
 }
 
-.today_concert {
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: "Noto Sans KR", sans-serif;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 29px;
-
-  position: absolute;
-  width: 404px;
-  height: 47px;
-  left: 66px;
-  top: 112px;
 }
 
-.photo {
-  position: absolute;
-  width: 180px;
-  height: 236px;
-  left: 60px;
-  top: 170px;
-}
-
-.concert_title {
-  position: absolute;
-  width: 140px;
-  height: 32px;
-  left: 72px;
-  top: 419px;
-
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 22px;
-}
-
-.concert_info {
-  position: absolute;
-  width: 111px;
-  height: 38px;
-  left: 72px;
-  top: 460px;
-
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 19px;
-  text-align: center;
-}
-
-#greet {
-  background-color: white;
+#main {
+  top: 0;
+  background: #e2e2e2;
   width: 100%;
-  height: 500px;
+  height: 28em;
 }
-
-.concert_mate {
-  position: absolute;
-  width: 220px;
-  height: 62px;
-  left: 61px;
-  top: 629px;
-
-  font-family: Noto Sans KR;
-  font-style: normal;
+/* 오늘 진행되고 있는 공연 */
+.today_concert .metadata .title {
+  display: block;
+  font-size: var(--font-large);
   font-weight: bold;
-  font-size: 21px;
-  line-height: 30px;
+  padding-left: 5%;
+  padding-top: 20px;
+}
+
+.today_concert .img img {
+  display: block;
+  width: 250px;
+  padding-left: 5%;
+  padding-top: 20px;
+}
+
+.today_concert .info .title {
+  display: block;
+  font-size: var(--font-medium);
+  font-weight: bold;
+  padding-left: 5.5%;
+  padding-top: 20px;
+}
+
+.today_concert .info .date {
+  display: block;
+  font-size: var(--font-small);
+  padding-left: 5.5%;
+  padding-top: 3px;
+}
+
+.today_concert .info .location {
+  display: block;
+  font-size: var(--font-small);
+  padding-left: 5.5%;
+  padding-top: 3px;
+}
+
+/* 콘서트 메이트 */
+.concert_mate .title {
+  display: inline-block;
+  font-size: var(--font-large);
+  font-weight: bold;
+  padding-left: 5.5%;
+  padding-top: 80px;
+}
+
+.concert_mate .more_info {
+  display: inline-block;
+  font-size: var(--font-small);
+  padding-left: 2%;
+}
+
+/* 기준 */
+.concert_mate .list .all {
+  display: inline-block;
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  margin-left: 8%;
+  margin-top: 3%;
+  background: #c4c4c4;
+}
+
+/* 기준 */
+.concert_mate .list .hiphop {
+  display: inline-block;
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  float: right;
+  margin-right: 8%;
+  margin-top: 3%;
+  background: #c4c4c4;
+}
+
+.concert_mate .list .ballad {
+  display: inline-block;
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  margin-left: 8%;
+  margin-top: 50px;
+  background: #c4c4c4;
+}
+
+.concert_mate .list .indi {
+  display: inline-block;
+  width: 580px;
+  height: 300px;
+  border-radius: 5%;
+  float: right;
+  margin-right: 8%;
+  margin-top: 50px;
+  background: #c4c4c4;
+}
+
+.home_list {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 50px 0px 50px;
+}
+
+.home_concert {
+  width: 300px;
+}
+
+.home_concert_info {
   text-align: center;
 }
 
-.concert_mate_more {
-  position: absolute;
-  width: 75px;
-  height: 27px;
-  left: 262px;
-  top: 639px;
-
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 19px;
-  text-align: center;
+.home_concert_info img {
+  margin-bottom: 20px;
+  width: 130px;
+  height: 200px;
 }
 
-/* .concert_mate_info 도형 */
-.concert_mate_info {
-  position: absolute;
-  width: 342px;
-  height: 183px;
-  left: 61px;
-  top: 732px;
-  background: #e2e2e2;
-  border-radius: 40px;
-}
-
-.concert_mate_info1 {
-  position: absolute;
-  width: 342px;
-  height: 183px;
-  left: 557px;
-  top: 732px;
-  background: #e2e2e2;
-  border-radius: 40px;
-}
-
-.concert_mate_info2 {
-  position: absolute;
-  width: 342px;
-  height: 183px;
-  left: 1028px;
-  top: 732px;
-  background: #e2e2e2;
-  border-radius: 40px;
+.home_concert_info div {
+  padding-top: 3px;
 }
