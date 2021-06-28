@@ -36,6 +36,21 @@ def user(request, user_id):
         }
     return render(request, 'account/user.html', context)
 
+def user_edit(request, user_id):
+    user = User.objects.get(username=user_id)
+    info = UserInfo.objects.get(username=user_id)
+    if request.method == 'POST':
+        userForm = UserForm(request.POST, instance=user)
+        infoForm = UserInfoForm(request.POST, request.FILES, instance=info)
+        if userForm.is_valid() and infoForm.is_valid():
+            userForm.save()
+            infoForm.save()
+            return redirect('user', user_id)
+    else:
+        userForm = UserForm(instance=user)
+        infoForm = UserInfoForm(instance=info)
+    return render(request, 'account/user_edit.html', { 'user':userForm, 'info':infoForm })
+
 def login(request):
     return render(request, 'account/login.html')
 
