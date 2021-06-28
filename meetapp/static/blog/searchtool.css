@@ -1,17 +1,18 @@
 .container-fluid {
-    padding-top:1%;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 10%;
+  padding-top: 1%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10%;
 }
 .pf-top-srch {
-    width: 400px;
-    height: 30px;
-    border-radius: 100px;
-    background-color: #E2E2E2;    
+  width: 400px;
+  height: 35px;
+  border-radius: 100px;
+  background-color: #e2e2e2;
+  align-items: center;
 }
 .fixed {
-    padding-left: 3%;
+  padding-left: 3%;
 }
 /* .pf-top-srch input {
     border : 5px solid transparent;
@@ -20,14 +21,5 @@
 } */
 
 .collapse-navbar-collapse {
-    margin-right: 5%;
+  margin-right: 5%;
 }
-
-
-  
-
-
-
-
-
-

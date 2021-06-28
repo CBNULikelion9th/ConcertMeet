@@ -4,8 +4,10 @@
   <head>
     <link rel="stylesheet" href="{% static 'blog/post_home.css' %}" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" 
-    rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
@@ -18,20 +20,26 @@
       <div class="metadata">
         <span class="title">오늘 진행되고 있는 공연</span>
       </div>
-      <div class="img">
-        <img src="{% static 'img1.jpg' %}">
-      </div>
-      <div class="info">
-        <span class="title">뮤지컬 <시카고></span>
-        <span class="date">2021.07.09~2021.07.11</span>
-        <span class="location">올림픽공원 올림픽홀</span>
+      <div class="home_list">
+        {% for concert in concert_list %}
+        <div class="home_concert">
+          <div class="home_concert_info">
+            <img src="{{ concert.image_url}}" />
+            <div>{{ concert.title }}</div>
+            <div>{{concert.location}}</div>
+            <div>{{concert.date}}</div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </section>
 
     <!-- 콘서트 메이트 -->
     <section class="concert_mate">
       <span class="title">콘서트 메이트 구해요</span>
-      <a href="{% url 'meetapp:post_list' %}"><span class="more_info">더보기</span></a>
+      <a href="{% url 'meetapp:post_list' %}"
+        ><span class="more_info">더보기</span></a
+      >
       <div class="list">
         <div class="all"></div>
         <div class="hiphop"></div>
@@ -41,4 +49,5 @@
     </section>
   </body>
 
-{% endblock content %}
+  {% endblock content %}
+</html>

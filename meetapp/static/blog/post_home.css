@@ -8,24 +8,24 @@
   --font-micro: 10px;
 }
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-body{
-  font-family: 'Noto Sans KR', sans-serif;
+body {
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-#main{
+#main {
   top: 0;
-  background: #E2E2E2;
+  background: #e2e2e2;
   width: 100%;
-  height: 27em;
+  height: 28em;
 }
 /* 오늘 진행되고 있는 공연 */
-.today_concert .metadata .title{
+.today_concert .metadata .title {
   display: block;
   font-size: var(--font-large);
   font-weight: bold;
@@ -33,14 +33,14 @@ body{
   padding-top: 20px;
 }
 
-.today_concert .img img{
+.today_concert .img img {
   display: block;
   width: 250px;
   padding-left: 5%;
   padding-top: 20px;
 }
 
-.today_concert .info .title{
+.today_concert .info .title {
   display: block;
   font-size: var(--font-medium);
   font-weight: bold;
@@ -48,14 +48,14 @@ body{
   padding-top: 20px;
 }
 
-.today_concert .info .date{
+.today_concert .info .date {
   display: block;
   font-size: var(--font-small);
   padding-left: 5.5%;
   padding-top: 3px;
 }
 
-.today_concert .info .location{
+.today_concert .info .location {
   display: block;
   font-size: var(--font-small);
   padding-left: 5.5%;
@@ -63,33 +63,33 @@ body{
 }
 
 /* 콘서트 메이트 */
-.concert_mate .title{
+.concert_mate .title {
   display: inline-block;
   font-size: var(--font-large);
   font-weight: bold;
   padding-left: 5.5%;
   padding-top: 80px;
-} 
+}
 
-.concert_mate .more_info{
+.concert_mate .more_info {
   display: inline-block;
   font-size: var(--font-small);
-  padding-left: 2%;  
+  padding-left: 2%;
 }
 
 /* 기준 */
-.concert_mate .list .all{
+.concert_mate .list .all {
   display: inline-block;
   width: 580px;
   height: 300px;
   border-radius: 5%;
   margin-left: 8%;
   margin-top: 3%;
-  background: #C4C4C4;
+  background: #c4c4c4;
 }
 
 /* 기준 */
-.concert_mate .list .hiphop{
+.concert_mate .list .hiphop {
   display: inline-block;
   width: 580px;
   height: 300px;
@@ -97,20 +97,20 @@ body{
   float: right;
   margin-right: 8%;
   margin-top: 3%;
-  background: #C4C4C4;
+  background: #c4c4c4;
 }
 
-.concert_mate .list .ballad{
+.concert_mate .list .ballad {
   display: inline-block;
   width: 580px;
   height: 300px;
   border-radius: 5%;
   margin-left: 8%;
   margin-top: 50px;
-  background: #C4C4C4;
+  background: #c4c4c4;
 }
 
-.concert_mate .list .indi{
+.concert_mate .list .indi {
   display: inline-block;
   width: 580px;
   height: 300px;
@@ -118,5 +118,30 @@ body{
   float: right;
   margin-right: 8%;
   margin-top: 50px;
-  background: #C4C4C4;
+  background: #c4c4c4;
+}
+
+.home_list {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 50px 0px 50px;
+}
+
+.home_concert {
+  width: 300px;
+}
+
+.home_concert_info {
+  text-align: center;
+}
+
+.home_concert_info img {
+  margin-bottom: 20px;
+  width: 130px;
+  height: 200px;
+}
+
+.home_concert_info div {
+  padding-top: 3px;
 }
