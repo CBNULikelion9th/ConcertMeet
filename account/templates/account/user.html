@@ -100,6 +100,20 @@
                                 <a href="{% url 'account:review_delete' info.username review.id %}">
                                     삭제
                                 </a>
+                                <!--
+                                <button onclick="delete_alert()">삭제</button>
+                                <script>
+                                    function delete_alert() {
+                                        var res = confirm("정말 삭제하시겠습니까?");
+                                        if(res) {
+                                            location.href="{% url 'account:review_delete' info.username review.id %}";
+                                        }
+                                        else {
+                                            alert("취소되었습니다.");
+                                        }
+                                    }
+                                </script>
+                                -->
                             {% endif %}
 
                         </li>
