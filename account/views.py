@@ -28,6 +28,7 @@ def user(request, user_id):
 
 
     context = {
+            'req_user':request.user.username,
             'user': users,
             'info': infos,
             'age':age,
@@ -61,10 +62,12 @@ def sign(request):
     if request.method == "POST":
         form = UserForm(request.POST, request.FILES)
         infoForm = UserInfoForm(request.POST, request.FILES)
+        interestForm = request.POST.get_list("interest")
         if form.is_valid() and infoForm.is_valid():
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             form.save()
+            infoForm.interest = interestForm
             infoForm.save(commit=False)
             infoForm.username=username
             infoForm.save()
@@ -157,15 +160,6 @@ def review_delete(request, user_id, review_id):
     except Review.DoesNotExist:
         return redirect('account:user', user_id)
 
-    if review.user_id != request.user.username:
-        return redirect('account:user', user_id)
-
-    if request.method == 'POST':
+    if review.user_id == request.user.username:
         review.delete()
-        return redirect('account:user', user_id)
-    
-    return render(request, 'account/review_confirm_delete.html', {
-        'review' : review,
-    })
-    # review.delete()
-    # return redirect('account:user', user_id)
+    return redirect('account:user', user_id)

@@ -15,8 +15,7 @@ class UserInfo(models.Model):
     date_of_birth = models.DateField(null=True)
     gender_choice = (('남자', '남자'), ('여자', '여자'))
     gender = models.CharField(max_length=10, choices=gender_choice, null=True)
-    interest_choice = (('ballad', 'Ballad'), ('hiphop', 'Hiphop'), ('pop', 'POP'))
-    interest = models.CharField(max_length=20, choices=interest_choice, null=True)
+    interest = models.JSONField(default=dict)
 
     profpic = models.ImageField(blank=True, upload_to='user/profilepic')
     introduction = models.TextField(blank=True)

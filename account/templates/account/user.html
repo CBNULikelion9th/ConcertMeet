@@ -54,6 +54,8 @@
                 <button><a href ="{% url 'account:unfollow' info.username %}">언팔로우</a></button>
                 {% elif isFollowed == 3 %}
                 <button><a href ="{% url 'account:follow' info.username %}">팔로우</a></button>
+                {% elif isFollowed == -1 %}
+                <button><a href ="{% url 'account:user_edit' info.username %}">정보 수정</a></button>
                 {% endif %}
             </div>
 
@@ -91,16 +93,10 @@
                                 &nbsp;&nbsp;{{ review.message }}
                             </div>
 
-                            {% if review.user_id == request.user.username %}
+                            {% if review.user_id == req_user %}
                                 <a href="{% url 'account:review_edit' info.username review.id %}">
-                                    수정
-                                </a>
-                            {% endif %}
-                            {% if review.user_id == request.user.username or request.user.username == review.user_id %}
-                                <a href="{% url 'account:review_delete' info.username review.id %}">
-                                    삭제
-                                </a>
-                                <!--
+                                        수정
+                                    </a>
                                 <button onclick="delete_alert()">삭제</button>
                                 <script>
                                     function delete_alert() {
@@ -113,7 +109,6 @@
                                         }
                                     }
                                 </script>
-                                -->
                             {% endif %}
 
                         </li>
