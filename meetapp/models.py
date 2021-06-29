@@ -9,6 +9,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     content = models.TextField()
+    hit = models.IntegerField(default=-1)
     
     def __str__(self):
         return f'{self.title}'

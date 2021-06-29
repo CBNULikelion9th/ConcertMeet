@@ -6,84 +6,50 @@
 
 .title > h1 {
     position:relative;
+    display:block;
+    margin: 5% 0% 3% 10%;
     font-family: notosans;
     font-size:20px;
     font-weight: bold;
-    display:inline-flex;
-    margin: 5% 0% 0% 10%;
 }
 
-.post > h2 {
+.button{
+    margin-right: 21%;
+}
+
+.page_title {
+    position: relative;
+    margin:auto;
     background-color: #E2E2E2;
     width: 972px;
     height: 79px;
-    margin: 3% 0% -3% 15%;
-    position: relative;
 }
-.post > h2 > a{
-    position:relative;
+
+.page_title > a {
+    position:absolute;
+    display:inline;
+    padding-top:1.7%;
+    padding-left:8.5%;
     font-size:15px;
     font-weight: bold;
-    display:inline;
-    padding-left: 11%;
-    text-align: center;
     font-style: normal;
     line-height: 18px;
     color: #000000;
     text-decoration: none;
 }
 
-.matching > p {
-    position: absolute;
-    font-family: notosans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 30px;
-    color: #000000;
-    padding-left: 47%;
-    transform: translate(50%,-30%);
-    width: 35px;
-    height: 35px;
-}
-
-.hashtag {
-    position: absolute; 
-    width: 56px;
-    height: 20px;
-    background: #ADC4FF;
-    border-radius: 11px;
-    margin-left:21.8%;
-    margin-top:1%;
-}
-
-.hashtag > p {
-    font-family: notosans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 13px;
-    line-height: 18px;
-    position: absolute;
-    transform: translate(24%,0%);
-}
-
-.date > p {
-    font-family: notosans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    position: absolute;
-    margin-left:26.5%;
-    margin-top:1%;
+.side {
+    display: flex;
+    justify-content: space-between;
+    margin: -3.2% 20% 0% 16.5%;
 }
 
 .heart {
+    background: #C4C4C4;
+    position: absolute;
+    transform: rotate(45deg);
     width: 18px;
     height: 18px;
-    background: #C4C4C4;
-    position: relative;
-    transform: rotate(45deg);
-    margin-left: 18%;
 }
 
 .heart:hover:before,
@@ -107,6 +73,43 @@
     top: -60%;
 }
 
-.button{
-    margin-right: 21%;
+.heart:visited:before,
+.heart:visited:after,
+.heart:visited {
+    background: #fff;
 }
+
+.matching > p {
+    position: relative;
+    font-family: notosans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 30px;
+    color: #000000;
+}
+
+.info {
+    position: relative;
+    margin: -2.3% 0% 2% 20%;
+}
+
+.hashtag > p {
+    position: absolute;
+    white-space : nowrap;
+    background: #ADC4FF;
+    border-radius: 11px;
+    font-family: notosans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    padding:0% 10px 0% 10px;
+}
+
+.date > p {
+    position: absolute;
+    margin: -0.2% 0% 0% 6%;
+}
+
+
+

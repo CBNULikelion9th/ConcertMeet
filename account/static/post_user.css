@@ -7,35 +7,22 @@
   background-color: #e2e2e2;
 }
 
-.user_info {
-  position: absolute;
-  width: 100px;
-  height: 95px;
-  line-height: 36px;
-}
 .user_name {
   position: relative;
-  left: 150%;
+  display: inline-flex;
+  margin: 5% 0% 0% 9%;
 }
-.user_name > p {
-  position: absolute;
+.user_name > h1 {
+  position: relative;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
-  margin-bottom: 0;
-  left: 20%;
-  top: 70px;
+  width: 150px;
+  text-align:center;
 }
-.user_etc {
+.user_name > p {
   position: relative;
-  left: 300%;
-  top: 70px;
-}
-.user_etc > p {
-  position: absolute;
   font-size: 17px;
-  margin-bottom: 0;
-  left: -20%;
 }
 .self_photo {
   background-color: rgb(139, 139, 139);
@@ -43,26 +30,29 @@
   border-radius: 50%;
   width: 210px;
   height: 210px;
-  left: 11%;
-  top: 28%;
+  margin: 1% 0% 0% 11%;
 }
 .self_content {
-  background-color: rgb(204, 203, 203);
-  width: 450px;
+  position: relative;
+  margin: 2% 0% 0% 35%;
+  width: 470px;
   height: 200px;
-  position: absolute;
+  background-color: rgb(204, 203, 203);
   border-radius: 30px;
-  left: 36%;
-  top: 30%;
+  
 }
 .follow {
   position: absolute;
   font-weight: bolder;
   text-align: center;
   font-size: 20px;
-  left: 78%;
-  top: 20%;
+  margin:-21% 0% 0% 80%;
 }
+
+.follow > p {
+  font-weight: normal;
+}
+
 .follow > hr {
   height: 2px;
   background-color: rgb(0, 0, 0);
@@ -80,8 +70,8 @@ button {
   transition: 800ms ease all;
   outline: none;
   border-radius: 30px;
-  top: 83%;
-  left: 14%;
+  margin: 19% 0% 0% 14.5%;
+  
 }
 button:hover {
   background: #fff;
@@ -117,8 +107,7 @@ button:after {
 }
 .review_title {
   position: absolute;
-  left: 15%;
-  top: 15%;
+  margin:6% 0% 0% 15%;
 }
 
 .review_title > p {
@@ -128,9 +117,9 @@ button:after {
 
 .comment {
   position: absolute;
-  left: 15%;
-  top: 35%;
+  margin:11% 0% 0% 15%;
 }
+
 .comment > ul > li {
   width: 1000px;
   height: 130px;
@@ -143,39 +132,37 @@ button:after {
   width: 50px;
   height: 50px;
   position: relative;
-  left: 3%;
+  margin: 2% 0% 0% 3%;
 }
 
 .comment_user_name > strong {
   position: absolute;
-  left: 10%;
+  margin: -6% 0% 0% 10%;
+  float:left;
 }
 
-.comment_user_etc {
+/* .comment_user_etc {
   position: absolute;
-  left: 18%;
-}
+  float:left;
+} 
 
 .comment_concert {
   position: absolute;
   left: 10%;
   padding-top: 30px;
-}
+} */
 
 .comment_date {
   position: absolute;
-  left: 9%;
-  top: 58%;
+  margin-left:10%;
 }
 
 .message {
-  left: 46%;
-  bottom: 50%;
+  position: relative;
+  margin: -7% 0% 0% 50%;
   width: 450px;
   height: 90px;
-  /* background-color: blue; */
-  position: relative;
-}
+} 
 
 .review_button {
   position: absolute;

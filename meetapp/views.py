@@ -22,9 +22,17 @@ def post_list(request):
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
+    post.hit +=1
+    post.save()
     context = {
             'post': post
         }
+    return render(request, 'meetapp/post_detail.html', context)
+
+def post_resethit(request,post_id):
+    post = Post.objects.get(id=post_id)
+    post.views = 0
+    post.save()
     return render(request, 'meetapp/post_detail.html', context)
 
 def post_new(request):
@@ -54,6 +62,7 @@ def post_edit(request, post_id):
         # 사용자가 입력한 데이터를 저장하는 부분
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
+            post.hit -= 1 
             post = form.save()
             return redirect('meetapp:post_detail', post_id=post.id)
 
