@@ -50,7 +50,7 @@ def user_edit(request, user_id):
     else:
         userForm = UserForm(instance=user)
         infoForm = UserInfoForm(instance=info)
-    return render(request, 'account/user_edit.html', { 'user':userForm, 'info':infoForm })
+    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'user':userForm, 'info':infoForm, 'cur_info':info })
 
 def login(request):
     return render(request, 'account/login.html')

@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.db.models.fields.files import ImageField
 from django.urls import reverse
 
 class Post(models.Model):
