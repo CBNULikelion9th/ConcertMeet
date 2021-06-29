@@ -4,12 +4,11 @@
   justify-content: space-between;
   padding-left: 10%;
 }
-.pf-top-srch {
+.pf {
   width: 400px;
   height: 35px;
   border-radius: 100px;
   background-color: #e2e2e2;
-  align-items: center;
 }
 .fixed {
   padding-left: 3%;

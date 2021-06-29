@@ -20,33 +20,35 @@
                 <h1>콘서트 메이트 구해요</h1>
             </div>
 
-            <div class="button">
+            <!-- <div class="button">
                 <a href="{% url 'meetapp:post_new' %}" class='btn btn-primary float-end'>새 글 쓰기</a>
-            </div>
+            </div> -->
 
-            <div class="post">
-                {% for post in post_list %} 
-                    <h2>
-                        <a href="{% url 'meetapp:post_detail' post.id %}">{{ post.title }}</a>
-                    </h2>
+            {% for post in post_list %}
+                <div class="page_title">
+                    <a href="{% url 'meetapp:post_detail' post.id %}">{{ post.title }}
+                        &nbsp;[{{ post.hit }}]</a>
+                </div>
+                
+                <div class="side">
+                    <div class="heart_border">
+                        <div class="heart"></div>
+                    </div>
                     <div class="matching">
                         <p>0/3</p>
                     </div>
+                </div>
 
+                <div class="info">
                     <div class="hashtag">
                         <p>#힙합</p>
                     </div>
-
                     <div class="date">
-                        <p>{{ post.created_at }}&nbsp;&nbsp;&nbsp;&nbsp;{{ post.user }}</p>
+                        <p>{{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;{{ post.user }}</p>
                     </div>
-
-                    <div class="heart"></div>
-                    <br>
-                {% endfor %}
-                
-            </div>
-                
+                </div>
+                <br>
+            {% endfor %}                
         </section>
     </body>
 </html>
