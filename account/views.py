@@ -167,3 +167,5 @@ def review_delete(request, user_id, review_id):
     return render(request, 'account/review_confirm_delete.html', {
         'review' : review,
     })
+    # review.delete()
+    # return redirect('account:user', user_id)
