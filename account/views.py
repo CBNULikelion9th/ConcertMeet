@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
+import json
 from .forms import *
 from .models import *
 
@@ -50,7 +51,7 @@ def user_edit(request, user_id):
     else:
         userForm = UserForm(instance=user)
         infoForm = UserInfoForm(instance=info)
-    return render(request, 'account/user_edit.html', { 'user':userForm, 'info':infoForm })
+    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'user':userForm, 'info':infoForm, 'cur_info':info })
 
 def login(request):
     return render(request, 'account/login.html')
@@ -62,12 +63,15 @@ def sign(request):
     if request.method == "POST":
         form = UserForm(request.POST, request.FILES)
         infoForm = UserInfoForm(request.POST, request.FILES)
-        interestForm = request.POST.get_list("interest")
+        infoForm.gender = request.POST.get('gender')
+        interests = request.POST.getlist('interests')
+        M = dict(zip(range(1, len(interests) + 1), interests))
+        json.dumps(M)
+        infoForm.interests = M
         if form.is_valid() and infoForm.is_valid():
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             form.save()
-            infoForm.interest = interestForm
             infoForm.save(commit=False)
             infoForm.username=username
             infoForm.save()
