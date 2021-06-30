@@ -1,0 +1,116 @@
+{% extends 'meetapp/base.html' %}
+{% block content %}
+{% load static %}
+<html>
+    <head>
+        <title>{{ info.name }}의 프로필</title>
+        <link rel="stylesheet" href="{% static 'post_user.css' %}">
+        <style>
+            ul {
+                list-style: none;
+                padding-left: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <section id="main">
+            <div class="user_info">
+                <div class="user_name">
+                    <p>{{ info.name }}</p>
+                </div>
+                <div class="user_etc">
+                    <p>{{ age }}세 {{ info.gender }}</p>
+                </div>
+            </div>
+
+            <!-- 프로필 사진 -->
+            <div class="self_photo">
+                {% if info.profpic %}
+                <img src="{{ info.profpic.url }}" width="210px", height="210px" style="border-radius: 50%;">
+                {% else %}
+                <img src="{% static 'defpropic/default-profile-pic.png' %}" width="210px", height="210px" style="border-radius: 50%;">
+                {% endif %}
+            </div>
+
+            <!-- 간단한 자기소개 -->
+            <div class="self_content">
+                <br>
+                <p>{{ info.introduction }}</p>
+            </div>
+
+            <div class="follow">
+                <p>팔로잉수</p>
+                <p>{{ info.following }}</p>
+                <hr>
+                <p>팔로워수</p>
+                <p>{{ info.follower }}</p>
+                <hr>
+                <p>다녀온공연</p>
+                <p>{{ info.concertnum }}</p>
+            </div>
+        
+            <div class="follow_button">
+                {% if isFollowed == 2 %}
+                <button><a href ="{% url 'account:unfollow' info.username %}">언팔로우</a></button>
+                {% elif isFollowed == 3 %}
+                <button><a href ="{% url 'account:follow' info.username %}">팔로우</a></button>
+                {% endif %}
+            </div>
+
+        </section>
+        <section id="review">
+            <div class="review_title">
+                <p>후기</p>
+            </div>
+            <div class="comment">
+                <ul>
+                    {% for review in reviews %}    
+                        <li>
+                            <br>
+                            <div class="comment_user_info">
+                                <div class="comment_user_name">
+                                    <strong>{{ review.user_id }}</strong>
+                                </div>
+                                
+                                <!--
+                                <div class="comment_user_etc">
+                                    <p>{{ review.age }}세 {{ review.gender }}</p>
+                                </div>
+                                <div class="comment_concert">
+                                    <p>{{ review.post.title }}</p>
+                                </div> 
+                                -->
+                                <div class="comment_date">
+                                    <p>{{ review.created_at }}</p>
+                                </div>
+                                <div class="comment_user_photo">
+                                    <p></p>
+                                </div> 
+                            </div>
+                            <div class="message">
+                                &nbsp;&nbsp;{{ review.message }}
+                            </div>
+
+                            {% if review.user_id == request.user.username %}
+                                <a href="{% url 'account:review_edit' info.username review.id %}">
+                                    수정
+                                </a>
+                            {% endif %}
+                            {% if review.user_id == request.user.username or request.user.username == review.user_id %}
+                                <a href="{% url 'account:review_delete' info.username review.id %}">
+                                    삭제
+                                </a>
+                            {% endif %}
+
+                        </li>
+                        <br>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="review_button">
+                <a href="{% url 'account:review_new' info.username %}" class='btn btn-primary float-end'>후기 작성</a>
+            </div>
+        </section>
+        {% endblock content %}
+    </body>
+</html>
