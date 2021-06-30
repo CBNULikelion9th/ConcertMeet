@@ -39,19 +39,19 @@ def user(request, user_id):
     return render(request, 'account/user.html', context)
 
 def user_edit(request, user_id):
-    user = User.objects.get(username=user_id)
     info = UserInfo.objects.get(username=user_id)
     if request.method == 'POST':
-        userForm = UserForm(request.POST, instance=user)
-        infoForm = UserInfoForm(request.POST, request.FILES, instance=info)
-        if userForm.is_valid() and infoForm.is_valid():
-            userForm.save()
+        infoForm = UserInfoForm(request.POST, request.FILES)
+        infoForm.email = info.email
+        infoForm.phone = info.phone
+        if infoForm.is_valid():
             infoForm.save()
             return redirect('user', user_id)
+        else:
+            print("invalid")
     else:
-        userForm = UserForm(instance=user)
         infoForm = UserInfoForm(instance=info)
-    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'user':userForm, 'info':infoForm, 'cur_info':info })
+    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'info':infoForm, 'cur_info':info })
 
 def login(request):
     return render(request, 'account/login.html')
@@ -77,6 +77,8 @@ def sign(request):
             infoForm.save()
             user = authenticate(username = username, password = raw_password)
             return redirect('account:login')
+        else:
+            print("validation failed")
     else:
         form = UserForm()
         infoForm = UserInfoForm()
@@ -122,11 +124,13 @@ def unfollow(request, user_id):
     return redirect('account:user', user_id)
 
 def review_new(request, user_id):
+    userinfo = get_object_or_404(UserInfo, username=request.user.username)
     if request.method == 'POST':
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
             review.user_id = request.user.username
+            review.user_info = userinfo
             review.tguser_id = user_id
             review.save()
             return redirect('account:user', user_id)
