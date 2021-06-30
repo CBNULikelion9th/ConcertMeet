@@ -31,7 +31,7 @@
 }
 
 .page_title > a {
-    position:absolute;
+    /* position:absolute; */
     padding-top:1.7%;
     padding-left:8.5%;
     font-size:15px;
@@ -97,6 +97,7 @@
 }
 
 .date > p {
+    font-size: 13px;
     position: absolute;
     margin: -0.2% 0% 0% 6%;
 }
