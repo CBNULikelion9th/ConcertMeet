@@ -37,8 +37,8 @@
                 {% elif isFollowed == -1 %}
                 <button><a href ="{% url 'account:user_edit' info.username %}">정보 수정</a></button>
                 {% endif %}
-            </div>    
-                         
+            </div>
+
             <div class="self_content">
                 <br>
                 <p>{{ info.introduction }}</p>
@@ -53,13 +53,15 @@
                 <hr>
                 <p>다녀온공연</p>
                 <p>{{ info.concertnum }}</p>
-            </div>
+            </div>           
         </section>
 
         <section id="review">
             <div class="review_title">
                 <p>후기</p>
+                <a href="{% url 'account:review_new' info.username %}" class='btn btn-primary float-end'>후기 작성</a>
             </div>
+            
             <div class="comment">
                 <ul>
                     {% for review in reviews %}  
@@ -89,9 +91,9 @@
                             <div class="comment_date">
                                 <p>{{ review.created_at|date:"Y.m.d A h:i" }}</p>
                             </div>
-                            
-                            
+                              
                         </div>
+
                         <div class="message">
                             &nbsp;&nbsp;{{ review.message }}
                         </div>
@@ -118,9 +120,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="review_button">
-                <a href="{% url 'account:review_new' info.username %}" class='btn btn-primary float-end'>후기 작성</a>
-            </div>
+            
         </section>
         {% endblock content %}
     </body>

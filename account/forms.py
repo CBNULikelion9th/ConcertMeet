@@ -11,7 +11,7 @@ class UserForm(UserCreationForm):
 class UserInfoForm(forms.ModelForm):
     class Meta:
         model = UserInfo
-        fields = ('username', 'name', 'email','phone', 'date_of_birth', 'gender', 'interest')
+        fields = ('username', 'name', 'email','phone', 'date_of_birth', 'gender', 'interests')
 
 class FollowForm(forms.ModelForm):
     class Meta:

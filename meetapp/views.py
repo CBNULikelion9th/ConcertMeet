@@ -33,10 +33,14 @@ def post_resethit(request,post_id):
     post = Post.objects.get(id=post_id)
     post.views = 0
     post.save()
+<<<<<<< HEAD
     context = {
             'post': post
         }
     return render(request, 'meetapp/post_detail.html', context)
+=======
+    return render(request, 'meetapp/post_detail.html')
+>>>>>>> db98ac0561daac6bf070c0a876f940572efe2a9a
 
 def post_new(request):
     if request.method == 'GET':
