@@ -29,7 +29,6 @@ def user(request, user_id):
 
 
     context = {
-            'req_user':request.user.username,
             'user': users,
             'info': infos,
             'age':age,
@@ -44,9 +43,10 @@ def user_edit(request, user_id):
         infoForm = UserInfoForm(request.POST, instance=info)
         infoForm.gender = request.POST.get('gender')
         interests = request.POST.getlist('interests')
-        M = dict(zip(range(1, len(interests) + 1), interests))
+        M = dict(zip(interests, range(1, len(interests) + 1)))
         json.dumps(M)
         infoForm.interests = M
+        print("관심사: "+str(infoForm.interests))
         if infoForm.is_valid():
             info = infoForm.save()
             info.save()
@@ -69,7 +69,7 @@ def sign(request):
         infoForm = UserInfoForm(request.POST, request.FILES)
         infoForm.gender = request.POST.get('gender')
         interests = request.POST.getlist('interests')
-        M = dict(zip(range(1, len(interests) + 1), interests))
+        M = dict(zip(interests, range(1, len(interests) + 1)))
         json.dumps(M)
         infoForm.interests = M
         if form.is_valid() and infoForm.is_valid():
