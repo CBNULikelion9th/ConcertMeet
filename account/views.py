@@ -7,6 +7,7 @@ from .models import *
 # Create your views here.
 
 def user(request, user_id):
+    print("request user:" + request.user.username)
     users = User.objects.get(username=user_id)
     infos = UserInfo.objects.get(username=user_id)
     try:
@@ -16,20 +17,22 @@ def user(request, user_id):
     age = infos.get_age()
 
     if request.user.username != user_id:
-        try:
-            following = Follow.objects.get(follow_user_id=request.user.username, followed_user_id=user_id)
-            if following:
-                isFollowed = 2
-            else:
+        if request.user.username:
+            try:
+                following = Follow.objects.get(follow_user_id=request.user.username, followed_user_id=user_id)
+                if following:
+                    isFollowed = 2
+                else:
+                    isFollowed = 3
+            except:
                 isFollowed = 3
-        except:
+        else:
             isFollowed = 3
     else:
         isFollowed = -1
 
 
     context = {
-            'user': users,
             'info': infos,
             'age':age,
             'reviews': reviews,
