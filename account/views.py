@@ -42,14 +42,15 @@ def user_edit(request, user_id):
     if request.method == 'POST':
         infoForm = UserInfoForm(request.POST, instance=info)
         infoForm.gender = request.POST.get('gender')
-        interests = request.POST.getlist('interests')
+        tempinterests = request.POST.getlist('interests')
         #M = dict(zip(interests, range(1, len(interests) + 1)))
         #infoForm.interests = json.dumps(M)
         #info.interests = json.dumps(M)
-        for interest in interests:
-            intereststr = "#" + interest
+        intereststr = ""
+        for interest in tempinterests:
+            intereststr += "#" + interest + " " 
         infoForm.interests = intereststr
-        print("관심사: "+str(infoForm.interests) + " " + str(info.interests))
+        print("관심사: "+str(infoForm.interests))
         if infoForm.is_valid():
             info = infoForm.save()
             info.save()
