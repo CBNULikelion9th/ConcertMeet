@@ -31,6 +31,9 @@
 }
 
 .page_title > a {
+    position: relative;
+    top:15%;
+    padding-left:8.5%;
     font-size:15px;
     padding-top: 20%;
     font-weight: bold;
@@ -43,7 +46,8 @@
 .heart {
     background: #C4C4C4;
     position: absolute;
-    margin:3.5%;
+    margin-left:3%;
+    margin-top:1%;
     transform: rotate(45deg);
     width: 18px;
     height: 18px;
@@ -79,7 +83,7 @@
 
 .info {
     position: relative;
-    padding-top:5%;
+    padding-top:2.5%;
     padding-left:8.5%;
 }
 .hashtag > p {
