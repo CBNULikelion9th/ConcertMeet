@@ -30,8 +30,13 @@
         <div class="collapse-navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if user.is_authenticated %}
+<<<<<<< HEAD
             <li class="nav-item"><a class="nav-link active" aria-current="page"  id="logout" onclick="logout();" href="{% url 'account:logout' %}">로그아웃</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:user' request.user.username %}">마이페이지</a></li>
+=======
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:logout' %}">로그아웃</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:user' user.username %}">마이페이지</a></li>
+>>>>>>> 009884f45bbe09644d90813ceb1c02c0352a8095
             {% else %}
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:login' %}">로그인</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'account:sign' %}">회원가입</a></li>

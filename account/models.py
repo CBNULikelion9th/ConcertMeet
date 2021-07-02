@@ -13,11 +13,10 @@ class UserInfo(models.Model):
     )
     phone = models.CharField(max_length=15)
     date_of_birth = models.DateField(null=True)
-    gender_choice = (('남자', '남자'), ('여자', '여자'))
-    gender = models.CharField(max_length=10, choices=gender_choice, null=True)
-    interests = models.JSONField(null=True)
+    gender = models.CharField(max_length=5, null=True)
+    interests = models.CharField(max_length=100, null=True)
 
-    profpic = models.ImageField(blank=True, upload_to='user/profilepic')
+    profpic = models.ImageField(null=True, blank=True, upload_to='user/profilepic')
     introduction = models.TextField(blank=True)
     following = models.IntegerField(default=0)
     follower = models.IntegerField(default=0)
@@ -35,6 +34,7 @@ class Follow(models.Model):
 
 class Review(models.Model):
     user_id = models.CharField(max_length=30)
+    user_info = models.ForeignKey('UserInfo',on_delete=models.CASCADE,)
     tguser_id = models.CharField(max_length=30)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

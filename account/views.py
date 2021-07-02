@@ -29,7 +29,6 @@ def user(request, user_id):
 
 
     context = {
-            'req_user':request.user.username,
             'user': users,
             'info': infos,
             'age':age,
@@ -39,19 +38,27 @@ def user(request, user_id):
     return render(request, 'account/user.html', context)
 
 def user_edit(request, user_id):
-    user = User.objects.get(username=user_id)
     info = UserInfo.objects.get(username=user_id)
     if request.method == 'POST':
-        userForm = UserForm(request.POST, instance=user)
-        infoForm = UserInfoForm(request.POST, request.FILES, instance=info)
-        if userForm.is_valid() and infoForm.is_valid():
-            userForm.save()
-            infoForm.save()
-            return redirect('user', user_id)
+        infoForm = UserInfoForm(request.POST, instance=info)
+        infoForm.gender = request.POST.get('gender')
+        interests = request.POST.getlist('interests')
+        #M = dict(zip(interests, range(1, len(interests) + 1)))
+        #infoForm.interests = json.dumps(M)
+        #info.interests = json.dumps(M)
+        for interest in interests:
+            intereststr = "#" + interest
+        infoForm.interests = intereststr
+        print("관심사: "+str(infoForm.interests) + " " + str(info.interests))
+        if infoForm.is_valid():
+            info = infoForm.save()
+            info.save()
+            return redirect('account:user', user_id)
+        else:
+            print("invalid")
     else:
-        userForm = UserForm(instance=user)
         infoForm = UserInfoForm(instance=info)
-    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'user':userForm, 'info':infoForm, 'cur_info':info })
+    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'infoform':infoForm, 'cur_info':info })
 
 def login(request):
     return render(request, 'account/login.html')
@@ -65,7 +72,7 @@ def sign(request):
         infoForm = UserInfoForm(request.POST, request.FILES)
         infoForm.gender = request.POST.get('gender')
         interests = request.POST.getlist('interests')
-        M = dict(zip(range(1, len(interests) + 1), interests))
+        M = dict(zip(interests, range(1, len(interests) + 1)))
         json.dumps(M)
         infoForm.interests = M
         if form.is_valid() and infoForm.is_valid():
@@ -77,6 +84,8 @@ def sign(request):
             infoForm.save()
             user = authenticate(username = username, password = raw_password)
             return redirect('account:login')
+        else:
+            print("validation failed")
     else:
         form = UserForm()
         infoForm = UserInfoForm()
@@ -122,11 +131,13 @@ def unfollow(request, user_id):
     return redirect('account:user', user_id)
 
 def review_new(request, user_id):
+    userinfo = get_object_or_404(UserInfo, username=request.user.username)
     if request.method == 'POST':
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
             review.user_id = request.user.username
+            review.user_info = userinfo
             review.tguser_id = user_id
             review.save()
             return redirect('account:user', user_id)

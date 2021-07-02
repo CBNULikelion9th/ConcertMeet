@@ -10,6 +10,14 @@
                 list-style: none;
                 padding-left: 0px;
             }
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
+                color: black;
+            }
         </style>
     </head>
 
@@ -19,6 +27,13 @@
                 <h1>{{ info.name }}</h1>
                 &nbsp;&nbsp;
                 <p>{{ age }}세 {{ info.gender }}</p>
+                &nbsp;&nbsp;
+                {% if info.interests %}
+                {% comment %} {% for interest in info.interests %}
+                <p style="color: blueviolet;">#{{ interest }} </p>
+                {% endfor %} {% endcomment %}
+                <p style="color: blueviolet;">#{{ info.interests }} </p>
+                {% endif %}
             </div>
                     
             <div class="self_photo">
@@ -59,7 +74,9 @@
         <section id="review">
             <div class="review_title">
                 <p>후기</p>
+                {% if user.is_authenticated %}
                 <a href="{% url 'account:review_new' info.username %}" class='btn btn-primary float-end'>후기 작성</a>
+                {% endif %}
             </div>
             
             <div class="comment">
@@ -70,23 +87,23 @@
                         <div class="comment_user_info">
 
                             <div class="comment_user_photo">
-                                {% if info.profpic %}
-                                <img src="{{ info.profpic.url }}" width="50px", height="50px" style="border-radius: 50%;">
+                                {% if review.user_info.profpic %}
+                                <img src="{{ review.user_info.profpic.url }}" width="50px", height="50px" style="border-radius: 50%;">
                                 {% else %}
                                 <img src="{% static 'defpropic/default-profile-pic.png' %}" width="50px", height="50px" style="border-radius: 50%;">
                                 {% endif %}
                             </div>
                          
                             <div class="comment_user_name">
-                                <strong>{{ review.user_id }}</strong>
+                                <strong><a href="{% url 'account:user' review.user_id %}">{{ review.user_id }}</a></strong>
                             </div>
                                 
-                            <!-- <div class="comment_user_etc">
-                                <p>{{ review.age }}세 {{ review.gender }}</p>
+                            <div class="comment_user_etc">
+                                <p>{{ review.age }}세 {{ review.user_info.gender }}</p>
                             </div>
-                            <div class="comment_concert">
+                            {% comment %} <div class="comment_concert">
                                 <p>{{ review.post.title }}</p>
-                            </div>  -->
+                            </div> {% endcomment %}
                             
                             <div class="comment_date">
                                 <p>{{ review.created_at|date:"Y.m.d A h:i" }}</p>
@@ -97,7 +114,7 @@
                         <div class="message">
                             &nbsp;&nbsp;{{ review.message }}
                         </div>
-                            {% if review.user_id == req_user %}
+                            {% if review.user_id == user.username %}
                                 <a href="{% url 'account:review_edit' info.username review.id %}">
                                         수정
                                     </a>
