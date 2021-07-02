@@ -6,71 +6,110 @@
         <title>프로필 수정</title>
         <link rel="stylesheet" href="{% static 'post_user.css' %}">
         <style>
-            ul {
-                list-style: none;
-                padding-left: 0px;
+            .form-group {
+            padding-bottom: 15px;
             }
-            input {
-                border:none;
-                background-color:none;
+            b {
+            color: red;
             }
         </style>
     </head>
 
     <body>
-        <section id="main">
-            <form action="{% url 'account:user_edit' user_id %}" method="POST">
+        <script>
+            function con() {
+            alert('비밀번호 확인되었습니다');
+            // 비밀번호 기준: 8자 이상, 간단한 비밀번호 X, 비밀번호 1 2의 내용 동일한지 체크..해야함
+            }
+        </script>
+        <section>
+            <div class="container" style="display: flex; justify-content: center;">
+            <div style="width: 80%; border: solid 2px #AA34B8; padding: 20px;">
+                <h1 style="text-align: center;">내 정보 수정</h1>
+                <form action="{% url 'account:user_edit' user_id %}" method="POST">
                 {% csrf_token %}
                 {% include "form_errors.html" %}
-                <div class="user_name">
-                    <p class="form-group">
-                        <input type="text" class="form-control" name="name" id="name" value="{{ info.name.value|default_if_none:'' }}">
-                    </p>
-                    &nbsp;&nbsp;
-                    <p class="form-group">
-                        <input type="date" class="form-control" name="date_of_birth" id="date_of_birth"
-                        value="{{ info.date_of_birth.value|default_if_none:'' }}">
-                        출생, {{ info.gender }}
-                    </p>
-                </div>
-                <div class="user_info">
-                    <div class="user_etc">
-                        
+                <div class="form-group">
+                    <label>아이디 <b>*</b></label>
+                    <div class="row">
+                    <div class="col-sm-5">
+                        <input type="hidden" class="form-control" name="username" id="username" value="{{ infoform.username.value|default_if_none:'' }}">
+                        <p>{{ infoform.username.value }}</p>
+                    </div>
                     </div>
                 </div>
-
-                <!-- 프로필 사진 -->
-                <div class="self_photo">
-                    {% if cur_info.profpic %}
-                    <img src="{{ cur_info.profpic.url }}" width="210px", height="210px" style="border-radius: 50%;">
-                    {% else %}
-                    <img src="{% static 'defpropic/default-profile-pic.png' %}" width="210px", height="210px" style="border-radius: 50%;">
-                    {% endif %}
+                <div class="row">
+                    <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>비밀번호 <b>*</b></label>
+                        <input type="password" class="form-control" name="password1" id="password1" placeholder="8자 이상 입력"
+                        value="{{ infoform.password1.value|default_if_none:'' }}" disabled>
+                    </div>
+                    </div>
+                    <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>비밀번호 확인 <b>*</b></label>
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="8자 이상 입력"
+                        value="{{ infoform.password2.value|default_if_none:'' }}" disabled>
+                    </div>
+                    </div>
+                    <div class="col-sm-2">
                     <br>
-                    <input type="file" name="profpic" id="profpic">
+                    <input type="button" id="confirm" class="btn btn-dark" value="확인" onclick="con();" disabled>
+                    </div>
                 </div>
-
-                <!-- 간단한 자기소개 -->
-                <div class="self_content">
+            
+                <div class="form-group">
+                    <label>이름 <b>*</b></label>
+                    <input type="text" class="form-control" name="name" id="name" value="{{ infoform.name.value|default_if_none:'' }}">
+                </div>
+            
+                <div class="form-group">
+                    <label>이메일 <b>*</b></label>
+                    <input type="text" class="form-control" name="email" id="email"
+                    value="{{ infoform.email.value|default_if_none:'' }}">
+                </div>
+                <div class="form-group">
+                    <label>전화번호 <b>*</b></label>
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="010-****-****"
+                    value="{{ infoform.phone.value|default_if_none:'' }}">
+                </div>
+                <div class="form-group">
+                    <label>생년월일</label>
                     <br>
-                    <textarea rows="6" cols="40" name="introduction" class="form-control" value="{{ cur_info.introduction }}">{{ cur_info.introduction }}</textarea>
+                    <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="2000-01-01"
+                    value="{{ infoform.date_of_birth.value|default_if_none:'' }}">
                 </div>
-
-                <div class="follow">
-                    <p>팔로잉수</p>
-                    <p>{{ cur_info.following }}</p>
-                    <hr>
-                    <p>팔로워수</p>
-                    <p>{{ cur_info.follower }}</p>
-                    <hr>
-                    <p>다녀온공연</p>
-                    <p>{{ cur_info.concertnum }}</p>
+                <div class="form-group">
+                    <label>성별</label>
+                    <br>
+                    남자 <input type="radio" name="gender" value="남자">&nbsp;
+                    여자 <input type="radio" name="gender" value="여자">&nbsp;
                 </div>
-        
-                <div class="follow_button">
-                    <button><input type="submit" id="submit" class="follow_button" value="수정"></button>
+                <div>
+                    <label>프로필 사진</label>
+                    <br>
+                    <img src="{{cur_info.profpic.url|default_if_none:''}}" width="300px" height="300px"><br>
+                    {{infoform.profpic}}
                 </div>
-            </form>
+                <div class="form-group">
+                    <label>관심사</label>
+                    <br>
+                    힙합 <input type="checkbox" name="interests" value="힙합">&nbsp;
+                    클래식 <input type="checkbox" name="interests" value="클래식">&nbsp;
+                    팝 <input type="checkbox" name="interests" value="팝">&nbsp;
+                    락 <input type="checkbox" name="interests" value="락">&nbsp;
+                    뮤지컬 <input type="checkbox" name="interests" value="뮤지컬">&nbsp;
+                    국악 <input type="checkbox" name="interests" value="국악">&nbsp;
+                </div>
+                <br>
+                <div style="text-align: center;">
+                    <input type="submit" id="submit" class="btn btn-dark" value="완료">
+                </div>
+                </form>
+            </div>
+            </div>
+            <div style="height: 100px;"></div>
         </section>
         {% endblock content %}
     </body>

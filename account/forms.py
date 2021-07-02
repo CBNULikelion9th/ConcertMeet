@@ -10,14 +10,12 @@ class UserForm(UserCreationForm):
         fields = ('username',)
 
 class UserInfoForm(forms.ModelForm):
-    email = forms.EmailField(required=False)
-    phone = forms.CharField(required=False)
     profpic = forms.ImageField(required=False)
     gender = forms.CharField(required=False)
     interests = forms.CharField(required=False)
     class Meta:
         model = UserInfo
-        fields = ('username', 'name', 'email','phone', 'date_of_birth', 'gender', 'interests')
+        fields = ('username', 'name', 'email','phone', 'date_of_birth', 'profpic', 'gender', 'interests',)
 
 class FollowForm(forms.ModelForm):
     class Meta:

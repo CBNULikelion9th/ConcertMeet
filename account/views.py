@@ -41,17 +41,21 @@ def user(request, user_id):
 def user_edit(request, user_id):
     info = UserInfo.objects.get(username=user_id)
     if request.method == 'POST':
-        infoForm = UserInfoForm(request.POST, request.FILES)
-        infoForm.email = info.email
-        infoForm.phone = info.phone
+        infoForm = UserInfoForm(request.POST, instance=info)
+        infoForm.gender = request.POST.get('gender')
+        interests = request.POST.getlist('interests')
+        M = dict(zip(range(1, len(interests) + 1), interests))
+        json.dumps(M)
+        infoForm.interests = M
         if infoForm.is_valid():
-            infoForm.save()
-            return redirect('user', user_id)
+            info = infoForm.save()
+            info.save()
+            return redirect('account:user', user_id)
         else:
             print("invalid")
     else:
         infoForm = UserInfoForm(instance=info)
-    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'info':infoForm, 'cur_info':info })
+    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'infoform':infoForm, 'cur_info':info })
 
 def login(request):
     return render(request, 'account/login.html')
