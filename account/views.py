@@ -43,10 +43,13 @@ def user_edit(request, user_id):
         infoForm = UserInfoForm(request.POST, instance=info)
         infoForm.gender = request.POST.get('gender')
         interests = request.POST.getlist('interests')
-        M = dict(zip(interests, range(1, len(interests) + 1)))
-        json.dumps(M)
-        infoForm.interests = M
-        print("관심사: "+str(infoForm.interests))
+        #M = dict(zip(interests, range(1, len(interests) + 1)))
+        #infoForm.interests = json.dumps(M)
+        #info.interests = json.dumps(M)
+        for interest in interests:
+            intereststr = "#" + interest
+        infoForm.interests = intereststr
+        print("관심사: "+str(infoForm.interests) + " " + str(info.interests))
         if infoForm.is_valid():
             info = infoForm.save()
             info.save()

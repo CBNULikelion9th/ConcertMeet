@@ -14,7 +14,7 @@ class UserInfo(models.Model):
     phone = models.CharField(max_length=15)
     date_of_birth = models.DateField(null=True)
     gender = models.CharField(max_length=5, null=True)
-    interests = models.JSONField(null=True)
+    interests = models.CharField(max_length=100, null=True)
 
     profpic = models.ImageField(null=True, blank=True, upload_to='user/profilepic')
     introduction = models.TextField(blank=True)
