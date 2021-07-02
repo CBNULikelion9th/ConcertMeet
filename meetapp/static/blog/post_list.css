@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+a, a:hover {
+    text-decoration: none;
+    color: black;
+}
+
 .title {
     position:relative;
     display:flex;
@@ -23,24 +28,23 @@
     margin-right:10%;
 }
 
-.page_title {
+.post_element {
+    text-decoration: none;
     margin-left: 17%;
     background-color: #E2E2E2;
     width: 972px;
     height: 79px;
 }
 
-.page_title > a {
+.page_title {
     position: relative;
     top:15%;
     padding-left:8.5%;
     font-size:15px;
-    padding-top: 20%;
     font-weight: bold;
     font-style: normal;
     line-height: 18px;
     color: #000000;
-    text-decoration: none;
 }
 
 .heart {
