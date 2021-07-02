@@ -72,19 +72,22 @@ def logout(request):
 
 def sign(request):
     if request.method == "POST":
+        print(request.POST)
         form = UserForm(request.POST, request.FILES)
-        infoForm = UserInfoForm(request.POST, request.FILES)
+        infoForm = UserJoinForm(request.POST, request.FILES)
         infoForm.gender = request.POST.get('gender')
-        interests = request.POST.getlist('interests')
-        M = dict(zip(interests, range(1, len(interests) + 1)))
-        json.dumps(M)
-        infoForm.interests = M
+        tempinterests = request.POST.getlist('interests')
+        intereststr = ""
+        
         if form.is_valid() and infoForm.is_valid():
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             form.save()
             infoForm.save(commit=False)
             infoForm.username=username
+            for interest in tempinterests:
+                intereststr += "#" + interest + " " 
+            infoForm.interests = intereststr
             infoForm.save()
             user = authenticate(username = username, password = raw_password)
             return redirect('account:login')
@@ -92,7 +95,7 @@ def sign(request):
             print("validation failed")
     else:
         form = UserForm()
-        infoForm = UserInfoForm()
+        infoForm = UserJoinForm()
     return render(request, 'account/sign.html', {'form': form, 'infoform': infoForm })
 
 def follow(request, user_id):
