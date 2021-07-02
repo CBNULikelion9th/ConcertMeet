@@ -12,6 +12,7 @@
     margin-bottom: 3%;
 }
 .title > h1 {
+    display: block;
     margin-left:10%;
     font-family: notosans;
     font-size:20px;
@@ -23,18 +24,15 @@
 }
 
 .page_title {
-    position: relative;
-    margin:auto;
+    margin-left: 17%;
     background-color: #E2E2E2;
     width: 972px;
     height: 79px;
 }
 
 .page_title > a {
-    /* position:absolute; */
-    padding-top:1.7%;
-    padding-left:8.5%;
     font-size:15px;
+    padding-top: 20%;
     font-weight: bold;
     font-style: normal;
     line-height: 18px;
