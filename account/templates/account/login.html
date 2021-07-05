@@ -69,10 +69,12 @@
             location.href = "{% url 'account:sign' %}";
           }
 
+          // const username = $('#username').val();
+          // const password = $('#password').val();
           function writeinfo() {
-            let value = $('#username').val();
+             value = $('#username' && '#password').val();
             if (value == "") {
-              alert('아이디를 입력하세요!')
+              alert('아이디와 비밀번호를 정확히 입력하세요!')
             }             
             else {
               alert('환영합니다!')
