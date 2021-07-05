@@ -7,6 +7,7 @@ from .models import *
 # Create your views here.
 
 def user(request, user_id):
+    print("request user:" + request.user.username)
     users = User.objects.get(username=user_id)
     infos = UserInfo.objects.get(username=user_id)
     try:
@@ -16,20 +17,22 @@ def user(request, user_id):
     age = infos.get_age()
 
     if request.user.username != user_id:
-        try:
-            following = Follow.objects.get(follow_user_id=request.user.username, followed_user_id=user_id)
-            if following:
-                isFollowed = 2
-            else:
+        if request.user.username:
+            try:
+                following = Follow.objects.get(follow_user_id=request.user.username, followed_user_id=user_id)
+                if following:
+                    isFollowed = 2
+                else:
+                    isFollowed = 3
+            except:
                 isFollowed = 3
-        except:
+        else:
             isFollowed = 3
     else:
         isFollowed = -1
 
 
     context = {
-            'user': users,
             'info': infos,
             'age':age,
             'reviews': reviews,
@@ -42,14 +45,15 @@ def user_edit(request, user_id):
     if request.method == 'POST':
         infoForm = UserInfoForm(request.POST, instance=info)
         infoForm.gender = request.POST.get('gender')
-        interests = request.POST.getlist('interests')
+        tempinterests = request.POST.getlist('interests')
         #M = dict(zip(interests, range(1, len(interests) + 1)))
         #infoForm.interests = json.dumps(M)
         #info.interests = json.dumps(M)
-        for interest in interests:
-            intereststr = "#" + interest
+        intereststr = ""
+        for interest in tempinterests:
+            intereststr += "#" + interest + " " 
         infoForm.interests = intereststr
-        print("관심사: "+str(infoForm.interests) + " " + str(info.interests))
+        print("관심사: "+str(infoForm.interests))
         if infoForm.is_valid():
             info = infoForm.save()
             info.save()
@@ -68,19 +72,22 @@ def logout(request):
 
 def sign(request):
     if request.method == "POST":
+        print(request.POST)
         form = UserForm(request.POST, request.FILES)
-        infoForm = UserInfoForm(request.POST, request.FILES)
+        infoForm = UserJoinForm(request.POST, request.FILES)
         infoForm.gender = request.POST.get('gender')
-        interests = request.POST.getlist('interests')
-        M = dict(zip(interests, range(1, len(interests) + 1)))
-        json.dumps(M)
-        infoForm.interests = M
+        tempinterests = request.POST.getlist('interests')
+        intereststr = ""
+        
         if form.is_valid() and infoForm.is_valid():
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             form.save()
             infoForm.save(commit=False)
             infoForm.username=username
+            for interest in tempinterests:
+                intereststr += "#" + interest + " " 
+            infoForm.interests = intereststr
             infoForm.save()
             user = authenticate(username = username, password = raw_password)
             return redirect('account:login')
@@ -88,7 +95,7 @@ def sign(request):
             print("validation failed")
     else:
         form = UserForm()
-        infoForm = UserInfoForm()
+        infoForm = UserJoinForm()
     return render(request, 'account/sign.html', {'form': form, 'infoform': infoForm })
 
 def follow(request, user_id):
