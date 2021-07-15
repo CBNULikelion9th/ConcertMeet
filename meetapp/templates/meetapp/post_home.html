@@ -15,6 +15,7 @@
     />
   </head>
   <body>
+    <h4 id="clock">00:00:00</h4>
     <!-- 오늘 진행되고 있는 공연 -->
     <section id="main" class="today_concert">
       <div class="metadata">
@@ -47,6 +48,10 @@
         <div class="indi"></div>
       </div>
     </section>
+    
+
+  <!-- javascript -->
+    <script src="{% static 'js/clock.js' %}"></script>
   </body>
 
   {% endblock content %}

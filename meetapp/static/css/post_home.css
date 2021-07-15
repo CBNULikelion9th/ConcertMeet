@@ -25,6 +25,7 @@ body {
   height: 28em;
 }
 /* 오늘 진행되고 있는 공연 */
+
 .today_concert .metadata .title {
   display: block;
   font-size: var(--font-large);
