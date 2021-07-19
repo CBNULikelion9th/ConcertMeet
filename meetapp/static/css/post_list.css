@@ -1,123 +1,116 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-a, a:hover {
-    text-decoration: none;
-    color: black;
+a,
+a:hover {
+  text-decoration: none;
+  color: black;
 }
 
 .title {
-    position:relative;
-    display:flex;
-    justify-content: space-between;
-    margin-top:4%;
-    margin-bottom: 3%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4%;
+  margin-bottom: 3%;
 }
 .title > h1 {
-    display: block;
-    margin-left:10%;
-    font-family: notosans;
-    font-size:20px;
-    font-weight: bold;
+  display: block;
+  margin-left: 10%;
+  font-family: notosans;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .title > a {
-    margin-right:10%;
+  margin-right: 10%;
 }
 
 .post_element {
-    text-decoration: none;
-    margin-left: 17%;
-    background-color: #E2E2E2;
-    width: 972px;
-    height: 79px;
+  text-decoration: none;
+  margin-left: 17%;
+  background-color: #e2e2e2;
+  width: 972px;
+  height: 79px;
 }
 
 .page_title {
-    position: relative;
-    top:15%;
-    padding-left:8.5%;
-    font-size:15px;
-    font-weight: bold;
-    font-style: normal;
-    line-height: 18px;
-    color: #000000;
+  position: relative;
+  top: 15%;
+  padding-left: 8.5%;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 18px;
+  color: #000000;
 }
 
 .heart {
-    background: #C4C4C4;
-    position: absolute;
-    margin-left:3%;
-    margin-top:1%;
-    transform: rotate(45deg);
-    width: 18px;
-    height: 18px;
+  background: #c4c4c4;
+  position: absolute;
+  margin-left: 3%;
+  margin-top: 1%;
+  transform: rotate(45deg);
+  width: 18px;
+  height: 18px;
 }
 
 .heart:hover:before,
 .heart:hover:after,
 .heart:hover {
-    background: #fff;
+  background: #fff;
 }
 
 .heart::before,
 .heart::after {
-    content: "";
-    width: 18px;
-    height: 18px;
-    position: absolute;
-    border-radius: 50%;
-    background: #C4C4C4;
+  content: "";
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  border-radius: 50%;
+  background: #c4c4c4;
 }
 .heart::before {
-    left: -60%;
+  left: -60%;
 }
 .heart::after {
-    top: -60%;
+  top: -60%;
 }
 
 .heart:visited:before,
 .heart:visited:after,
 .heart:visited {
-    background: #fff;
+  background: #fff;
 }
 
 .info {
-    position: relative;
-    padding-top:2.5%;
-    padding-left:8.5%;
+  position: relative;
+  padding-top: 2.5%;
+  padding-left: 8.5%;
 }
 .hashtag > p {
-    position: absolute;
-    white-space : nowrap;
-    background: #ADC4FF;
-    border-radius: 11px;
-    font-family: notosans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 13px;
-    padding:0% 10px 0% 10px;
+  position: absolute;
+  white-space: nowrap;
+  background: #adc4ff;
+  border-radius: 11px;
+  font-family: notosans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 0% 10px 0% 10px;
 }
 
 .date > p {
-    font-size: 13px;
-    position: absolute;
-    margin: -0.2% 0% 0% 6%;
+  font-size: 13px;
+  position: absolute;
+  margin: -0.2% 0% 0% 6%;
 }
 
 .matching > p {
-    position: absolute;
-    margin-left: 57%;
-    margin-top: -1.2%;
-    font-family: notosans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 30px;
-    color: #000000;
+  position: absolute;
+  margin-left: 57%;
+  margin-top: -1.2%;
+  font-family: notosans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 30px;
+  color: #000000;
 }
-
-

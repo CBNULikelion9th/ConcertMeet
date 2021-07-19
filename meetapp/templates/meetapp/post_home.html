@@ -4,6 +4,8 @@
   <head>
     <link rel="stylesheet" href="{% static 'css/post_home.css' %}" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap"
       rel="stylesheet"
@@ -15,7 +17,6 @@
     />
   </head>
   <body>
-    <h4 id="clock">00:00:00</h4>
     <!-- 오늘 진행되고 있는 공연 -->
     <section id="main" class="today_concert">
       <div class="metadata">
@@ -41,16 +42,92 @@
       <a href="{% url 'meetapp:post_list' %}"
         ><span class="more_info">더보기</span></a
       >
-      <div class="list">
-        <div class="all"></div>
-        <div class="hiphop"></div>
-        <div class="ballad"></div>
-        <div class="indi"></div>
-      </div>
+      <ul class="card-list">
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">Lorem ipsum.</div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam! Lorem
+            ipsum dolor sit amet consectetur adipisicing elit. Sit libero in
+            ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+        <li class="card-item">
+          <figure class="card-image" style="background-image: url()">
+            <img src="" alt="" />
+          </figure>
+          <div class="card-desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
+            in ratione dicta nihil corporis illo odio, voluptatem a nam!
+          </div>
+        </li>
+      </ul>
+      <footer class="footer"><h4 id="clock">00:00:00</h4></footer>
     </section>
-    
 
-  <!-- javascript -->
+    <!-- javascript -->
     <script src="{% static 'js/clock.js' %}"></script>
   </body>
 

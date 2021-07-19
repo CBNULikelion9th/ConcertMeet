@@ -1,0 +1,22 @@
+/* serach bar */
+.search-form {
+  display: flex;
+  height: 40px;
+}
+.search-form input[type="search"] {
+  /* flex-grow, flex-shrink 를 각각 1로 설정 */
+  flex: 1;
+  /*  */
+  min-width: 0;
+  margin-right: 10px;
+  border: 0;
+  border-radius: 0.3em;
+  font-size: 1rem;
+}
+.search-form input[type="submit"] {
+  width: 4em;
+  border: 0;
+  border-radius: 0.3em;
+  font-size: 1rem;
+  background: gold;
+}

@@ -78,50 +78,6 @@ body {
   padding-left: 2%;
 }
 
-/* 기준 */
-.concert_mate .list .all {
-  display: inline-block;
-  width: 580px;
-  height: 300px;
-  border-radius: 5%;
-  margin-left: 8%;
-  margin-top: 3%;
-  background: #c4c4c4;
-}
-
-/* 기준 */
-.concert_mate .list .hiphop {
-  display: inline-block;
-  width: 580px;
-  height: 300px;
-  border-radius: 5%;
-  float: right;
-  margin-right: 8%;
-  margin-top: 3%;
-  background: #c4c4c4;
-}
-
-.concert_mate .list .ballad {
-  display: inline-block;
-  width: 580px;
-  height: 300px;
-  border-radius: 5%;
-  margin-left: 8%;
-  margin-top: 50px;
-  background: #c4c4c4;
-}
-
-.concert_mate .list .indi {
-  display: inline-block;
-  width: 580px;
-  height: 300px;
-  border-radius: 5%;
-  float: right;
-  margin-right: 8%;
-  margin-top: 50px;
-  background: #c4c4c4;
-}
-
 .home_list {
   margin-top: 30px;
   display: flex;
@@ -145,4 +101,34 @@ body {
 
 .home_concert_info div {
   padding-top: 3px;
+}
+
+/* card list -> 메인 페이지의 콘서트 메이트 구해요 및*/
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+  column-gap: 2%;
+  padding: 1rem;
+}
+.card-item {
+  margin-bottom: 1rem;
+  background: turquoise;
+}
+.card-image {
+  height: 0;
+  padding-bottom: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: lightgray;
+  background-size: cover;
+}
+.card-image img {
+  display: none;
+}
+.card-desc {
+  padding: 1em;
+}
+
+.title {
+  margin-bottom: 20px;
 }

@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding: 0 2rem;
+}
+
+.search-form {
+  margin-left: auto;
+  margin-right: 1rem;
+  width: 300px;
+  max-width: 60%;
+}
+
+.top_right {
+  display: flex;
+}
+
+.top_right div:first-child {
+  margin-right: 1rem;
+}
+
+/* menu */
+.menu {
+  display: flex;
+}
+.menu-item {
+  /* flex-grow: 1; */
+  width: 25%;
+  background: gold;
+  transition: 0.5s;
+}
+.menu-item:hover {
+  /* flex-grow: 1.5; */
+  width: 35%;
+  background: crimson;
+}
+.menu-link {
+  display: block;
+  padding: 1em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #555;
+  text-decoration: none;
+  text-align: center;
+}
+.menu-link:hover {
+  color: white;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: center;
+}
