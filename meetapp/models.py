@@ -9,13 +9,17 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     content = models.TextField()
     hit = models.IntegerField(default=-1)
-    
+    likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes_user') 
+
+    def count_likes_user(self): 
+        return self.likes_user.count()
+
     def __str__(self):
         return f'{self.title}'
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey('Post',on_delete=models.CASCADE,)
+    post = models.ForeignKey('Post',on_delete=models.CASCADE)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

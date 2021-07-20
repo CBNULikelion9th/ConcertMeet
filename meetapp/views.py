@@ -1,8 +1,10 @@
+import json
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
 from .models import Post, Comment
-
 
 def post_home(request):
     post_home = Post.objects.all()
@@ -19,6 +21,24 @@ def post_list(request):
         'post_list': post_list,
     }
     return render(request, 'meetapp/post_list.html', context)
+
+@login_required
+@require_POST
+def post_like(request):
+    # pk = request.POST.get('pk', None)
+    post = get_object_or_404(Post, id=request.POST['pk'])
+    user = request.user
+
+    if post.likes_user.filter(id=user.id).exists():
+        post.likes_user.remove(user)
+        message = '좋아요 취소'
+    else:
+        post.likes_user.add(user)
+        message = '좋아요'
+
+    context = {'likes_count':post.count_likes_user(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
 
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
@@ -73,7 +93,7 @@ def post_edit(request, post_id):
 
 def post_delete(request, post_id):
     # post = Post.objects.get(id=post_id)
-    post = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post, blog_id=post_id)
     post.delete()
     return redirect('meetapp:post_list')
 
