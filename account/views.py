@@ -50,12 +50,13 @@ def user_edit(request, user_id):
         #infoForm.interests = json.dumps(M)
         #info.interests = json.dumps(M)
         intereststr = ""
-        for interest in tempinterests:
-            intereststr += "#" + interest + " " 
-        infoForm.interests = intereststr
-        print("관심사: "+str(infoForm.interests))
+
         if infoForm.is_valid():
-            info = infoForm.save()
+            info = infoForm.save(commit=False)
+            for interest in tempinterests:
+                intereststr += "#" + interest + " " 
+            infoForm.interests = intereststr
+            print("관심사: "+str(infoForm.interests))
             info.save()
             return redirect('account:user', user_id)
         else:
@@ -84,6 +85,7 @@ def sign(request):
             raw_password = form.cleaned_data.get('password1')
             form.save()
             infoForm.save(commit=False)
+            infoForm.profpic = 'static/defpropic/default-profile-pic'
             infoForm.username=username
             for interest in tempinterests:
                 intereststr += "#" + interest + " " 

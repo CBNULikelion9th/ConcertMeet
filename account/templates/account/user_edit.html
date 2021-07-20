@@ -26,7 +26,7 @@
             <div class="container" style="display: flex; justify-content: center;">
             <div style="width: 80%; border: solid 2px #AA34B8; padding: 20px;">
                 <h1 style="text-align: center;">내 정보 수정</h1>
-                <form action="{% url 'account:user_edit' user_id %}" method="POST">
+                <form action="{% url 'account:user_edit' user_id %}" method="POST" enctype = "multipart/form-data">
                 {% csrf_token %}
                 {% include "form_errors.html" %}
                 <div class="form-group">
@@ -89,7 +89,9 @@
                 <div>
                     <label>프로필 사진</label>
                     <br>
+                    {% if cur_info.profpic.url %}
                     <img src="{{cur_info.profpic.url|default_if_none:''}}" width="300px" height="300px"><br>
+                    {% endif %}
                     {{infoform.profpic}}
                 </div>
                 <div>
