@@ -31,10 +31,44 @@ a:hover {
   height: 79px;
 }
 
+/*likes*/
+:root {
+  --red: rgb(209, 3, 3);
+  --white: #fff;
+  --gray: #a5a5a5;
+}
+
+.btn-icon {
+  margin: 1% 0 0 16.7%;
+  position: absolute;
+  left: 1.5rem;
+  transition: 1s cubic-bezier(.21,.04,.26,.99);
+  color: var(--gray);
+  border:0;
+  background-color: #e2e2e2;
+}
+
+.btn-icon:hover {
+  color: var(--red);
+} 
+
+.likes {
+  background: var(--red);
+}
+
+.post_element > p {
+  position: absolute;
+  font-weight:bold;
+  font-size: 20px;
+  margin-top:3.2%;
+  width: 85px;
+  text-align: center;
+}
+
 .page_title {
   position: relative;
   top: 15%;
-  padding-left: 8.5%;
+  margin-left: 8.5%;
   font-size: 15px;
   font-weight: bold;
   font-style: normal;
@@ -42,48 +76,10 @@ a:hover {
   color: #000000;
 }
 
-.heart {
-  background: #c4c4c4;
-  position: absolute;
-  margin-left: 3%;
-  margin-top: 1%;
-  transform: rotate(45deg);
-  width: 18px;
-  height: 18px;
-}
-
-.heart:hover:before,
-.heart:hover:after,
-.heart:hover {
-  background: #fff;
-}
-
-.heart::before,
-.heart::after {
-  content: "";
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  border-radius: 50%;
-  background: #c4c4c4;
-}
-.heart::before {
-  left: -60%;
-}
-.heart::after {
-  top: -60%;
-}
-
-.heart:visited:before,
-.heart:visited:after,
-.heart:visited {
-  background: #fff;
-}
-
 .info {
   position: relative;
   padding-top: 2.5%;
-  padding-left: 8.5%;
+  margin-left: 8.5%;
 }
 .hashtag > p {
   position: absolute;
@@ -114,3 +110,4 @@ a:hover {
   line-height: 30px;
   color: #000000;
 }
+
