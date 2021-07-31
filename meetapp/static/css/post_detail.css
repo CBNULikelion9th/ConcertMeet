@@ -7,12 +7,29 @@
   background: #e2e2e2;
 }
 
-.material-icons-outlined {
+/*likes*/
+:root {
+  --red: rgb(209, 3, 3);
+  --white: #fff;
+  --gray: #a5a5a5;
+}
+
+.btn-icon {
+  /* margin: 4.7% 0 0 18%; */
   position: absolute;
-  width: 43px;
-  height: 42px;
-  left: 20.25%;
-  top: 78px;
+  left: 1.5rem;
+  transition: 1s cubic-bezier(.21,.04,.26,.99);
+  color: var(--gray);
+  border:0;
+  background-color: #e2e2e2;
+}
+
+.btn-icon:hover {
+  color: var(--red);
+} 
+
+.likes {
+  background: var(--red);
 }
 
 .post_title {

@@ -98,13 +98,12 @@
                                 {% endif %}
                             </div>
                          
-                            <div class="comment_user_name">
-                                <strong><a href="{% url 'account:user' review.user_id %}">{{ review.user_id }}</a></strong>
+                            <div class="comment_user_etc">
+                                <strong style="display: inline-block;"><a href="{% url 'account:user' review.user_id %}">{{ review.user_id }}</a></strong>
+                                <p style="display: inline-block;">{{ review.age }}세 {{ review.user_info.gender }}</p>
                             </div>
                                 
-                            <div class="comment_user_etc">
-                                <p>{{ review.age }}세 {{ review.user_info.gender }}</p>
-                            </div>
+                        
                             {% comment %} <div class="comment_concert">
                                 <p>{{ review.post.title }}</p>
                             </div> {% endcomment %}
@@ -119,10 +118,11 @@
                             &nbsp;&nbsp;{{ review.message }}
                         </div>
                             {% if review.user_id == user.username %}
-                                <a href="{% url 'account:review_edit' info.username review.id %}">
-                                        수정
-                                    </a>
-                                <button onclick="delete_alert()">삭제</button>
+                            <div class="message_button">
+                                <button><a href="{% url 'account:review_edit' info.username review.id %}">
+                                    수정
+                                </a></button>
+                                <button onclick="delete_alert()" >삭제</button>
                                 <script>
                                     function delete_alert() {
                                         var res = confirm("정말 삭제하시겠습니까?");
@@ -134,10 +134,11 @@
                                         }
                                     }
                                 </script>
+                            </div>  
                             {% endif %}
 
-                        </li>
-                        <br>
+                    </li>
+                    <br>
                     {% endfor %}
                 </ul>
             </div>

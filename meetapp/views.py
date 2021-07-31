@@ -1,5 +1,6 @@
 import json
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
@@ -25,18 +26,16 @@ def post_list(request):
 @login_required
 @require_POST
 def post_like(request):
-    # pk = request.POST.get('pk', None)
-    post = get_object_or_404(Post, id=request.POST['pk'])
+    pk = request.POST.get('pk', None)
+    post = get_object_or_404(Post, pk=pk)
     user = request.user
 
     if post.likes_user.filter(id=user.id).exists():
         post.likes_user.remove(user)
-        message = '좋아요 취소'
     else:
         post.likes_user.add(user)
-        message = '좋아요'
 
-    context = {'likes_count':post.count_likes_user(), 'message': message}
+    context = {'likes_count':post.count_likes_user()}
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 
