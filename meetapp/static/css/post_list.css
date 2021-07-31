@@ -1,3 +1,8 @@
+#main {
+  max-width: 2060px;
+  margin: 0 auto;
+}
+
 a,
 a:hover {
   text-decoration: none;
@@ -8,27 +13,28 @@ a:hover {
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin-top: 4%;
-  margin-bottom: 3%;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 .title > h1 {
   display: block;
-  margin-left: 10%;
+  margin-left: 2rem;
   font-family: notosans;
   font-size: 20px;
   font-weight: bold;
 }
 
 .title > a {
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 .post_element {
+  position: relative;
   text-decoration: none;
-  margin-left: 17%;
+  margin-left: 2vw;
   background-color: #e2e2e2;
-  width: 972px;
-  height: 79px;
+  max-width: 1860px;
+  height: 120px;
 }
 
 /*likes*/
@@ -39,18 +45,17 @@ a:hover {
 }
 
 .btn-icon {
-  margin: 1% 0 0 16.7%;
+  margin: 1.5% 0 0 2.5%;
   position: absolute;
-  left: 1.5rem;
-  transition: 1s cubic-bezier(.21,.04,.26,.99);
+  transition: 1s color cubic-bezier(0.21, 0.04, 0.26, 0.99);
   color: var(--gray);
-  border:0;
+  border: 0;
   background-color: #e2e2e2;
 }
 
 .btn-icon:hover {
   color: var(--red);
-} 
+}
 
 .likes {
   background: var(--red);
@@ -58,18 +63,17 @@ a:hover {
 
 .post_element > p {
   position: absolute;
-  font-weight:bold;
+  font-weight: bold;
   font-size: 20px;
-  margin-top:3.2%;
-  width: 85px;
+  margin: 4% 0 0 3.4%;
+  margin-right: 1rem;
   text-align: center;
 }
 
 .page_title {
   position: relative;
   top: 15%;
-  margin-left: 8.5%;
-  font-size: 15px;
+  margin-left: 6rem;
   font-weight: bold;
   font-style: normal;
   line-height: 18px;
@@ -78,8 +82,11 @@ a:hover {
 
 .info {
   position: relative;
-  padding-top: 2.5%;
-  margin-left: 8.5%;
+  padding-top: 1.5vh;
+  margin-left: 6rem;
+}
+.hashtag {
+  margin-top: 2rem;
 }
 .hashtag > p {
   position: absolute;
@@ -90,24 +97,48 @@ a:hover {
   font-style: normal;
   font-weight: bold;
   font-size: 13px;
-  padding: 0% 10px 0% 10px;
+  padding: 0% 1rem 0% 1rem;
 }
 
 .date > p {
   font-size: 13px;
   position: absolute;
-  margin: -0.2% 0% 0% 6%;
+  margin: 0 0 0 5rem;
 }
 
 .matching > p {
   position: absolute;
-  margin-left: 57%;
-  margin-top: -1.2%;
   font-family: notosans;
   font-style: normal;
   font-weight: bold;
   font-size: 30px;
-  line-height: 30px;
   color: #000000;
+  margin-left: 92%;
+  margin-top: -3.7vh;
 }
 
+@media (max-width: 1980px) {
+  #main {
+    width: 1480px;
+    margin: 0 auto;
+  }
+  .post_element {
+    width: 1300px;
+  }
+  .post_element > p {
+    margin: 5% 0 0 3.8%;
+  }
+}
+
+@media (max-width: 1680px) {
+  #main {
+    width: 1180px;
+    margin: 0 auto;
+  }
+  .post_element {
+    width: 1000px;
+  }
+  .post_element > p {
+    margin: 6% 0 0 4.1%;
+  }
+}

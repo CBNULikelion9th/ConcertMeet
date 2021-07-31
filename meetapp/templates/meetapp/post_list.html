@@ -1,12 +1,16 @@
-{% extends 'meetapp/base.html' %} 
-{% block content %} 
-{% load static %}
+{% extends 'meetapp/base.html' %} {% block content %} {% load static %}
 <html>
   <head>
     <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -14,40 +18,60 @@
       <div class="title">
         <h1>콘서트 메이트 구해요</h1>
 
-        <a href="{% url 'meetapp:post_new' %}" class="btn btn-primary float-end">새 글 쓰기</a>
+        <a href="{% url 'meetapp:post_new' %}" class="btn btn-primary float-end"
+          >새 글 쓰기</a
+        >
       </div>
 
       {% for post in post_list %}
-        <div class="post_element">
-          <script src="{% static 'js/likes.js' %}"></script>
+      <div class="post_element">
+        <script src="{% static 'js/likes.js' %}"></script>
 
-          <button class="btn-icon btn--icon-default" name="{{ post.id }}" onclick='onClick()' >
-              <span class="fa fa-heart" style="font-size:35px" onclick='onClick()' ></span>
-          </button>
-          <button class="btn-icon btn--icon-liked" name="{{ post.id }}" onclick='onClick()'>
-              <span class="fa fa-heart" style="font-size:35px" onclick='onClick()' ></span>
-          </button>
+        <button
+          class="btn-icon btn--icon-default"
+          name="{{ post.id }}"
+          onclick="onClick()"
+        >
+          <span
+            class="fa fa-heart"
+            style="font-size: 35px"
+            onclick="onClick()"
+          ></span>
+        </button>
+        <button
+          class="btn-icon btn--icon-liked"
+          name="{{ post.id }}"
+          onclick="onClick()"
+        >
+          <span
+            class="fa fa-heart"
+            style="font-size: 35px"
+            onclick="onClick()"
+          ></span>
+        </button>
 
-          <p id="count-{{ post.id }}" >{{ post.likes_user.all.count }}</p>
+        <p id="count-{{ post.id }}">{{ post.likes_user.all.count }}</p>
 
-          <a href="{% url 'meetapp:post_detail' post.id %}">
-            <div class="page_title">{{ post.title }}&nbsp;[{{ post.hit }}]</div>
-          
-            <div class="info">
-              <div class="hashtag">
-                <p>#힙합</p>
-              </div>
-              <div class="date">
-                <p>{{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;{{ post.user }}</p>
-              </div>
+        <a href="{% url 'meetapp:post_detail' post.id %}">
+          <div class="page_title">{{ post.title }}&nbsp;[{{ post.hit }}]</div>
+
+          <div class="info">
+            <div class="hashtag">
+              <p>#힙합</p>
             </div>
-            <div class="matching">
-              <p>0/3</p>
+            <div class="date">
+              <p>
+                {{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;{{
+                post.user }}
+              </p>
             </div>
-          </a>
-
-        </div>
-      <br>
+          </div>
+          <div class="matching">
+            <p>0/3</p>
+          </div>
+        </a>
+      </div>
+      <br />
       {% endfor %}
     </section>
   </body>
@@ -55,21 +79,25 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-    $(".btn-icon").click(function () { // .like 버튼을 클릭 감지
-      var pk = $(this).attr('name') // Jquery의 경우에는 이벤트가 발생한 요소의 정보들이 Object로 표시
-        $.ajax({ // ajax로 서버와 통신
-            type: "POST", // 데이터를 전송하는 방법
-            url: "{% url 'meetapp:post_like' %}", // 통신할 url을 지정
-            data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 post인지 알 수 있음
-            dataType: "json",
-            success: function (response) { // 성공
-                $("#count-" + pk).html(response.likes_count); // 좋아요 개수 변경
-            },
-            error: function (request, status, error) { // 실패
-                alert("로그인이 필요합니다.")
-                window.location.replace("/user/login/") // 로그인 페이지로 넘어가기
-            },
-        });
-    })
+  $(".btn-icon").click(function () {
+    // .like 버튼을 클릭 감지
+    var pk = $(this).attr("name"); // Jquery의 경우에는 이벤트가 발생한 요소의 정보들이 Object로 표시
+    $.ajax({
+      // ajax로 서버와 통신
+      type: "POST", // 데이터를 전송하는 방법
+      url: "{% url 'meetapp:post_like' %}", // 통신할 url을 지정
+      data: { pk: pk, csrfmiddlewaretoken: "{{ csrf_token }}" }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 post인지 알 수 있음
+      dataType: "json",
+      success: function (response) {
+        // 성공
+        $("#count-" + pk).html(response.likes_count); // 좋아요 개수 변경
+      },
+      error: function (request, status, error) {
+        // 실패
+        alert("로그인이 필요합니다.");
+        window.location.replace("/user/login/"); // 로그인 페이지로 넘어가기
+      },
+    });
+  });
 </script>
 {% endblock content %}

@@ -1,45 +1,31 @@
-:root {
-  /* size */
-
-  /* Font size */
-  --font-large: 20px;
-  --font-medium: 15px;
-  --font-small: 13px;
-  --font-micro: 10px;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Noto Sans KR", sans-serif;
-}
-
 #main {
   top: 0;
   background: #e2e2e2;
   width: 100%;
-  height: 28em;
+  height: 500px;
 }
+
 /* 오늘 진행되고 있는 공연 */
+
+.today_concert {
+  max-width: 2060px;
+  margin: 0 auto;
+}
 
 .today_concert .metadata .title {
   display: block;
   font-size: var(--font-large);
   font-weight: bold;
-  padding-left: 5%;
-  padding-top: 20px;
+  padding-left: 1.5vw;
+  padding-top: 1.5rem;
 }
 
-.today_concert .img img {
+/* .today_concert .img img {
   display: block;
   width: 250px;
   padding-left: 5%;
   padding-top: 20px;
-}
+} */
 
 .today_concert .info .title {
   display: block;
@@ -64,12 +50,17 @@ body {
 }
 
 /* 콘서트 메이트 */
+
+.concert_mate {
+  max-width: 2060px;
+  margin: 0 auto;
+}
 .concert_mate .title {
   display: inline-block;
   font-size: var(--font-large);
   font-weight: bold;
-  padding-left: 5.5%;
-  padding-top: 80px;
+  padding-left: 1.5vw;
+  padding-top: 8rem;
 }
 
 .concert_mate .more_info {
@@ -131,4 +122,78 @@ body {
 
 .title {
   margin-bottom: 20px;
+}
+
+@media (max-width: 1980px) {
+  #main {
+    height: 26vw;
+  }
+  .today_concert {
+    max-width: 1480px;
+  }
+  .concert_mate {
+    max-width: 1480px;
+  }
+}
+
+@media (max-width: 1680px) {
+  #main {
+    height: 26rem;
+  }
+  .today_concert {
+    max-width: 1180px;
+  }
+  .concert_mate {
+    max-width: 1180px;
+  }
+}
+
+@media (max-width: 1366px) {
+  #main {
+    height: 25rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  #main {
+    height: 25rem;
+  }
+}
+
+@media (max-width: 1152px) {
+  #main {
+    height: 25rem;
+  }
+  .today_concert {
+    max-width: 852px;
+  }
+  .concert_mate {
+    max-width: 852px;
+  }
+  .home_concert:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+/* 1024 x 768 */
+@media (max-width: 1024px) {
+  #main {
+    height: 25rem;
+  }
+}
+
+/* 800 x 600 */
+@media (max-width: 800px) {
+  #main {
+    height: 28rem;
+  }
+  .today_concert {
+    max-width: 650px;
+  }
+  .concert_mate {
+    max-width: 650px;
+  }
+  .home_concert:nth-child(n + 3) {
+    display: none;
+  }
 }
