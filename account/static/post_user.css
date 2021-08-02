@@ -11,14 +11,13 @@
   position: relative;
   display: inline-flex;
   margin-top: 5%;
-  margin-left:10%;
+  margin-left:13%;
 }
 .user_name > h1 {
   position: relative;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
-  width: 150px;
   text-align:center;
 }
 .user_name > p {
@@ -43,7 +42,7 @@
   text-decoration: none;
 }
 
-button {
+.follow_button > button {
   background: rgb(185, 185, 185);
   border: none;
   position: absolute;
@@ -57,12 +56,12 @@ button {
   border-radius: 30px;
   
 }
-button:hover {
+.follow_button > button:hover {
   background: #fff;
   color: #a5a5a5;
 }
-button:before,
-button:after {
+.follow_button > button:before,
+.follow_button >button:after {
   content: "";
   position: absolute;
   top: 0;
@@ -72,7 +71,7 @@ button:after {
   background: #b9b9b9;
   transition: 400ms ease all;
 }
-button:after {
+.follow_button > button:after {
   right: inherit;
   top: inherit;
   left: 0;
@@ -147,32 +146,38 @@ button:after {
   margin: 2% 0% 0% 3%;
 }
 
-.comment_user_name > strong {
+.comment_user_etc {
   position: relative;
-  margin: -6% 0% 0% 10%;
-  float:left;
-}
-
-/* .comment_user_etc {
-  position: absolute;
-  float:left;
+  margin: -8% 0% 0% 10%;
 } 
 
-.comment_concert {
-  position: absolute;
-  left: 10%;
-  padding-top: 30px;
-} */
+/*.comment_concert {
+  position: relative;
+  margin-left: 10%;
+  margin-top:2%;
+}*/
 
 .comment_date {
   position: relative;
   margin-left:10%;
+  margin-top:3%;
 }
 
 .message {
-  position: relative;
-  margin: -10% 0% 0% 50%;
+  position: absolute;
+  margin: -5% 0% 0% 35%;
   width: 450px;
   height: 90px;
 } 
 
+.message_button {
+  position: relative;
+  margin: 0.5% 0% 0% 10%;
+}
+
+.message_button > button {
+  border: 0;
+  outline: 0;
+  background-color: rgb(138, 138, 138);
+  border-radius: 10px;
+}
