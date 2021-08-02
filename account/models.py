@@ -4,6 +4,7 @@ import django.utils.timezone as timezone
 from django.conf import settings
 
 class UserInfo(models.Model):
+    userkey = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     username=models.CharField(unique=True, max_length=100)
     name = models.CharField(max_length=30)
     email = models.EmailField(
@@ -14,7 +15,8 @@ class UserInfo(models.Model):
     phone = models.CharField(max_length=15)
     date_of_birth = models.DateField(null=True)
     gender = models.CharField(max_length=5, null=True)
-    interests = models.CharField(max_length=100, null=True)
+    # interests = models.CharField(max_length=100, null=True)
+    interests = models.JSONField(default=list)
 
     profpic = models.ImageField(null=True, blank=True, upload_to='user/profilepic')
     introduction = models.TextField(blank=True)

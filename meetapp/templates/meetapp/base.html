@@ -16,8 +16,8 @@
       integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'css/ui.css' %}" />  
   
     <script
@@ -32,10 +32,10 @@
       <a href="{% url 'meetapp:post_home' %}"
         >ConcertMeet</a
       >
-      <form class="search-form">
+      <!-- <form class="search-form">
         <input type="search" />
         <input type="submit" value="찾기" />
-      </form>
+      </form> -->
       <div class="top_right">
           {% if user.is_authenticated %}
           <div>
