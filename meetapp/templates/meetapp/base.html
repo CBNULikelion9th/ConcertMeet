@@ -36,6 +36,7 @@
         <input type="search" />
         <input type="submit" value="찾기" />
       </form>
+      <h4 id="clock">00:00:00</h4>
       <div class="top_right">
           {% if user.is_authenticated %}
           <div>
@@ -103,5 +104,6 @@
         alert("로그아웃 되었습니다!");
       }
     </script>
+    <script src="{% static 'js/clock.js' %}"></script>
   </body>
 </html>
