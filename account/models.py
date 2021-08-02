@@ -23,6 +23,7 @@ class UserInfo(models.Model):
     following = models.IntegerField(default=0)
     follower = models.IntegerField(default=0)
     concertnum = models.IntegerField(default=0)
+    concertpcp = models.JSONField(default=list) #concert participation. 참가한 공연 목록이며 데이터는 게시글의 id가 들어감
 
     def __str__(self):
         return self.username
