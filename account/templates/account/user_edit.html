@@ -89,7 +89,7 @@
                 <div>
                     <label>프로필 사진</label>
                     <br>
-                    {% if cur_info.profpic.url %}
+                    {% if cur_info.profpic %}
                     <img src="{{cur_info.profpic.url|default_if_none:''}}" width="300px" height="300px"><br>
                     {% endif %}
                     {{infoform.profpic}}

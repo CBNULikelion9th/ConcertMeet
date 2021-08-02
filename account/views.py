@@ -31,6 +31,7 @@ def user(request, user_id):
     else:
         isFollowed = -1
 
+    infos.interests = json.loads(infos.interests)
 
     context = {
             'info': infos,
@@ -41,22 +42,22 @@ def user(request, user_id):
     return render(request, 'account/user.html', context)
 
 def user_edit(request, user_id):
+    print(request.POST)
+
     info = UserInfo.objects.get(username=user_id)
     if request.method == 'POST':
         infoForm = UserInfoForm(request.POST, instance=info)
         infoForm.gender = request.POST.get('gender')
         tempinterests = request.POST.getlist('interests')
-        #M = dict(zip(interests, range(1, len(interests) + 1)))
-        #infoForm.interests = json.dumps(M)
-        #info.interests = json.dumps(M)
-        intereststr = ""
+        M = dict(zip(tempinterests, range(1, len(tempinterests) + 1)))
+        # intereststr = ""
 
         if infoForm.is_valid():
             info = infoForm.save(commit=False)
-            for interest in tempinterests:
-                intereststr += "#" + interest + " " 
-            infoForm.interests = intereststr
-            print("관심사: "+str(infoForm.interests))
+            # for interest in tempinterests:
+            #     intereststr += "#" + interest + " " 
+            # info.interests = intereststr
+            info.interests = json.dumps(M)
             info.save()
             return redirect('account:user', user_id)
         else:
@@ -78,19 +79,18 @@ def sign(request):
         infoForm = UserJoinForm(request.POST, request.FILES)
         infoForm.gender = request.POST.get('gender')
         tempinterests = request.POST.getlist('interests')
-        intereststr = ""
+        M = dict(zip(tempinterests, range(1, len(tempinterests) + 1)))
         
         if form.is_valid() and infoForm.is_valid():
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            form.save()
-            infoForm.save(commit=False)
-            infoForm.profpic = 'static/defpropic/default-profile-pic'
-            infoForm.username=username
-            for interest in tempinterests:
-                intereststr += "#" + interest + " " 
-            infoForm.interests = intereststr
-            infoForm.save()
+            user = form.save()
+            new_user = infoForm.save(commit=False)
+            new_user.username=username
+            new_user.userkey = user
+            new_user.gender = infoForm.gender
+            new_user.interests = json.dumps(M)
+            new_user.save()
             user = authenticate(username = username, password = raw_password)
             return redirect('account:login')
         else:

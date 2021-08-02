@@ -57,12 +57,11 @@
 
           <div class="info">
             <div class="hashtag">
-              <p>#힙합</p>
+              <p>#{{ post.category }}}</p>
             </div>
             <div class="date">
               <p>
-                {{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;{{
-                post.user }}
+                {{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;{{ post.user.username }}
               </p>
             </div>
           </div>
