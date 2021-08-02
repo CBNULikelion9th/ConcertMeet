@@ -4,7 +4,6 @@
   <head>
     <link rel="stylesheet" href="{% static 'css/post_home.css' %}" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap"
@@ -21,6 +20,9 @@
     <section id="main" class="today_concert">
       <div class="metadata">
         <span class="title">오늘 진행되고 있는 공연</span>
+        <a href="{% url 'meetapp:content_list' %}"
+          ><span class="more_info">더보기</span></a
+        >
       </div>
       <div class="home_list">
         {% for concert in concert_list %}

@@ -80,6 +80,10 @@
   width: 300px;
 }
 
+.home_concert:nth-child(n + 4) {
+  display: none;
+}
+
 .home_concert_info {
   text-align: center;
 }
@@ -124,7 +128,7 @@
   margin-bottom: 20px;
 }
 
-@media (max-width: 1980px) {
+@media (max-width: 1920px) {
   #main {
     height: 26vw;
   }

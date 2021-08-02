@@ -67,7 +67,7 @@ a:hover {
   text-align: center;
 }
 
-@media (max-width: 1980px) {
+@media (max-width: 1920px) {
   .header {
     max-width: 1480px;
   }

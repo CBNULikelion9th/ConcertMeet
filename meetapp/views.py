@@ -142,3 +142,10 @@ def comment_delete(request, post_id,id):
     return render(request, 'meetapp/comment_confirm_delete.html', {
         'comment' : comment,
     })
+
+def content_list(request):
+    concert_list = Concert.objects.all()
+    context = {
+        'concert_list' : concert_list,
+    }
+    return render(request, 'meetapp/content_list.html', context)
