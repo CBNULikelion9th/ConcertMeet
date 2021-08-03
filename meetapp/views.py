@@ -43,8 +43,10 @@ def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     post.hit +=1
     post.save()
+    form = CommentForm() 
     context = {
-            'post': post
+            'post': post,
+            'form': form,
         }
     return render(request, 'meetapp/post_detail.html', context)
 
@@ -107,11 +109,7 @@ def comment_new(request, post_id):
             comment.user = request.user
             comment.save()
             return redirect('meetapp:post_detail',post.id)
-    else:
-        form = CommentForm() 
-    return render(request, 'meetapp/comment_form.html', {
-        'form' : form,
-    })
+    return redirect('meetapp:post_detail',post.id)
 
 @login_required
 def comment_edit(request, post_id,id):
@@ -135,13 +133,8 @@ def comment_delete(request, post_id,id):
     comment = get_object_or_404(Comment,id=id)
     if comment.user != request.user:
         return redirect('meetapp:post_detail', post_id)
-    if request.method == 'POST':
-        comment.delete()
-        return redirect('meetapp:post_detail', post_id)
-    
-    return render(request, 'meetapp/comment_confirm_delete.html', {
-        'comment' : comment,
-    })
+    comment.delete()
+    return redirect('meetapp:post_detail', post_id)
 
 def content_list(request):
     concert_list = Concert.objects.all()
