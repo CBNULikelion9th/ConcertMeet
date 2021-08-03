@@ -29,10 +29,9 @@
                 <p>{{ age }}세 {{ info.gender }}</p>
                 &nbsp;&nbsp;
                 {% if info.interests %}
-                <!-- {% for interest in info.interests %}
-                <p style="color: blueviolet;">#{{ interest }} </p>
-                {% endfor %} -->
-                <p style="color: blueviolet;">#{{ info.interests }} </p>
+                {% for interest in info.interests %}
+                <p style="color: blueviolet;">#{{ interest }}&nbsp;</p>
+                {% endfor %}
                 {% endif %}
             </div>
                     

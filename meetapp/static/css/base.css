@@ -1,11 +1,6 @@
-html {
+#clock {
+  padding-right: 1.5%;
   font-size: 20px;
-}
-
-a,
-a:hover {
-  text-decoration: none;
-  color: black;
 }
 
 .header {
@@ -67,7 +62,7 @@ a:hover {
   text-align: center;
 }
 
-@media (max-width: 1980px) {
+@media (max-width: 1920px) {
   .header {
     max-width: 1480px;
   }
