@@ -46,6 +46,7 @@ class Concert(models.Model):
     image_url = models.URLField('url', unique=True)
     location = models.CharField(max_length=100)
     date = models.CharField(max_length=100)
+    genre = models.CharField(max_length=50)
 
     def __str__(self):
         return f'{self.title}'
