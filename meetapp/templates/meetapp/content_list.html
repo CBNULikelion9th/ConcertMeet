@@ -1,0 +1,34 @@
+{% extends 'meetapp/base.html' %} {% block content %} {% load static %}
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/content_list.css' %}" />
+  </head>
+  <body>
+    <section id="main">
+      <div class="title">곧 진행될 콘서트 리스트에요</div>
+      <div class="btns">
+        <button id="hip">힙합</button><button class="bal">발라드</button>
+      </div>
+
+      <div id="concert_list">
+        <div class="info_tag">
+          <p>콘서트명</p>
+          <p>장소</p>
+          <p>기간</p>
+        </div>
+        {% for concert in concert_list %}
+        <div class="line">
+          <img src="{{ concert.image_url}}" />
+          <div class="concert_title">{{concert.title}}</div>
+          <div class="concert_location">{{concert.location}}</div>
+          <div class="concert_date">{{concert.date}}</div>
+          <div class="concert_genre hide">{{concert.genre}}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    <script src="{% static 'js/content.js' %}"></script>
+  </body>
+</html>
+{% endblock content %}

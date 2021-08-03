@@ -14,4 +14,5 @@ urlpatterns = [
     path('lists/<int:post_id>/comment/new/', views.comment_new, name='comment_new'),
     path('lists/<int:post_id>/comment/<int:id>/edit/', views.comment_edit, name='comment_edit'),
     path('lists/<int:post_id>/comment/<int:id>/delete/', views.comment_delete, name='comment_delete'),
+    path('content/', views.content_list, name='content_list'),
 ]
