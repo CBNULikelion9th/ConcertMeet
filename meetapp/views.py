@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
-from .models import Post, Comment
+from .models import Post, Comment, Declaration
 
 def post_home(request):
     post_home = Post.objects.all()
@@ -93,10 +93,30 @@ def post_edit(request, post_id):
     })
 
 def post_delete(request, post_id):
-    # post = Post.objects.get(id=post_id)
-    post = get_object_or_404(Post, blog_id=post_id)
+    post = get_object_or_404(Post, id=post_id)
     post.delete()
     return redirect('meetapp:post_list')
+
+@login_required
+def post_declaration(request, post_id):
+    post = Post.objects.get(id=post_id)
+    
+    if request.method == 'GET':
+        form = DeclareForm()
+
+    elif request.method == 'POST':
+        form = DeclareForm(request.POST)
+        if form.is_valid():
+            declaration = form.save(commit=False)
+            declaration.user = post.user 
+            declaration.post = post
+            declaration.save() 
+            return redirect('meetapp:post_detail', post_id=post.id)
+            
+    return render(request, 'meetapp/post_declaration.html', {
+        'form': form,
+    })
+
 
 @login_required
 def comment_new(request, post_id):

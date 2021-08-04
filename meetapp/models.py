@@ -41,6 +41,17 @@ class Comment(models.Model):
         return reverse('meetapp:comment_delete', args=[self.post.id, self.id])
 
 
+class Declaration(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    message = models.TextField()
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    process = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.message}'
+
+
 class Concert(models.Model):
     title = models.CharField(max_length=100)
     image_url = models.URLField('url', unique=True)

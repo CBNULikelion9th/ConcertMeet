@@ -43,10 +43,15 @@
                 <h3>0/3</h3>
             </div>
             <div class="post_manage">
+                <a href="{% url 'meetapp:post_list' %}"><input type="button" value ='목록'></a>
+
                 {% if post.user == request.user %}
-                    <a href="{% url 'meetapp:post_edit' post.id %}"><input type="button" value ='수정'></a>
-                    <a href="{% url 'meetapp:post_list' %}"><input type="button" value ='목록'></a>
-                    <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value ='삭제'></a>
+                <a href="{% url 'meetapp:post_edit' post.id %}"><input type="button" value ='수정'></a>
+                <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value ='삭제'></a>
+                {% endif %}
+               
+                {% if post.user != request.user %}
+                <a href="{% url 'meetapp:post_declaration' post.id %}"><input type="button" value ='신고'></a>
                 {% endif %}
             </div>
         </section>

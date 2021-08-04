@@ -6,6 +6,7 @@ from .models import *
 
 # Create your views here.
 
+
 def user(request, user_id):
     print("request user:" + request.user.username)
     users = User.objects.get(username=user_id)
@@ -13,13 +14,14 @@ def user(request, user_id):
     try:
         reviews = Review.objects.filter(tguser_id=user_id)
     except Review.DoesNotExist:
-        reviews=""
+        reviews = ""
     age = infos.get_age()
 
     if request.user.username != user_id:
         if request.user.username:
             try:
-                following = Follow.objects.get(follow_user_id=request.user.username, followed_user_id=user_id)
+                following = Follow.objects.get(
+                    follow_user_id=request.user.username, followed_user_id=user_id)
                 if following:
                     isFollowed = 2
                 else:
@@ -34,12 +36,13 @@ def user(request, user_id):
     infos.interests = json.loads(infos.interests)
 
     context = {
-            'info': infos,
-            'age':age,
-            'reviews': reviews,
-            'isFollowed': isFollowed
-        }
+        'info': infos,
+        'age': age,
+        'reviews': reviews,
+        'isFollowed': isFollowed
+    }
     return render(request, 'account/user.html', context)
+
 
 def user_edit(request, user_id):
     print(request.POST)
@@ -55,7 +58,7 @@ def user_edit(request, user_id):
         if infoForm.is_valid():
             info = infoForm.save(commit=False)
             # for interest in tempinterests:
-            #     intereststr += "#" + interest + " " 
+            #     intereststr += "#" + interest + " "
             # info.interests = intereststr
             info.interests = json.dumps(M)
             info.save()
@@ -64,13 +67,16 @@ def user_edit(request, user_id):
             print("invalid")
     else:
         infoForm = UserInfoForm(instance=info)
-    return render(request, 'account/user_edit.html', { 'user_id':user_id, 'infoform':infoForm, 'cur_info':info })
+    return render(request, 'account/user_edit.html', {'user_id': user_id, 'infoform': infoForm, 'cur_info': info})
+
 
 def login(request):
     return render(request, 'account/login.html')
 
+
 def logout(request):
     return render(request, 'meetapp/post_home.html')
+
 
 def sign(request):
     if request.method == "POST":
@@ -80,25 +86,26 @@ def sign(request):
         infoForm.gender = request.POST.get('gender')
         tempinterests = request.POST.getlist('interests')
         M = dict(zip(tempinterests, range(1, len(tempinterests) + 1)))
-        
+
         if form.is_valid() and infoForm.is_valid():
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = form.save()
             new_user = infoForm.save(commit=False)
-            new_user.username=username
+            new_user.username = username
             new_user.userkey = user
             new_user.gender = infoForm.gender
             new_user.interests = json.dumps(M)
             new_user.save()
-            user = authenticate(username = username, password = raw_password)
+            user = authenticate(username=username, password=raw_password)
             return redirect('account:login')
         else:
             print("validation failed")
     else:
         form = UserForm()
         infoForm = UserJoinForm()
-    return render(request, 'account/sign.html', {'form': form, 'infoform': infoForm })
+    return render(request, 'account/sign.html', {'form': form, 'infoform': infoForm})
+
 
 def follow(request, user_id):
     try:
@@ -111,9 +118,11 @@ def follow(request, user_id):
     user.save()
     tguser.save()
 
-    following = Follow.objects.create(follow_user_id=request.user.username, followed_user_id=user_id)
+    following = Follow.objects.create(
+        follow_user_id=request.user.username, followed_user_id=user_id)
     following.save()
     return redirect('account:user', user_id)
+
 
 def unfollow(request, user_id):
     userID = request.user.username
@@ -134,10 +143,12 @@ def unfollow(request, user_id):
     user.save()
     tguser.save()
 
-    unfollowing = Follow.objects.get(follow_user_id=userID, followed_user_id=user_id)
+    unfollowing = Follow.objects.get(
+        follow_user_id=userID, followed_user_id=user_id)
     unfollowing.delete()
 
     return redirect('account:user', user_id)
+
 
 def review_new(request, user_id):
     userinfo = get_object_or_404(UserInfo, username=request.user.username)
@@ -151,10 +162,11 @@ def review_new(request, user_id):
             review.save()
             return redirect('account:user', user_id)
     else:
-        form = ReviewForm() 
+        form = ReviewForm()
     return render(request, 'account/review_form.html', {
-        'form' : form,
+        'form': form,
     })
+
 
 def review_edit(request, user_id, review_id):
     try:
@@ -172,11 +184,12 @@ def review_edit(request, user_id, review_id):
             review.save()
             return redirect('account:user', user_id)
     else:
-        form = ReviewForm(instance=review) 
+        form = ReviewForm(instance=review)
 
     return render(request, 'account/review_form.html', {
-        'form' : form,
+        'form': form,
     })
+
 
 def review_delete(request, user_id, review_id):
     try:
