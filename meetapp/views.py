@@ -93,10 +93,28 @@ def post_edit(request, post_id):
     })
 
 def post_delete(request, post_id):
-    # post = Post.objects.get(id=post_id)
-    post = get_object_or_404(Post, blog_id=post_id)
+    post = get_object_or_404(Post, id=post_id)
     post.delete()
     return redirect('meetapp:post_list')
+
+def post_declaration(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if request.method == 'GET':
+        #빈 폼 보여주는 부분
+        form = DeclareForm()
+
+    elif request.method == 'POST':
+        # 사용자가 입력한 데이터를 저장하는 부분
+        form = DeclareForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False) #post.id 없음
+            post.user = request.user 
+            post.save() #post.id 저장
+            return redirect('meetapp:post_detail', post_id=post.id)
+            
+    return render(request, 'meetapp/post_declaration.html', {
+        'form': form,
+    })
 
 @login_required
 def comment_new(request, post_id):

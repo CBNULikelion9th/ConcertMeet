@@ -13,6 +13,7 @@ class Post(models.Model):
     hit = models.IntegerField(default=-1)
     likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes_user') 
     pcp_user = models.JSONField(default=list) #공연 참가 유저수. 사용자가 존재하면 글 삭제 불가능. 유저 아이디 넣기
+    declarations = models.TextField(null=True)
 
     def count_likes_user(self): 
         return self.likes_user.count()
