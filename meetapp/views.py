@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
-from .models import Post, Comment
+from .models import Post, Comment, Declaration
 
 def post_home(request):
     post_home = Post.objects.all()
@@ -97,24 +97,26 @@ def post_delete(request, post_id):
     post.delete()
     return redirect('meetapp:post_list')
 
+@login_required
 def post_declaration(request, post_id):
     post = Post.objects.get(id=post_id)
+    
     if request.method == 'GET':
-        #빈 폼 보여주는 부분
         form = DeclareForm()
 
     elif request.method == 'POST':
-        # 사용자가 입력한 데이터를 저장하는 부분
-        form = DeclareForm(request.POST, request.FILES)
+        form = DeclareForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False) #post.id 없음
-            post.user = request.user 
-            post.save() #post.id 저장
+            declaration = form.save(commit=False)
+            declaration.user = post.user 
+            declaration.post = post
+            declaration.save() 
             return redirect('meetapp:post_detail', post_id=post.id)
             
     return render(request, 'meetapp/post_declaration.html', {
         'form': form,
     })
+
 
 @login_required
 def comment_new(request, post_id):
