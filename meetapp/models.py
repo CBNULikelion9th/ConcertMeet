@@ -12,10 +12,16 @@ class Post(models.Model):
     content = models.TextField()
     hit = models.IntegerField(default=-1)
     likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes_user') 
-    pcp_user = models.JSONField(default=list) #공연 참가 유저수. 사용자가 존재하면 글 삭제 불가능. 유저 아이디 넣기
+    pcp_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='pcp_user')  #공연 참가 유저수. 사용자가 존재하면 글 삭제 불가능. 유저 아이디 넣기
+    pcp_user_count = models.IntegerField(default=1)
+    pcp_user_total = models.IntegerField(default=4)
 
     def count_likes_user(self): 
         return self.likes_user.count()
+
+    def count_pcp_user(self):
+        pcp_user_count += 1
+        return self.pcp_user.count()
 
     def __str__(self):
         return f'{self.title}'
