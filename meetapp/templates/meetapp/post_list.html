@@ -61,8 +61,7 @@
             </div>
             <div class="date">
               <p>
-                {{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;
-                {{post.user.username }}
+                {{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;{{ post.user }}
               </p>
             </div>
           </div>
