@@ -26,14 +26,6 @@ class Participant(models.Model):
 
     pcp_user_count = models.IntegerField(default=1)
     pcp_user_total = models.IntegerField(default=4)
-
-    def count_pcp_user(self):
-        pcp_user_count += 1
-        return self.pcp_user.count()
-
-    def decount_pcp_user(self):
-        pcp_user_count -= 1
-        return self.pcp_user.count()
         
     def __str__(self):
         return f'{self.id}'

@@ -166,13 +166,15 @@ def pcp_add(request, post_id, comment_id):
     post = get_object_or_404(Post, id=post_id)
     comment = get_object_or_404(Comment,id=comment_id)
     if post.pcp.pcp_user.filter(id=comment.user.id).exists():
-        pass
+        context = {'status': 0}
     else:
         post.pcp.pcp_user.add(comment.user)
         post.pcp.pcp_user_count += 1
-    post.save()
+        post.pcp.save()
+        post.save()
+        context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
 
-    return redirect('meetapp:post_detail', post_id)
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 def pcp_delete(request, post_id, comment_id):
     post = get_object_or_404(Post, id=post_id)
@@ -180,10 +182,13 @@ def pcp_delete(request, post_id, comment_id):
     if post.pcp.pcp_user.filter(id=comment.user.id).exists():
         post.pcp.pcp_user.remove(comment.user)
         post.pcp.pcp_user_count -= 1
+        post.pcp.save()
+        post.save()
+        context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
     else:
-        pass
-    post.save()
-    return redirect('meetapp:post_detail', post_id)
+        context = {'status': 0}
+        
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 def content_list(request):
     concert_list = Concert.objects.all()

@@ -2,119 +2,148 @@
 {% block content %}
 {% load static %} <br>
 <html>
-    <head>
-        <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" 
-        rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" 
-        rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined"
-      rel="stylesheet">
-    </head>
 
-    <body>
-        <section id="main">
-            
-            <script src="{% static 'js/likes.js' %}"></script>
+<head>
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+</head>
 
-            <button class="btn-icon btn--icon-default" name="{{ post.id }}" onclick='onClick()' >
-                <span class="fa fa-heart" style="font-size:35px" ></span>
-            </button>
+<body>
+    <section id="main">
 
-            <div class="post_title">
-                <p>{{ post.title }}</p>
-            </div>
-            <div class="post_user">
-                <p class="user_name">
-                    <a href="{% url 'account:user' post.user.username %}">{{ post.user }}</a>
-                </p>
-            </div> 
-            <div class="post_content">
-                <p>
-                    {{ post.content }}
-                </p>
-            </div>
-            <div class="count">
-                <h3>{{ post.pcp.pcp_user_count }}/{{ post.pcp.pcp_user_total }}</h3>
-                
-            </div>
-            <div class="post_manage">
-                <a href="{% url 'meetapp:post_list' %}"><input type="button" value ='목록'></a>
+        <script src="{% static 'js/likes.js' %}"></script>
 
-                {% if post.user == request.user %}
-                <a href="{% url 'meetapp:post_edit' post.id %}"><input type="button" value ='수정'></a>
-                <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value ='삭제'></a>
+        <button class="btn-icon btn--icon-default" name="{{ post.id }}" onclick='onClick()'>
+            <span class="fa fa-heart" style="font-size:35px"></span>
+        </button>
+
+        <div class="post_title">
+            <p>{{ post.title }}</p>
+        </div>
+        <div class="post_user">
+            <p class="user_name">
+                <a href="{% url 'account:user' post.user.username %}">{{ post.user }}</a>
+            </p>
+        </div>
+        <div class="post_content">
+            <p>
+                {{ post.content }}
+            </p>
+        </div>
+        <div class="count">
+            <h3><span id="pcp_user_cnt">{{ post.pcp.pcp_user_count }}</span>/{{ post.pcp.pcp_user_total }}</h3>
+        </div>
+        <div class="post_manage">
+            <a href="{% url 'meetapp:post_list' %}"><input type="button" value='목록'></a>
+
+            {% if post.user == request.user %}
+            <a href="{% url 'meetapp:post_edit' post.id %}"><input type="button" value='수정'></a>
+            <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value='삭제'></a>
+            {% endif %}
+
+            {% if post.user != request.user %}
+            <a href="{% url 'meetapp:post_declaration' post.id %}"><input type="button" value='신고'></a>
+            {% endif %}
+        </div>
+    </section>
+    <section id="greet">
+        <div class="comment">
+            <p>댓글</p>
+            <form action="{% url 'meetapp:comment_new' post.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea cols="40" rows="3" class="form-control" name="message" id="message"
+                        value="{{ form.message.value|default_if_none:'' }}" placeholder="참가 의사를 표현해주세요"></textarea>
+                </div>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                    <input type="submit" class="btn btn-primary float-end" value="작성">
+                </div>
+            </form>
+            {% for comment in post.comment_set.all %}
+            <li>
+                {{ comment.user }}
+                {{ comment.message }}<br>
+                {{ comment.created_at }}
+                {% if comment.user == request.user %}
+                <a href="{{ comment.get_edit_url }}">
+                    <button>수정</button>
+                </a>
+                <a>
+                    <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
+                    <button onclick="deletefunc();">삭제</button>
+                </a>
                 {% endif %}
-               
-                {% if post.user != request.user %}
-                <a href="{% url 'meetapp:post_declaration' post.id %}"><input type="button" value ='신고'></a>
+                {% if request.user == post.user %}
+                <a>
+                    <input type="hidden" id="pcp_url" name="pcp_url" value="{% url 'meetapp:pcp_add' post.id comment.id %}">
+                    <input type="hidden" id="del_pcp_url" name="del_pcp_url" value="{% url 'meetapp:pcp_delete' post.id comment.id %}">
+                    <button id="pcp_btn" onclick="addpcpfunc();">참가자로 추가</button>
+                    <button id="del_pcp_btn" onclick="delpcpfunc();">참가자에서 삭제</button>
+                </a>
                 {% endif %}
-            </div>
-        </section>
-        <section id="greet">
-            <div class="comment">
-                <p>댓글</p>
-                <form action="{% url 'meetapp:comment_new' post.id %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <textarea cols="40" rows="3" class="form-control" name="message" id="message"
-                            value="{{ form.message.value|default_if_none:'' }}"
-                            placeholder="참가 의사를 표현해주세요"></textarea>
-                    </div>
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
-                        <input type="submit" class="btn btn-primary float-end" value="작성">
-                    </div>
-                </form>
-                {% for comment in post.comment_set.all %}
-                <li>
-                    {{ comment.user }}
-                    {{ comment.message }}<br>
-                    {{ comment.created_at }}
-                    {% if comment.user == request.user %}
-                    <a href="{{ comment.get_edit_url }}">
-                        <button>수정</button>
-                    </a>
-                    <a>
-                        <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
-                        <button onclick="deletefunc();">삭제</button>
-                    </a>
-                    {% endif %}
-                    {% if request.user == post.user %}
-                    <a>
-                        <input type="hidden" id="pcp_url" name="pcp_url" value="{% url 'meetapp:pcp_add' post.id comment.id %}">
-                        <input type="hidden" id="del_pcp_url" name="del_pcp_url" value="{% url 'meetapp:pcp_delete' post.id comment.id %}">
-                        <button onclick="addpcpfunc();">참가자로 추가</button>
-                        <button onclick="delpcpfunc();">참가자에서 삭제</button>
-                    </a>
-                    {% endif %}
-                </li>
-                <hr>
-                {% endfor %}
-            </div>
-            <script type="text/javascript">
-                function deletefunc(){
-                    if(confirm('정말 삭제하시겠습니까?'))
-                        window.location = document.getElementById("delete_url").value;;
+            </li>
+            <hr>
+            {% endfor %}
+        </div>
+        <script type="text/javascript">
+            function deletefunc() {
+                if (confirm('정말 삭제하시겠습니까?'))
+                    window.location = document.getElementById("delete_url").value;;
+            }
+            function addpcpfunc() {
+                if (confirm('해당 사용자를 추가하시겠습니까?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: document.getElementById("pcp_url").value,
+                        data: {'csrfmiddlewaretoken':'{{ csrf_token }}'}, 
+                        dataType: "json",
+                        success: function (response) {
+                            alert("성공적으로 추가되었습니다.");
+                            $("#pcp_user_cnt").text(response.pcp_user_count);
+                        },
+                        error: function (request, status, error) {
+                            if(status == 0)
+                                alert("이미 등록된 사용자입니다.");
+                            else
+                                alert("추가에 실패하였습니다.");
+                        },
+                    });
                 }
-                function addpcpfunc(){
-                    if(confirm('해당 사용자를 추가하시겠습니까?'))
-                        window.location = document.getElementById("pcp_url").value;;
+            }
+            function delpcpfunc() {
+                if (confirm('해당 사용자를 제외하시겠습니까?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: document.getElementById("del_pcp_url").value,
+                        data: {'csrfmiddlewaretoken':'{{ csrf_token }}'}, 
+                        dataType: "json",
+                        success: function (response) {
+                            alert("성공적으로 삭제되었습니다.");
+                            $("#pcp_user_cnt").text(response.pcp_user_count);
+                        },
+                        error: function (request, status, error) {
+                            if(status == 0)
+                                alert("참가하지 않은 사용자입니다.");
+                            else
+                                alert("삭제에 실패하였습니다.");
+                        },
+                    });
                 }
-                function delpcpfunc(){
-                    if(confirm('해당 사용자를 제외하시겠습니까?'))
-                        window.location = document.getElementById("del_pcp_url").value;;
-                }
-            </script>
-        </section>
-    </body>
+            }
+        </script>
+    </section>
+</body>
+
 </html>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(".btn-icon").click(function () { // .like 버튼을 클릭 감지
-      var pk = $(this).attr('name') // Jquery의 경우에는 이벤트가 발생한 요소의 정보들이 Object로 표시
+        var pk = $(this).attr('name') // Jquery의 경우에는 이벤트가 발생한 요소의 정보들이 Object로 표시
         $.ajax({ // ajax로 서버와 통신
             type: "POST", // 데이터를 전송하는 방법
             url: "{% url 'meetapp:post_like' %}", // 통신할 url을 지정
