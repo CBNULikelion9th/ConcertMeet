@@ -22,9 +22,6 @@
             <button class="btn-icon btn--icon-default" name="{{ post.id }}" onclick='onClick()' >
                 <span class="fa fa-heart" style="font-size:35px" ></span>
             </button>
-            <button class="btn-icon btn--icon-liked" name="{{ post.id }}" onclick='onClick()'>
-                <span class="fa fa-heart" style="font-size:35px" ></span>
-            </button>
 
             <div class="post_title">
                 <p>{{ post.title }}</p>
@@ -44,10 +41,15 @@
                 
             </div>
             <div class="post_manage">
+                <a href="{% url 'meetapp:post_list' %}"><input type="button" value ='목록'></a>
+
                 {% if post.user == request.user %}
-                    <a href="{% url 'meetapp:post_edit' post.id %}"><input type="button" value ='수정'></a>
-                    <a href="{% url 'meetapp:post_list' %}"><input type="button" value ='목록'></a>
-                    <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value ='삭제'></a>
+                <a href="{% url 'meetapp:post_edit' post.id %}"><input type="button" value ='수정'></a>
+                <a href="{% url 'meetapp:post_delete' post.id %}"><input type="button" value ='삭제'></a>
+                {% endif %}
+               
+                {% if post.user != request.user %}
+                <a href="{% url 'meetapp:post_declaration' post.id %}"><input type="button" value ='신고'></a>
                 {% endif %}
             </div>
         </section>

@@ -3,21 +3,16 @@ from django.urls.base import reverse
 import django.utils.timezone as timezone
 from django.conf import settings
 
+
 class UserInfo(models.Model):
     userkey = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    username=models.CharField(unique=True, max_length=100)
+    username = models.CharField(unique=True, max_length=100)
     name = models.CharField(max_length=30)
-    email = models.EmailField(
-        verbose_name='email',
-        max_length=255,
-        unique=True,
-    )
+    email = models.EmailField(verbose_name='email',max_length=255,unique=True)
     phone = models.CharField(max_length=15)
     date_of_birth = models.DateField(null=True)
     gender = models.CharField(max_length=5, null=True)
-    # interests = models.CharField(max_length=100, null=True)
     interests = models.JSONField(default=list, null=True, blank=True)
-
     profpic = models.ImageField(null=True, blank=True, upload_to='user/profilepic')
     introduction = models.TextField(blank=True)
     following = models.IntegerField(default=0)
@@ -31,13 +26,15 @@ class UserInfo(models.Model):
     def get_age(self):
         return timezone.now().year - self.date_of_birth.year + 1
 
+
 class Follow(models.Model):
     follow_user_id = models.CharField(max_length=30)
     followed_user_id = models.CharField(max_length=30)
 
+
 class Review(models.Model):
     user_id = models.CharField(max_length=30)
-    user_info = models.ForeignKey('UserInfo',on_delete=models.CASCADE,)
+    user_info = models.ForeignKey('UserInfo', on_delete=models.CASCADE,)
     tguser_id = models.CharField(max_length=30)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

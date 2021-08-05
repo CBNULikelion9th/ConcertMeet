@@ -13,8 +13,7 @@ class Post(models.Model):
     hit = models.IntegerField(default=-1)
     likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes_user') 
     pcp = models.ForeignKey('Participant',on_delete=models.CASCADE)
-
-
+    
     def count_likes_user(self): 
         return self.likes_user.count()
 
@@ -53,6 +52,17 @@ class Comment(models.Model):
     
     def get_delete_url(self):
         return reverse('meetapp:comment_delete', args=[self.post.id, self.id])
+
+class Declaration(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    message = models.TextField()
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    process = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.message}'
+
 
 class Concert(models.Model):
     title = models.CharField(max_length=100)
