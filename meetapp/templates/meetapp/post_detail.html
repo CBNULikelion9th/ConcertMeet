@@ -54,15 +54,20 @@
         <h3>0/3</h3>
       </div>
       <div class="post_manage">
+        <a href="{% url 'meetapp:post_list' %}"
+          ><input type="button" value="목록"
+        /></a>
+
         {% if post.user == request.user %}
         <a href="{% url 'meetapp:post_edit' post.id %}"
           ><input type="button" value="수정"
         /></a>
-        <a href="{% url 'meetapp:post_list' %}"
-          ><input type="button" value="목록"
-        /></a>
         <a href="{% url 'meetapp:post_delete' post.id %}"
           ><input type="button" value="삭제"
+        /></a>
+        {% endif %} {% if post.user != request.user %}
+        <a href="{% url 'meetapp:post_declaration' post.id %}"
+          ><input type="button" value="신고"
         /></a>
         {% endif %}
       </div>
@@ -70,24 +75,56 @@
     <section id="greet">
       <div class="comment">
         <p>댓글</p>
+        <form
+          action="{% url 'meetapp:comment_new' post.id %}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="form-group">
+            <textarea
+              cols="40"
+              rows="3"
+              class="form-control"
+              name="message"
+              id="message"
+              value="{{ form.message.value|default_if_none:'' }}"
+              placeholder="참가 의사를 표현해주세요"
+            ></textarea>
+          </div>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+            <input
+              type="submit"
+              class="btn btn-primary float-end"
+              value="작성"
+            />
+          </div>
+        </form>
         {% for comment in post.comment_set.all %}
         <li>
           {{ comment.user }} {{ comment.message }}<br />
           {{ comment.created_at }} {% if comment.user == request.user %}
           <a href="{{ comment.get_edit_url }}"> 수정 </a>
-          <a href="{{ comment.get_delete_url }}"> 삭제 </a>
+          <a>
+            <input
+              type="hidden"
+              id="delete_url"
+              name="delete_url"
+              value="{{ comment.get_delete_url }}"
+            />
+            <button onclick="deletefunc();">삭제</button>
+          </a>
           {% endif %}
         </li>
         <hr />
         {% endfor %}
       </div>
-      <div class="comment_submit">
-        <a
-          href="{% url 'meetapp:comment_new' post.id %}"
-          class="btn btn-primary float-end"
-          >댓글 작성</a
-        >
-      </div>
+      <script type="text/javascript">
+        function deletefunc() {
+          if (confirm("정말 삭제하시겠습니까?"))
+            window.location = document.getElementById("delete_url").value;
+        }
+      </script>
     </section>
   </body>
 </html>
