@@ -43,10 +43,15 @@ def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     post.hit +=1
     post.save()
-    form = CommentForm() 
+    form = CommentForm()
+    if request.user != post.user and post.pcp.pcp_user.filter(id=request.user.id).exists():
+        is_pcp = 1
+    else:
+        is_pcp = 0
     context = {
             'post': post,
             'form': form,
+            'is_pcp': is_pcp,
         }
     return render(request, 'meetapp/post_detail.html', context)
 

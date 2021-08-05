@@ -51,7 +51,11 @@
         </div>
     </section>
     <section id="greet">
+        
         <div class="comment">
+            {% if is_pcp %}
+            <a href="{% url 'account:review_new' post.user.username %}" class='btn btn-primary float-end'>후기 작성</a>
+            {% endif %}
             <p>댓글</p>
             <form action="{% url 'meetapp:comment_new' post.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
