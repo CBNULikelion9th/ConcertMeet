@@ -1,8 +1,9 @@
+from django.db.models.fields.related import ForeignObject
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 import json
 from .forms import *
-from .models import *
+from . import models
 
 # Create your views here.
 
@@ -15,7 +16,7 @@ def user(request, user_id):
         reviews = Review.objects.filter(tguser_id=user_id)
     except Review.DoesNotExist:
         reviews = ""
-    age = infos.get_age()
+    # age = infos.get_age()
 
     if request.user.username != user_id:
         if request.user.username:
@@ -37,9 +38,10 @@ def user(request, user_id):
 
     context = {
         'info': infos,
-        'age': age,
+        # 'age': age,
         'reviews': reviews,
-        'isFollowed': isFollowed
+        'isFollowed': isFollowed,
+        'users': users,
     }
     return render(request, 'account/user.html', context)
 
@@ -148,6 +150,15 @@ def unfollow(request, user_id):
     unfollowing.delete()
 
     return redirect('account:user', user_id)
+
+
+def follow_list(request, user_id):
+
+    follower = models.Follow.objects.all()
+
+    return render(request, 'account/follow_list.html', {
+        "follower": follower
+    })
 
 
 def review_new(request, user_id):

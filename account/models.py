@@ -40,6 +40,9 @@ class Follow(models.Model):
     follow_user_id = models.CharField(max_length=30)
     followed_user_id = models.CharField(max_length=30)
 
+    def __str__(self):
+        return f'팔로우: {self.follow_user_id} - 팔로워: {self.followed_user_id}'
+
 
 class Review(models.Model):
     user_id = models.CharField(max_length=30)
