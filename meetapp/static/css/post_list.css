@@ -73,7 +73,7 @@ a:hover {
 .page_title {
   position: relative;
   top: 15%;
-  margin-left: 6rem;
+  margin-left: 8rem;
   font-weight: bold;
   font-style: normal;
   line-height: 18px;
@@ -83,7 +83,7 @@ a:hover {
 .info {
   position: relative;
   padding-top: 1.5vh;
-  margin-left: 6rem;
+  margin-left: 8rem;
 }
 .hashtag {
   margin-top: 2rem;
@@ -114,7 +114,7 @@ a:hover {
   font-size: 30px;
   color: #000000;
   margin-left: 92%;
-  margin-top: -3.7vh;
+  margin-top: -3vh;
 }
 
 @media (max-width: 1980px) {

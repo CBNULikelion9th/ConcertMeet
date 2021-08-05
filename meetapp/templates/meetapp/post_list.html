@@ -27,22 +27,14 @@
       <div class="post_element">
         <script src="{% static 'js/likes.js' %}"></script>
 
-        <button
-          class="btn-icon btn--icon-default"
-          name="{{ post.id }}"
-          onclick="onClick()"
-        >
+        <button class="btn-icon btn--icon-default" name="{{ post.id }}">
           <span
             class="fa fa-heart"
             style="font-size: 35px"
             onclick="onClick()"
           ></span>
         </button>
-        <button
-          class="btn-icon btn--icon-liked"
-          name="{{ post.id }}"
-          onclick="onClick()"
-        >
+        <button class="btn-icon btn--icon-liked" name="{{ post.id }}">
           <span
             class="fa fa-heart"
             style="font-size: 35px"
@@ -57,11 +49,12 @@
 
           <div class="info">
             <div class="hashtag">
-              <p>#{{ post.category }}}</p>
+              <p>#{{ post.category }}</p>
             </div>
             <div class="date">
               <p>
-                {{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;{{ post.user.username }}
+                {{ post.created_at|date:"Y/m/d A h:i " }}&nbsp;&nbsp;&nbsp;
+                {{post.user.username }}
               </p>
             </div>
           </div>
@@ -75,7 +68,7 @@
     </section>
   </body>
 </html>
-
+<script src="../../static/js/likes.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
   $(".btn-icon").click(function () {
