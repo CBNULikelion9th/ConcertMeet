@@ -98,8 +98,7 @@ def post_edit(request, post_id):
 def post_delete(request, post_id):
     # post = Post.objects.get(id=post_id)
     post = get_object_or_404(Post, blog_id=post_id)
-    pcp = get_object_or_404(Participant, id=post_id)
-    pcp.delete()
+    post.pcp.delete()
     post.delete()
     return redirect('meetapp:post_list')
 
@@ -187,7 +186,7 @@ def pcp_delete(request, post_id, comment_id):
         context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
     else:
         context = {'status': 0}
-        
+
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 def content_list(request):
