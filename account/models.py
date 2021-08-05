@@ -16,14 +16,14 @@ class UserInfo(models.Model):
     date_of_birth = models.DateField(null=True)
     gender = models.CharField(max_length=5, null=True)
     # interests = models.CharField(max_length=100, null=True)
-    interests = models.JSONField(default=list)
+    interests = models.JSONField(default=list, null=True, blank=True)
 
     profpic = models.ImageField(null=True, blank=True, upload_to='user/profilepic')
     introduction = models.TextField(blank=True)
     following = models.IntegerField(default=0)
     follower = models.IntegerField(default=0)
     concertnum = models.IntegerField(default=0)
-    concertpcp = models.JSONField(default=list) #concert participation. 참가한 공연 목록이며 데이터는 게시글의 id가 들어감
+    concertpcp = models.JSONField(default=list, null=True, blank=True) #concert participation. 참가한 공연 목록이며 데이터는 게시글의 id가 들어감
 
     def __str__(self):
         return self.username

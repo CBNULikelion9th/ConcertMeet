@@ -67,6 +67,9 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False) #post.id 없음
             post.user = request.user 
+            pcp = Participant.objects.create(created_user=request.user)
+            pcp.save()
+            post.pcp = pcp
             post.save() #post.id 저장
             return redirect('meetapp:post_detail', post_id=post.id)
 
@@ -95,6 +98,8 @@ def post_edit(request, post_id):
 def post_delete(request, post_id):
     # post = Post.objects.get(id=post_id)
     post = get_object_or_404(Post, blog_id=post_id)
+    pcp = get_object_or_404(Participant, id=post_id)
+    pcp.delete()
     post.delete()
     return redirect('meetapp:post_list')
 
@@ -134,6 +139,29 @@ def comment_delete(request, post_id,id):
     if comment.user != request.user:
         return redirect('meetapp:post_detail', post_id)
     comment.delete()
+    return redirect('meetapp:post_detail', post_id)
+
+def pcp_add(request, post_id, comment_id):
+    post = get_object_or_404(Post, id=post_id)
+    comment = get_object_or_404(Comment,id=comment_id)
+    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+        pass
+    else:
+        post.pcp.pcp_user.add(comment.user)
+        post.pcp.pcp_user_count += 1
+    post.save()
+
+    return redirect('meetapp:post_detail', post_id)
+
+def pcp_delete(request, post_id, comment_id):
+    post = get_object_or_404(Post, id=post_id)
+    comment = get_object_or_404(Comment,id=comment_id)
+    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+        post.pcp.pcp_user.remove(comment.user)
+        post.pcp.pcp_user_count -= 1
+    else:
+        pass
+    post.save()
     return redirect('meetapp:post_detail', post_id)
 
 def content_list(request):
