@@ -27,14 +27,22 @@
       <div class="post_element">
         <script src="{% static 'js/likes.js' %}"></script>
 
-        <button class="btn-icon btn--icon-default" name="{{ post.id }}">
+        <button
+          class="btn-icon btn--icon-default"
+          name="{{ post.id }}"
+          onclick="onClick()"
+        >
           <span
             class="fa fa-heart"
             style="font-size: 35px"
             onclick="onClick()"
           ></span>
         </button>
-        <button class="btn-icon btn--icon-liked" name="{{ post.id }}">
+        <button
+          class="btn-icon btn--icon-liked"
+          name="{{ post.id }}"
+          onclick="onClick()"
+        >
           <span
             class="fa fa-heart"
             style="font-size: 35px"
