@@ -34,7 +34,8 @@ def user(request, user_id):
     else:
         isFollowed = -1
 
-    infos.interests = json.loads(infos.interests)
+    if infos.interests:
+        infos.interests = json.loads(infos.interests)
 
     context = {
         'info': infos,

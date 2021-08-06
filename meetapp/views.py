@@ -43,10 +43,15 @@ def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     post.hit +=1
     post.save()
-    form = CommentForm() 
+    form = CommentForm()
+    if request.user != post.user and post.pcp.pcp_user.filter(id=request.user.id).exists():
+        is_pcp = 1
+    else:
+        is_pcp = 0
     context = {
             'post': post,
             'form': form,
+            'is_pcp': is_pcp,
         }
     return render(request, 'meetapp/post_detail.html', context)
 
@@ -67,6 +72,9 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False) #post.id 없음
             post.user = request.user 
+            pcp = Participant.objects.create(created_user=request.user)
+            pcp.save()
+            post.pcp = pcp
             post.save() #post.id 저장
             return redirect('meetapp:post_detail', post_id=post.id)
 
@@ -93,7 +101,9 @@ def post_edit(request, post_id):
     })
 
 def post_delete(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    # post = Post.objects.get(id=post_id)
+    post = get_object_or_404(Post, blog_id=post_id)
+    post.pcp.delete()
     post.delete()
     return redirect('meetapp:post_list')
 
@@ -155,6 +165,34 @@ def comment_delete(request, post_id,id):
         return redirect('meetapp:post_detail', post_id)
     comment.delete()
     return redirect('meetapp:post_detail', post_id)
+
+def pcp_add(request, post_id, comment_id):
+    post = get_object_or_404(Post, id=post_id)
+    comment = get_object_or_404(Comment,id=comment_id)
+    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+        context = {'status': 0}
+    else:
+        post.pcp.pcp_user.add(comment.user)
+        post.pcp.pcp_user_count += 1
+        post.pcp.save()
+        post.save()
+        context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+def pcp_delete(request, post_id, comment_id):
+    post = get_object_or_404(Post, id=post_id)
+    comment = get_object_or_404(Comment,id=comment_id)
+    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+        post.pcp.pcp_user.remove(comment.user)
+        post.pcp.pcp_user_count -= 1
+        post.pcp.save()
+        post.save()
+        context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
+    else:
+        context = {'status': 0}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 def content_list(request):
     concert_list = Concert.objects.all()

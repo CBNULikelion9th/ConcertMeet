@@ -6,28 +6,33 @@ from django.urls import reverse
 class Post(models.Model):
     category = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     content = models.TextField()
     hit = models.IntegerField(default=-1)
-    likes_user = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, blank=True, related_name='likes_user')
-    # 공연 참가 유저수. 사용자가 존재하면 글 삭제 불가능. 유저 아이디 넣기
-    pcp_user = models.JSONField(default=list)
-
-    def count_likes_user(self):
+    likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes_user') 
+    pcp = models.ForeignKey('Participant',on_delete=models.CASCADE)
+    
+    def count_likes_user(self): 
         return self.likes_user.count()
 
     def __str__(self):
         return f'{self.title}'
 
+class Participant(models.Model):
+    created_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    pcp_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='pcp_user')  #공연 참가 유저수. 사용자가 존재하면 글 삭제 불가능. 유저 아이디 넣기
+
+    pcp_user_count = models.IntegerField(default=1)
+    pcp_user_total = models.IntegerField(default=4)
+        
+    def __str__(self):
+        return f'{self.id}'
 
 class Comment(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey('Post',on_delete=models.CASCADE)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -36,10 +41,9 @@ class Comment(models.Model):
 
     def get_edit_url(self):
         return reverse('meetapp:comment_edit', args=[self.post.id, self.id])
-
+    
     def get_delete_url(self):
         return reverse('meetapp:comment_delete', args=[self.post.id, self.id])
-
 
 class Declaration(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -64,3 +68,4 @@ class Concert(models.Model):
 
 # class Photo(models.Model):
 #     post = models.ForeignKey(Concert, on_delete=models.CASCADE, null=True)
+    

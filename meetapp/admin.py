@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Post
-from .models import Concert
-from .models import Declaration
-
+from .models import *
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display=('title','user','created_at')
+
+admin.site.register(Participant)
+admin.site.register(Comment)
 
 @admin.register(Declaration)
 class DeclarationAdmin(admin.ModelAdmin):
