@@ -71,13 +71,13 @@
                 </div>
                 <div class="form-group">
                     <label>전화번호 <b>*</b></label>
-                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="010-****-****"
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="- 없이 입력"
                     value="{{ infoform.phone.value|default_if_none:'' }}">
                 </div>
                 <div class="form-group">
                     <label>생년월일</label>
                     <br>
-                    <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="2000-01-01"
+                    <input type="date" class="form-control" name="date_of_birth" id="date_of_birth"
                     value="{{ infoform.date_of_birth.value|default_if_none:'' }}">
                 </div>
                 <div class="form-group">

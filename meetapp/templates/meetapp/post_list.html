@@ -4,13 +4,9 @@
     <link rel="stylesheet" href="{% static 'css/post_list.css' %}" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
   </head>
 
   <body>
@@ -18,9 +14,7 @@
       <div class="title">
         <h1>콘서트 메이트 구해요</h1>
 
-        <a href="{% url 'meetapp:post_new' %}" class="btn btn-primary float-end"
-          >새 글 쓰기</a
-        >
+        <a href="{% url 'meetapp:post_new' %}" class="btn btn-primary float-end">새 글 쓰기</a>
       </div>
 
       {% for post in post_list %}
@@ -66,7 +60,7 @@
             </div>
           </div>
           <div class="matching">
-            <p>0/3</p>
+            <p>{{ post.pcp.pcp_user_count }}/{{ post.pcp.pcp_user_total }}</p>
           </div>
         </a>
       </div>

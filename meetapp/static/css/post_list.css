@@ -58,7 +58,7 @@ a:hover {
 }
 
 .likes {
-  background: var(--red);
+  color: var(--red);
 }
 
 .post_element > p {

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
-from .models import Post, Comment
+from .models import Post, Comment, Declaration
 
 def post_home(request):
     post_home = Post.objects.all()
@@ -43,8 +43,15 @@ def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     post.hit +=1
     post.save()
+    form = CommentForm()
+    if request.user != post.user and post.pcp.pcp_user.filter(id=request.user.id).exists():
+        is_pcp = 1
+    else:
+        is_pcp = 0
     context = {
-            'post': post
+            'post': post,
+            'form': form,
+            'is_pcp': is_pcp,
         }
     return render(request, 'meetapp/post_detail.html', context)
 
@@ -65,6 +72,9 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False) #post.id 없음
             post.user = request.user 
+            pcp = Participant.objects.create(created_user=request.user)
+            pcp.save()
+            post.pcp = pcp
             post.save() #post.id 저장
             return redirect('meetapp:post_detail', post_id=post.id)
 
@@ -93,8 +103,30 @@ def post_edit(request, post_id):
 def post_delete(request, post_id):
     # post = Post.objects.get(id=post_id)
     post = get_object_or_404(Post, blog_id=post_id)
+    post.pcp.delete()
     post.delete()
     return redirect('meetapp:post_list')
+
+@login_required
+def post_declaration(request, post_id):
+    post = Post.objects.get(id=post_id)
+    
+    if request.method == 'GET':
+        form = DeclareForm()
+
+    elif request.method == 'POST':
+        form = DeclareForm(request.POST)
+        if form.is_valid():
+            declaration = form.save(commit=False)
+            declaration.user = post.user 
+            declaration.post = post
+            declaration.save() 
+            return redirect('meetapp:post_detail', post_id=post.id)
+            
+    return render(request, 'meetapp/post_declaration.html', {
+        'form': form,
+    })
+
 
 @login_required
 def comment_new(request, post_id):
@@ -107,11 +139,7 @@ def comment_new(request, post_id):
             comment.user = request.user
             comment.save()
             return redirect('meetapp:post_detail',post.id)
-    else:
-        form = CommentForm() 
-    return render(request, 'meetapp/comment_form.html', {
-        'form' : form,
-    })
+    return redirect('meetapp:post_detail',post.id)
 
 @login_required
 def comment_edit(request, post_id,id):
@@ -135,13 +163,36 @@ def comment_delete(request, post_id,id):
     comment = get_object_or_404(Comment,id=id)
     if comment.user != request.user:
         return redirect('meetapp:post_detail', post_id)
-    if request.method == 'POST':
-        comment.delete()
-        return redirect('meetapp:post_detail', post_id)
-    
-    return render(request, 'meetapp/comment_confirm_delete.html', {
-        'comment' : comment,
-    })
+    comment.delete()
+    return redirect('meetapp:post_detail', post_id)
+
+def pcp_add(request, post_id, comment_id):
+    post = get_object_or_404(Post, id=post_id)
+    comment = get_object_or_404(Comment,id=comment_id)
+    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+        context = {'status': 0}
+    else:
+        post.pcp.pcp_user.add(comment.user)
+        post.pcp.pcp_user_count += 1
+        post.pcp.save()
+        post.save()
+        context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+def pcp_delete(request, post_id, comment_id):
+    post = get_object_or_404(Post, id=post_id)
+    comment = get_object_or_404(Comment,id=comment_id)
+    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+        post.pcp.pcp_user.remove(comment.user)
+        post.pcp.pcp_user_count -= 1
+        post.pcp.save()
+        post.save()
+        context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
+    else:
+        context = {'status': 0}
+
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 def content_list(request):
     concert_list = Concert.objects.all()
