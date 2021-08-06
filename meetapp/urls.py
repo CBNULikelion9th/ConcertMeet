@@ -1,12 +1,12 @@
 from django.urls import path
 from . import views
 
-app_name='meetapp'
+app_name = 'meetapp'
 
 urlpatterns = [
     path('', views.post_home, name='post_home'),
     path('lists/', views.post_list, name='post_list'),
-    path('like/', views.post_like, name='post_like'), #ajax로 좋아요 기능을 구현할 url
+    path('like/', views.post_like, name='post_like'),  # ajax로 좋아요 기능을 구현할 url
     path('lists/<int:post_id>/', views.post_detail, name='post_detail'),
     path('lists/new/', views.post_new, name='post_new'),
     path('lists/<int:post_id>/edit/', views.post_edit, name='post_edit'),
