@@ -28,7 +28,7 @@ def post_list(request):
 def post_like(request):
     pk = request.POST.get('pk', None)
     post = get_object_or_404(Post, pk=pk)
-    user = request.user
+    user = UserInfo.objects.get(userkey=request.user)
 
     if post.likes_user.filter(id=user.id).exists():
         post.likes_user.remove(user)
@@ -44,7 +44,7 @@ def post_detail(request, post_id):
     post.hit +=1
     post.save()
     form = CommentForm()
-    if request.user != post.user and post.pcp.pcp_user.filter(id=request.user.id).exists():
+    if post.pcp.pcp_user.filter(id=request.user.id).exists():
         is_pcp = 1
     else:
         is_pcp = 0
@@ -71,8 +71,8 @@ def post_new(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False) #post.id 없음
-            post.user = request.user 
-            pcp = Participant.objects.create(created_user=request.user)
+            post.user = UserInfo.objects.get(userkey=request.user)
+            pcp = Participant.objects.create(created_user=post.user)
             pcp.save()
             post.pcp = pcp
             post.save() #post.id 저장
@@ -81,6 +81,7 @@ def post_new(request):
     return render(request, 'meetapp/post_new.html', {
         'form': form,
     })
+
 def post_edit(request, post_id):
     post = Post.objects.get(id=post_id)
 
@@ -101,8 +102,7 @@ def post_edit(request, post_id):
     })
 
 def post_delete(request, post_id):
-    # post = Post.objects.get(id=post_id)
-    post = get_object_or_404(Post, blog_id=post_id)
+    post = Post.objects.get(id=post_id)
     post.pcp.delete()
     post.delete()
     return redirect('meetapp:post_list')
@@ -118,7 +118,7 @@ def post_declaration(request, post_id):
         form = DeclareForm(request.POST)
         if form.is_valid():
             declaration = form.save(commit=False)
-            declaration.user = post.user 
+            declaration.user = UserInfo.objects.get(userkey=request.user)
             declaration.post = post
             declaration.save() 
             return redirect('meetapp:post_detail', post_id=post.id)
@@ -136,7 +136,7 @@ def comment_new(request, post_id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.user = request.user
+            comment.user = UserInfo.objects.get(userkey=request.user)
             comment.save()
             return redirect('meetapp:post_detail',post.id)
     return redirect('meetapp:post_detail',post.id)
@@ -144,7 +144,7 @@ def comment_new(request, post_id):
 @login_required
 def comment_edit(request, post_id,id):
     comment = get_object_or_404(Comment,id=id)
-    if comment.user != request.user:
+    if comment.user.username != request.user.username:
         return redirect('meetapp:post_detail', post_id)
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES, instance=comment)
@@ -154,6 +154,7 @@ def comment_edit(request, post_id,id):
             return redirect('meetapp:post_detail',post_id)
     else:
         form = CommentForm(instance=comment) 
+
     return render(request, 'meetapp/comment_form.html', {
         'form' : form,
     })
@@ -161,7 +162,7 @@ def comment_edit(request, post_id,id):
 @login_required
 def comment_delete(request, post_id,id):
     comment = get_object_or_404(Comment,id=id)
-    if comment.user != request.user:
+    if comment.user.username != request.user.username:
         return redirect('meetapp:post_detail', post_id)
     comment.delete()
     return redirect('meetapp:post_detail', post_id)
@@ -169,7 +170,7 @@ def comment_delete(request, post_id,id):
 def pcp_add(request, post_id, comment_id):
     post = get_object_or_404(Post, id=post_id)
     comment = get_object_or_404(Comment,id=comment_id)
-    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+    if post.pcp.pcp_user.filter(id=comment.user.userkey.id).exists():
         context = {'status': 0}
     else:
         post.pcp.pcp_user.add(comment.user)
@@ -183,7 +184,7 @@ def pcp_add(request, post_id, comment_id):
 def pcp_delete(request, post_id, comment_id):
     post = get_object_or_404(Post, id=post_id)
     comment = get_object_or_404(Comment,id=comment_id)
-    if post.pcp.pcp_user.filter(id=comment.user.id).exists():
+    if post.pcp.pcp_user.filter(id=comment.user.userkey.id).exists():
         post.pcp.pcp_user.remove(comment.user)
         post.pcp.pcp_user_count -= 1
         post.pcp.save()
