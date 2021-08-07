@@ -85,6 +85,9 @@
                             <button id="del_pcp_btn" onclick="delpcpfunc();">참가자 삭제</button>
                         </a>
                         {% endif %}
+                        {% if comment.user.username != request.user.username %}
+                        <a href="{% url 'meetapp:comment_declaration' comment.id %}"><input type="button" value ='신고'></a>
+                        {% endif %}
                     </div>
                     <div class="cmt_tit">
                         {{ comment.user.name }} | {{ comment.created_at }} <br>

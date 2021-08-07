@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
-from .models import Post, Comment, Declaration
+from .models import Post, Comment, PostDeclaration,CommentDeclaration
 
 def post_home(request):
     post_home = Post.objects.all()
@@ -63,19 +63,17 @@ def post_resethit(request,post_id):
 
 def post_new(request):
     if request.method == 'GET':
-        #빈 폼 보여주는 부분
         form = PostForm()
 
     elif request.method == 'POST':
-        # 사용자가 입력한 데이터를 저장하는 부분
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False) #post.id 없음
+            post = form.save(commit=False) 
             post.user = UserInfo.objects.get(userkey=request.user)
             pcp = Participant.objects.create(created_user=post.user)
             pcp.save()
             post.pcp = pcp
-            post.save() #post.id 저장
+            post.save() 
             return redirect('meetapp:post_detail', post_id=post.id)
 
     return render(request, 'meetapp/post_new.html', {
@@ -89,7 +87,6 @@ def post_edit(request, post_id):
         form = PostForm(instance=post)
 
     elif request.method == 'POST':
-        # 사용자가 입력한 데이터를 저장하는 부분
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post.hit -= 1 
@@ -108,25 +105,42 @@ def post_delete(request, post_id):
     return redirect('meetapp:post_list')
 
 @login_required
-def post_declaration(request, post_id):
+def post_declaration(request,post_id):
     post = Post.objects.get(id=post_id)
-    
     if request.method == 'GET':
-        form = DeclareForm()
+        form = PostDeclareForm()
 
     elif request.method == 'POST':
-        form = DeclareForm(request.POST)
+        form = PostDeclareForm(request.POST)
         if form.is_valid():
-            declaration = form.save(commit=False)
-            declaration.user = UserInfo.objects.get(userkey=request.user)
-            declaration.post = post
-            declaration.save() 
-            return redirect('meetapp:post_detail', post_id=post.id)
-            
+            postdeclaration = form.save(commit=False)
+            postdeclaration.user = post.user 
+            postdeclaration.post = post
+            postdeclaration.save() 
+            return redirect('meetapp:post_detail', post_id= post.id)   
+
     return render(request, 'meetapp/post_declaration.html', {
         'form': form,
     })
 
+@login_required
+def comment_declaration(request,post_id):
+    comment = Comment.objects.get(id=post_id)
+    if request.method == 'GET':
+        form = CommentDeclareForm()
+
+    elif request.method == 'POST':
+        form = CommentDeclareForm(request.POST)
+        if form.is_valid():
+            commentdeclaration = form.save(commit=False)
+            commentdeclaration.user = comment.user
+            commentdeclaration.comment = comment.message
+            commentdeclaration.save() 
+            return redirect('meetapp:post_detail', commment_id=comment.id)   
+
+    return render(request, 'meetapp/comment_declaration.html', {
+        'form': form,
+    })
 
 @login_required
 def comment_new(request, post_id):
