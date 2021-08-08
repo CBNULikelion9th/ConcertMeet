@@ -5,6 +5,10 @@ from .models import *
 class PostAdmin(admin.ModelAdmin):
     list_display=('title','user','created_at')
 
+@admin.register(Comment)
+class PostAdmin(admin.ModelAdmin):
+    list_display=('message','post','user')
+
 @admin.register(PostDeclaration)
 class PostDeclarationAdmin(admin.ModelAdmin):
     list_display=('message','post','user','process')
@@ -14,7 +18,6 @@ class CommentDeclarationAdmin(admin.ModelAdmin):
     list_display=('message','post','comment','user','process')
 
 admin.site.register(Participant)
-admin.site.register(Comment)
 admin.site.register(Concert)
 
 

@@ -58,7 +58,7 @@ class PostDeclaration(models.Model):
         return f'{self.message}'
 
 class CommentDeclaration(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey('account.UserInfo', on_delete=models.CASCADE,)
     message = models.TextField()
     post = models.ForeignKey('Post',on_delete=models.CASCADE, null=True, blank=True)
     comment = models.ForeignKey('Comment',on_delete=models.CASCADE, null=True, blank=True)

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import *
-from .models import Post, Comment, PostDeclaration,CommentDeclaration
+from .models import Post, Comment, PostDeclaration, CommentDeclaration
 
 def post_home(request):
     post_home = Post.objects.all()
@@ -68,7 +68,7 @@ def post_new(request):
     elif request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False) 
+            post = form.save(commit=False)
             post.user = UserInfo.objects.get(userkey=request.user)
             pcp = Participant.objects.create(created_user=post.user)
             pcp.save()
@@ -105,8 +105,9 @@ def post_delete(request, post_id):
     return redirect('meetapp:post_list')
 
 @login_required
-def post_declaration(request,post_id):
+def post_declaration(request, post_id):
     post = Post.objects.get(id=post_id)
+    
     if request.method == 'GET':
         form = PostDeclareForm()
 
@@ -114,18 +115,19 @@ def post_declaration(request,post_id):
         form = PostDeclareForm(request.POST)
         if form.is_valid():
             postdeclaration = form.save(commit=False)
-            postdeclaration.user = post.user 
+            postdeclaration.user = UserInfo.objects.get(userkey=request.user)
             postdeclaration.post = post
             postdeclaration.save() 
-            return redirect('meetapp:post_detail', post_id= post.id)   
-
+            return redirect('meetapp:post_detail', post_id=post.id)
+            
     return render(request, 'meetapp/post_declaration.html', {
         'form': form,
     })
 
 @login_required
-def comment_declaration(request,post_id):
-    comment = Comment.objects.get(id=post_id)
+def comment_declaration(request,post_id,comment_id):
+    post = Post.objects.get(id=post_id)
+    comment = Comment.objects.get(id=comment_id)
     if request.method == 'GET':
         form = CommentDeclareForm()
 
@@ -134,9 +136,10 @@ def comment_declaration(request,post_id):
         if form.is_valid():
             commentdeclaration = form.save(commit=False)
             commentdeclaration.user = comment.user
-            commentdeclaration.comment = comment.message
+            commentdeclaration.post = post
+            commentdeclaration.comment = comment
             commentdeclaration.save() 
-            return redirect('meetapp:post_detail', commment_id=comment.id)   
+            return redirect('meetapp:post_detail', post_id=post.id)   
 
     return render(request, 'meetapp/comment_declaration.html', {
         'form': form,
