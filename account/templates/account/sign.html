@@ -26,8 +26,10 @@
   
   <section>
     <div class="container" style="display: flex; justify-content: center;">
-      <div style="width: 80%; border: solid 2px blueviolet; padding: 20px;">
-        <h1 style="text-align: center;">회원가입</h1>
+      <div style="width: 80%; padding: 50px;">
+        <h1 style="text-align: center; font-weight: bolder; margin-bottom: 50px;">
+          <a href="{% url 'meetapp:post_home' %}">ConcertMeet</a>
+        </h1>
         <form action="{% url 'account:sign' %}" method="POST">
           {% csrf_token %}
           {% include "form_errors.html" %}
@@ -100,8 +102,8 @@
             국악 <input type="checkbox" name="interests" value="국악">&nbsp;
           </div>
           <br>
-          <div style="text-align: center;">
-            <input type="submit" id="submit" class="btn btn-dark" value="Join">
+          <div class="d-grid gap-2" style="text-align: center;">
+            <button class="btn btn-dark" type="submit" id="submit" type="button">회원가입</button>
           </div>
         </form>
       </div>

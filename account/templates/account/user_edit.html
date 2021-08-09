@@ -24,8 +24,8 @@
         </script>
         <section>
             <div class="container" style="display: flex; justify-content: center;">
-            <div style="width: 80%; border: solid 2px #AA34B8; padding: 20px;">
-                <h1 style="text-align: center;">내 정보 수정</h1>
+            <div style="width: 80%; padding: 50px;">
+                <h1 style="text-align: center; margin-bottom: 50px;">내 정보 수정</h1>
                 <form action="{% url 'account:user_edit' user_id %}" method="POST" enctype = "multipart/form-data">
                 {% csrf_token %}
                 {% include "form_errors.html" %}
@@ -112,8 +112,8 @@
                     국악 <input type="checkbox" name="interests" value="국악">&nbsp;
                 </div>
                 <br>
-                <div style="text-align: center;">
-                    <input type="submit" id="submit" class="btn btn-dark" value="완료">
+                <div class="d-grid gap-2" style="text-align: center;">
+                    <button class="btn btn-dark" type="submit" id="submit" type="button">수정 완료</button>
                 </div>
                 </form>
             </div>

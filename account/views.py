@@ -5,9 +5,6 @@ import json
 from .forms import *
 from . import models
 
-# Create your views here.
-
-
 def user(request, user_id):
     print("request user:" + request.user.username)
     users = User.objects.get(username=user_id)
@@ -16,7 +13,7 @@ def user(request, user_id):
         reviews = Review.objects.filter(tguser_id=user_id)
     except Review.DoesNotExist:
         reviews = ""
-    # age = infos.get_age()
+    age = infos.get_age()
 
     if request.user.username != user_id:
         if request.user.username:
@@ -34,11 +31,12 @@ def user(request, user_id):
     else:
         isFollowed = -1
 
-    infos.interests = json.loads(infos.interests)
+    if infos.interests:
+        infos.interests = json.loads(infos.interests)
 
     context = {
         'info': infos,
-        # 'age': age,
+        'age': age,
         'reviews': reviews,
         'isFollowed': isFollowed,
         'users': users,
@@ -55,13 +53,9 @@ def user_edit(request, user_id):
         infoForm.gender = request.POST.get('gender')
         tempinterests = request.POST.getlist('interests')
         M = dict(zip(tempinterests, range(1, len(tempinterests) + 1)))
-        # intereststr = ""
 
         if infoForm.is_valid():
             info = infoForm.save(commit=False)
-            # for interest in tempinterests:
-            #     intereststr += "#" + interest + " "
-            # info.interests = intereststr
             info.interests = json.dumps(M)
             info.save()
             return redirect('account:user', user_id)
