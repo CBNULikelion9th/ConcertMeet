@@ -115,7 +115,7 @@ def post_declaration(request, post_id):
         form = PostDeclareForm(request.POST)
         if form.is_valid():
             postdeclaration = form.save(commit=False)
-            postdeclaration.user = UserInfo.objects.get(userkey=request.user)
+            postdeclaration.user = post.user
             postdeclaration.post = post
             postdeclaration.save() 
             return redirect('meetapp:post_detail', post_id=post.id)
