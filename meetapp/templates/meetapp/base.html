@@ -91,11 +91,20 @@
       
     </header>
     <ul class="menu">
-      <li class="menu-item"><a href="#" class="menu-link">Home</a></li>
+      <li class="menu-item"><a href="{% url 'meetapp:post_home' %}" class="menu-link">Home</a></li>
       <li class="menu-item"><a href="#" class="menu-link">About</a></li>
       <li class="menu-item"><a href="#" class="menu-link">Product</a></li>
       <li class="menu-item"><a href="#" class="menu-link">Contact</a></li>
     </ul>
+
+    <div class="quickmenu"> 
+      <ul> 
+        <li><a href="#">test</a></li>
+        <li><a href="#">test1</a></li> 
+        <li><a href="#">test2</a></li> 
+      </ul> 
+    </div>
+
 
     {% block content %} {% endblock content %}
 
@@ -126,5 +135,14 @@
       }
     </script>
     <script src="{% static 'js/clock.js' %}"></script>
+    <script>$(document).ready(function(){ 
+      var currentPosition = parseInt($(".quickmenu").css("top")); 
+      $(window).scroll(function() { 
+        var position = $(window).scrollTop();
+        $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000); 
+      });
+    });
+
+    </script>
   </body>
 </html>

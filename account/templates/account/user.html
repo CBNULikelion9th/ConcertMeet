@@ -3,7 +3,7 @@
 {% load static %}
 <html>
     <head>
-        <title>{{ info.name }}의 프로필</title>
+        <title>{{ info.name }}의 프로필 - ConcertMeet</title>
         <link rel="stylesheet" href="{% static 'post_user.css' %}">
         <style>
             ul {
@@ -22,39 +22,41 @@
     </head>
 
     <body>
-        <section id="main">
-            <div class="user_name">
-                <h1>{{ info.name }}</h1>
-                &nbsp;&nbsp;
-                <p>{{ age }}세 {{ info.gender }}</p>
-                &nbsp;&nbsp;
-                {% if info.interests %}
-                {% for interest in info.interests %}
-                <p style="color: blueviolet;">#{{ interest }}&nbsp;</p>
-                {% endfor %}
-                {% endif %}
-            </div>
-                    
-            <div class="self_photo">
-                {% if info.profpic %}
-                <img src="{{ info.profpic.url }}" width="210px", height="210px" style="border-radius: 50%;">
-                {% else %}
-                <img src="{% static 'defpropic/default-profile-pic.png' %}" width="210px", height="210px" style="border-radius: 50%;">
-                {% endif %}
-            </div>
-
-            <div class="follow_button">
-                {% if isFollowed == 2 %}
-                <button><a href ="{% url 'account:unfollow' info.username %}">언팔로우</a></button>
-                {% elif isFollowed == 3 %}
-                    {% if user.is_authenticated %}
-                    <button><a href ="{% url 'account:follow' info.username %}">팔로우</a></button>
-                    {% else %}
-                    <button onclick="alert('로그인하세요');"><a href ="{% url 'account:login' %}">팔로우</a></button>
+        <section id="profile_main">
+            <div class="part_one">
+                <div class="user_name">
+                    <h1>{{ info.name }}</h1>
+                    &nbsp;&nbsp;
+                    <p>{{ age }}세 {{ info.gender }}</p>
+                    &nbsp;&nbsp;
+                    {% if info.interests %}
+                    {% for interest in info.interests %}
+                    <p style="color: blueviolet;">관심사 : #{{ interest }}&nbsp;</p>
+                    {% endfor %}
                     {% endif %}
-                {% elif isFollowed == -1 %}
-                <button><a href ="{% url 'account:user_edit' info.username %}">정보 수정</a></button>
-                {% endif %}
+                </div>
+                        
+                <div class="self_photo">
+                    {% if info.profpic %}
+                    <img src="{{ info.profpic.url }}" width="210px", height="210px" style="border-radius: 50%;">
+                    {% else %}
+                    <img src="{% static 'defpropic/default-profile-pic.png' %}" width="210px", height="210px" style="border-radius: 50%;">
+                    {% endif %}
+                </div>
+
+                <div class="follow_button">
+                    {% if isFollowed == 2 %}
+                    <button><a href ="{% url 'account:unfollow' info.username %}">언팔로우</a></button>
+                    {% elif isFollowed == 3 %}
+                        {% if user.is_authenticated %}
+                        <button><a href ="{% url 'account:follow' info.username %}">팔로우</a></button>
+                        {% else %}
+                        <button onclick="alert('로그인하세요');"><a href ="{% url 'account:login' %}">팔로우</a></button>
+                        {% endif %}
+                    {% elif isFollowed == -1 %}
+                    <button><a href ="{% url 'account:user_edit' info.username %}">정보 수정</a></button>
+                    {% endif %}
+                </div>
             </div>
 
             <div class="self_content">
