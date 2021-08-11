@@ -1,8 +1,3 @@
-#detail_main {
-  background-color: #e2e2e2;
-  position: relative;
-}
-
 /*likes*/
 :root {
   --red: rgb(209, 3, 3);
@@ -44,7 +39,6 @@
 
 @media screen and (max-width: 980px) {
   .det_container {width: auto; margin: 0 70px;}
-
 }
 
 @media screen and (max-width: 720px) {
