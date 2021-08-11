@@ -1,0 +1,83 @@
+{% extends 'meetapp/base.html' %}
+{% block content %}
+{% load static %}
+<html>
+  <title>{{ searchstr }} 검색 결과</title>
+<head>
+  <link rel="stylesheet" href="{% static 'css/search_result.css' %}" />
+  <script src="{% static 'js/likes.js' %}"></script>
+</head>
+
+<body>
+    <section class="page">
+        <div id="title">
+            <h1>'{{ searchstr }}' 검색 결과</h1>
+        </div>
+
+        <div id="content">
+        {% for post in posts %}
+            <div class="post">
+                <div class="likes">
+                    <button class="like" name="{{ post.id }}" onclick="onClick()">
+                        <span class="fa fa-heart"></span>
+                    </button>
+                    <p id="count-{{ post.id }}">{{ post.likes_user.all.count }}</p>
+                </div>
+
+                <div class="post_info">
+                    <a href="{% url 'meetapp:post_detail' post.id %}">
+                        <div class="post_middle">
+                            <div class="title"><span>{{ post.title }}</span></div>
+                            <div class="title_wrap">
+                                <div class="hashtag">
+                                    <span class="category">#{{ post.category }}</span>
+                                    <span class="hit">조회수 [{{ post.hit }}]회</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="participants">
+                        <p>{{ post.pcp.pcp_user_count }}/{{ post.pcp.pcp_user_total }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        
+        <div id="page_nav">
+            {% if page.has_previous %}
+            <a href="?page={{page.previous_page_number}}"><i class="fas fa-arrow-left text-gray-700"></i></a>
+            {% endif %}
+        
+            <span class="mx-3 font-medium">{{page.number}} of {{page.paginator.num_pages}}</span>
+        
+            {% if page.has_next %}
+            <a href="?page={{page.next_page_number}}"><i class="fas fa-arrow-right text-gray-700"></i></a>
+            {% endif %}
+        </div>
+
+    </section>
+</body>
+
+</html>
+<script src="../../static/js/likes.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+  $(".like").click(function () {
+    var pk = $(this).attr("name");
+    $.ajax({
+      type: "POST",
+      url: "{% url 'meetapp:post_like' %}",
+      data: { pk: pk, csrfmiddlewaretoken: "{{ csrf_token }}" },
+      dataType: "json",
+      success: function (response) {
+        $("#count-" + pk).html(response.likes_count);
+      },
+      error: function (request, status, error) {
+        alert("로그인이 필요합니다.");
+        window.location.replace("/user/login/");
+      },
+    });
+  });
+</script>
+{% endblock content %}
