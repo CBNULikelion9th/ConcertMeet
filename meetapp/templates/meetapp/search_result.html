@@ -27,10 +27,12 @@
                 <div class="post_info">
                     <a href="{% url 'meetapp:post_detail' post.id %}">
                         <div class="post_middle">
-                            <div class="title">{{ post.title }}&nbsp;[{{ post.hit }}]</div>
-                        
-                            <div class="hashtag">
-                                <p>#{{ post.category }}</p>
+                            <div class="title"><span>{{ post.title }}</span></div>
+                            <div class="title_wrap">
+                                <div class="hashtag">
+                                    <span class="category">#{{ post.category }}</span>
+                                    <span class="hit">조회수 [{{ post.hit }}]회</span>
+                                </div>
                             </div>
                         </div>
                     </a>
