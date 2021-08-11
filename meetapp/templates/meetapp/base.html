@@ -53,8 +53,8 @@
       <a href="{% url 'meetapp:post_home' %}"
         >ConcertMeet</a
       >
-      <form class="search-form">
-        <input type="search" />
+      <form class="search-form" action="{% url 'meetapp:search_result' %}">
+        <input type="search" id="keyword" name="keyword">
         <input type="submit" value="찾기" />
       </form>
       <h4 id="clock">00:00:00</h4>
