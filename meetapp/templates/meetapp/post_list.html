@@ -24,7 +24,6 @@
 
       <a href="{% url 'meetapp:post_new' %}" class="btn btn-primary float-end">새 글 쓰기</a>
     </div>
-
     {% for post in page.object_list %}
     <div class="post_element">
       <script src="{% static 'js/likes.js' %}"></script>
@@ -56,15 +55,17 @@
     </div>
     <br />
     {% endfor %}
-    {% if page.has_previous %}
-    <a href="?page={{page.previous_page_number}}"><i class="fas fa-arrow-left text-gray-700"></i></a>
-    {% endif %}
+    <div class="paginator">
+      {% if page.has_previous %}
+      <a href="?page={{page.previous_page_number}}"><i class="fas fa-arrow-left text-gray-700"></i></a>
+      {% endif %}
 
-    <span class="mx-3 font-medium">{{page.number}} of {{page.paginator.num_pages}}</span>
+      <span class="mx-3 font-medium">{{page.number}} of {{page.paginator.num_pages}}</span>
 
-    {% if page.has_next %}
-    <a href="?page={{page.next_page_number}}"><i class="fas fa-arrow-right text-gray-700"></i></a>
-    {% endif %}
+      {% if page.has_next %}
+      <a href="?page={{page.next_page_number}}"><i class="fas fa-arrow-right text-gray-700"></i></a>
+      {% endif %}
+    </div>
   </section>
 </body>
 

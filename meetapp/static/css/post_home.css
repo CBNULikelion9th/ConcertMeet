@@ -20,9 +20,14 @@
 }
 
 .today_concert .title {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   margin: 2rem 2rem 1rem 2rem;
+}
+
+.today_concert .t_more_info{
+  font-size: 13px;
+  
 }
 
 .today_concert a {
@@ -38,7 +43,7 @@
 
 .concert_mate .title {
   display: inline-block;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   padding-left: 2vh;
   padding-top: 5rem;

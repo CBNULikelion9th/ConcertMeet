@@ -31,10 +31,16 @@ a:hover {
 .post_element {
   position: relative;
   text-decoration: none;
-  margin-left: 2vw;
+  margin-left: 7%;
   background-color: #e2e2e2;
   max-width: 1860px;
   height: 120px;
+}
+
+.paginator {
+  margin-top: 3%;
+  padding-bottom: 5%;
+  margin-left: 45%;
 }
 
 /*likes*/
