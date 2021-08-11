@@ -12,10 +12,10 @@ from .models import Post, Comment, PostDeclaration, CommentDeclaration
 
 
 def post_home(request):
-    post_home = Post.objects.all()
+    hit_posts = Post.objects.all().order_by('-hit')[:10]
     concert_list = Concert.objects.all()
     context = {
-        'post_home': post_home,
+        'posts': hit_posts,
         'concert_list': concert_list,
     }
     return render(request, 'meetapp/post_home.html', context)
@@ -75,6 +75,7 @@ def post_detail(request, post_id):
         is_pcp = 1
     else:
         is_pcp = 0
+        
     context = {
         'post': post,
         'form': form,
