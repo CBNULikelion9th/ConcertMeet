@@ -12,6 +12,7 @@ a, a:hover {text-decoration: none; color: black;}
 .like:hover {color: rgb(209, 3, 3);}
 
 .post_info {width: 90%; font-family: notosans; flex-direction: row; display: inherit;}
+.post_info a {width: inherit;}
 .post_info .post_middle {width:85%; flex-direction: column;}
 .post_info .post_middle .title {font-size: 20px; font-weight: bold; transform: translateY(20px);}
 

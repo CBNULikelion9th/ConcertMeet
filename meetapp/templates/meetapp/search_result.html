@@ -16,7 +16,6 @@
 
         <div id="content">
         {% for post in posts %}
-        <a href="{% url 'meetapp:post_detail' post.id %}">
             <div class="post">
                 <div class="likes">
                     <button class="like" name="{{ post.id }}" onclick="onClick()">
@@ -26,20 +25,20 @@
                 </div>
 
                 <div class="post_info">
-                    <div class="post_middle">
-                        <div class="title">{{ post.title }}&nbsp;[{{ post.hit }}]</div>
-            
-                        <div class="hashtag">
-                            <p>#{{ post.category }}</p>
+                    <a href="{% url 'meetapp:post_detail' post.id %}">
+                        <div class="post_middle">
+                            <div class="title">{{ post.title }}&nbsp;[{{ post.hit }}]</div>
+                        
+                            <div class="hashtag">
+                                <p>#{{ post.category }}</p>
+                            </div>
                         </div>
-                    </div>
-
+                    </a>
                     <div class="participants">
                         <p>{{ post.pcp.pcp_user_count }}/{{ post.pcp.pcp_user_total }}</p>
                     </div>
                 </div>
             </div>
-        </a>
         {% endfor %}
         </div>
         
