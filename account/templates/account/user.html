@@ -3,7 +3,7 @@
 {% load static %}
 <html>
     <head>
-        <title>{{ info.name }}의 프로필</title>
+        <title>{{ info.name }}의 프로필 - ConcertMeet</title>
         <link rel="stylesheet" href="{% static 'post_user.css' %}">
         <style>
             ul {
@@ -31,7 +31,7 @@
                     &nbsp;&nbsp;
                     {% if info.interests %}
                     {% for interest in info.interests %}
-                    <p style="color: blueviolet;">관심사 : #{{ interest }}&nbsp;</p>
+                    <p style="color: blueviolet;">&nbsp;#{{ interest }}&nbsp;</p>
                     {% endfor %}
                     {% endif %}
                 </div>

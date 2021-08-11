@@ -11,7 +11,12 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('message',)
 
-class DeclareForm(forms.ModelForm):
+class PostDeclareForm(forms.ModelForm):
     class Meta:
-        model = Declaration
+        model = PostDeclaration
+        fields = ('message',)
+
+class CommentDeclareForm(forms.ModelForm):
+    class Meta:
+        model = CommentDeclaration
         fields = ('message',)
