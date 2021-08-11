@@ -98,6 +98,20 @@ a, a:hover {
 .quickmenu ul li a:hover {color:#000;}
 .quickmenu ul li:last-child {border-bottom:0;}
 
+.df {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.df .copyright {
+  margin: 10rem 0;
+  padding: 3rem 0;
+  border-top: 1px solid gainsboro;
+  font-size: 30px;
+  text-decoration:gainsboro;
+  color: gray;
+}
 
 @media (max-width: 1920px) {
   .header {
