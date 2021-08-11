@@ -20,17 +20,19 @@
 
 .user_name {
   display: flex;
+  margin-bottom: 30%;
 }
 .user_name > h1 {
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
 }
 .user_name > p {
-  font-size: 20px;
+  font-size: 17px;
 }
 .self_photo {
   background-color: rgb(139, 139, 139);
+  margin-bottom: 15%;
   border-radius: 50%;
   width: 210px;
   height: 210px;
@@ -83,6 +85,7 @@
   background-color: rgb(204, 203, 203);
   border-radius: 30px;
 }
+
 
 .follow {
   font-weight: bolder;
