@@ -5,6 +5,7 @@ app_name = 'meetapp'
 
 urlpatterns = [
     path('', views.post_home, name='post_home'),
+    path('search', views.search_result, name='search_result'),
     path('lists/', views.post_list, name='post_list'),
     path('like/', views.post_like, name='post_like'),  # ajax로 좋아요 기능을 구현할 url
     path('lists/<int:post_id>/', views.post_detail, name='post_detail'),

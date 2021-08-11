@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render, redirect
+from django.db.models import Q
 from .forms import *
 from .models import Post, Comment, PostDeclaration, CommentDeclaration
 
@@ -18,6 +19,22 @@ def post_home(request):
         'concert_list': concert_list,
     }
     return render(request, 'meetapp/post_home.html', context)
+
+def search_result(request):
+    page = request.GET.get("page", 1)
+    keyword = request.GET.get('keyword')
+    results = Post.objects.filter(Q(title__icontains=keyword) | Q(content__icontains=keyword))
+    paginator = Paginator(results, 10, orphans=3)
+    try:
+        lists = paginator.page(int(page))
+    except EmptyPage:
+        return redirect("/")
+    context = {
+        'searchstr' : keyword,
+        'posts' : results,
+        'page': lists,
+    }
+    return render(request, 'meetapp/search_result.html', context)
 
 
 def post_list(request):

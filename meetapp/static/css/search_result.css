@@ -1,0 +1,29 @@
+.page {margin: 0 100px;}
+a, a:hover {text-decoration: none; color: black;}
+
+#title { justify-content: space-between; font-family: notosans; margin: 3rem auto 2rem;}
+#title h1 {font-size: 20px; font-weight: bold;}
+
+.post {height: 100px; width: 90%; background-color: #e2e2e2; margin: 3px auto; border-radius: 10px; display: flex; flex-direction: row;}
+
+/*likes*/
+.likes {display: flex; flex-direction: column; width: 10%; text-align: center; margin: auto 0;}
+.like {transition: 1s cubic-bezier(0.21, 0.04, 0.26, 0.99); color: #a5a5a5; border: 0; background-color: #e2e2e2; font-size: 20px; }
+.like:hover {color: rgb(209, 3, 3);}
+
+.post_info {width: 90%; font-family: notosans; flex-direction: row; display: inherit;}
+.post_info .post_middle {width:85%; flex-direction: column;}
+.post_info .post_middle .title {font-size: 20px; font-weight: bold; transform: translateY(20px);}
+
+.post_info .hashtag {margin-top: 2rem;}
+.post_info .hashtag > p { position: absolute; white-space: nowrap; background: #adc4ff; border-radius: 11px; font-weight: bold; font-size: 13px; padding: 0% 1rem 0% 1rem;}
+
+.post_info .participants {width: 15%; margin: auto 0; font-weight: bold;}
+
+#page_nav {text-align: center;}
+
+@media screen and (max-width: 720px) {
+    .page {margin: 0 30px;}
+    .likes {width: 15%;}
+    .post_info {width: 85%;}
+}
