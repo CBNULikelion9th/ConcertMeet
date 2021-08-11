@@ -19,7 +19,7 @@
     </div>
     <div class="btn_list">
       <button id="hip">힙합</button><button id="bal">발라드</button><button id="pop">내한공연</button><button id="rock">락</button>
-      <button id="jazz">재즈</button><button id="fes">페스티벌</button><button id="indi">인디</button>
+      <button id="jazz">재즈</button><button id="fes">페스티벌</button><button id="indi">인디</button><button id="all">전체 보기</button>
     </div>
 
     {% for post in page.object_list %}
@@ -51,7 +51,6 @@
         </div> -->
       </a>
     </div>
-    <br />
     {% endfor %}
     {% if page.has_previous %}
     <a href="?page={{page.previous_page_number}}"><i class="fas fa-arrow-left text-gray-700"></i></a>

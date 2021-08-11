@@ -1,6 +1,6 @@
 /* 공통 */
 section {
-  width: 90%;
+  max-width: 2060px;
   height: auto;
   padding: 20px 0 100px;
   margin: 0 auto;
