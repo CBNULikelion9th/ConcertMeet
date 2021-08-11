@@ -8,8 +8,7 @@ a, a:hover {text-decoration: none; color: black;}
 
 /*likes*/
 .likes {display: flex; flex-direction: column; width: 10%; text-align: center; margin: auto 0;}
-.like {transition: 1s cubic-bezier(0.21, 0.04, 0.26, 0.99); color: #a5a5a5; border: 0; background-color: #e2e2e2; font-size: 20px; }
-.like:hover {color: rgb(209, 3, 3);}
+.like {transition: 1s cubic-bezier(0.21, 0.04, 0.26, 0.99); color: rgb(209, 3, 3); border: 0; background-color: #e2e2e2; font-size: 20px; }
 
 .post_info {width: 90%; font-family: notosans; flex-direction: row; display: inherit;}
 .post_info a {width: inherit;}
