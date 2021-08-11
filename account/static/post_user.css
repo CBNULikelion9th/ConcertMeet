@@ -187,3 +187,10 @@
     max-width: 1180px;
   }
 }
+
+/* mobile */
+@media (max-width: 720px) {
+  #profile_main {
+    max-width: 650px;
+  }
+}

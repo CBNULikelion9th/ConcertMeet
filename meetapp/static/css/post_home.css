@@ -182,18 +182,3 @@
     display: none;
   }
 }
-
-.df {
-  width: 2060px;
-  margin: 0 auto;
-}
-
-footer {
-  width: 100%;
-  margin-top: 10rem;
-  padding-top: 3rem;
-  border-top: 1px solid gainsboro;
-  font-size: 40px;
-  text-decoration:gainsboro;
-  color: gray;
-}
