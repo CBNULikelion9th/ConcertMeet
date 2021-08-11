@@ -9,46 +9,14 @@ section {
 
 .metadata {
   display: flex;
-<<<<<<< HEAD
-  width: 100%;
-  /* padding-top: 20px; */
-}
-
-.today_concert .title {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 2rem 2rem 1rem 2rem;
-}
-
-.today_concert .t_more_info{
-  font-size: 13px;
-  
-}
-
-.today_concert a {
-  margin-top: 2.9rem;
-}
-
-/* 콘서트 메이트 */
-
-.concert_mate {
-  max-width: 2060px;
-=======
->>>>>>> 68d81b7a077c51c48fcdb54e8639ab7909111ad1
   margin: 0 auto;
   width: 95%;
   border-bottom: solid 2px black;
   padding-bottom: 5px;
 }
 
-<<<<<<< HEAD
-.concert_mate .title {
-  display: inline-block;
-  font-size: 20px;
-=======
 .title {
   font-size: 30px;
->>>>>>> 68d81b7a077c51c48fcdb54e8639ab7909111ad1
   font-weight: bold;
   margin: 1rem;
 }
