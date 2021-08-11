@@ -13,18 +13,23 @@ a, a:hover {text-decoration: none; color: black;}
 
 .post_info {width: 90%; font-family: notosans; flex-direction: row; display: inherit;}
 .post_info a {width: inherit;}
-.post_info .post_middle {width:85%; flex-direction: column;}
-.post_info .post_middle .title {font-size: 20px; font-weight: bold; transform: translateY(20px);}
+.post_info .post_middle {width:80%; display: flex; flex-direction: column;}
+.post_info .post_middle .title {width: 100%; font-size: 20px; font-weight: bold; transform: translateY(20px);}
+.post_info .post_middle .title span {display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 
-.post_info .hashtag {margin-top: 2rem;}
-.post_info .hashtag > p { position: absolute; white-space: nowrap; background: #adc4ff; border-radius: 11px; font-weight: bold; font-size: 13px; padding: 0% 1rem 0% 1rem;}
+.post_info .post_middle .title_wrap {display: flex; flex-direction: row;}
+.post_info .hashtag {margin-top: 2rem; display: inline-block;}
+.post_info .hashtag > .category {white-space: nowrap; background: #adc4ff; border-radius: 11px; font-weight: bold; font-size: 13px; padding: 0% 1rem 0% 1rem;}
+.post_info .hashtag > .hit {font-weight: bold; font-size: 13px; transform: translateX(20%);}
 
-.post_info .participants {width: 15%; margin: auto 0; font-weight: bold;}
+
+.post_info .participants {width: 10%; margin: auto 0; font-weight: bold;}
 
 #page_nav {text-align: center;}
 
 @media screen and (max-width: 720px) {
     .page {margin: 0 30px;}
     .likes {width: 15%;}
-    .post_info {width: 85%;}
+    .post_info {width: 70%;}
+    .post_info .participants {width: 15%;}
 }

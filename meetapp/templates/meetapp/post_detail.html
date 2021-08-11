@@ -42,9 +42,9 @@
                             <span class="fa fa-heart"></span>
                         </button>
                     </a>
-                    <a href="{% url 'meetapp:post_declaration' post.id %}"><button>신고</button></a>
+                    <a href="{% url 'meetapp:post_declaration' post.id %}"><button class="btn btn-dark">신고</button></a>
                     {% endif %}
-                    <a href="{% url 'meetapp:post_list' %}"><button>목록</button></a>
+                    <a href="{% url 'meetapp:post_list' %}"><button class="btn btn-dark">목록</button></a>
                 </div>
             </section>
 
@@ -59,7 +59,7 @@
                             value="{{ form.message.value|default_if_none:'' }}" placeholder="댓글로 참가 의사를 표현하세요"></textarea>
                     </div>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
-                        <input type="submit" class="comment_new_btn" value="작성">
+                        <input type="submit" class="btn btn-dark" value="작성">
                     </div>
                 </form>
 
@@ -69,7 +69,7 @@
                         <div>
                             {% if comment.user.username == request.user.username %}
                             <a href="{{ comment.get_edit_url }}">
-                                <button>수정</button>
+                                <button class="btn btn-dark">수정</button>
                             </a>
                             <a>
                                 <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
@@ -81,12 +81,12 @@
                                 <input type="hidden" id="pcp_url" name="pcp_url" value="{% url 'meetapp:pcp_add' post.id comment.id %}">
                                 <input type="hidden" id="del_pcp_url" name="del_pcp_url"
                                     value="{% url 'meetapp:pcp_delete' post.id comment.id %}">
-                                <button id="pcp_btn" onclick="addpcpfunc();">참가자 추가</button>
-                                <button id="del_pcp_btn" onclick="delpcpfunc();">참가자 삭제</button>
+                                <button id="pcp_btn" onclick="addpcpfunc();" class="btn btn-dark">참가자 추가</button>
+                                <button id="del_pcp_btn" onclick="delpcpfunc();" class="btn btn-dark">참가자 삭제</button>
                             </a>
                             {% endif %}
                             {% if comment.user.username != request.user.username %}
-                            <a href="{% url 'meetapp:comment_declaration' post.id comment.id %}"><input type="button" value ='신고'></a>
+                            <a href="{% url 'meetapp:comment_declaration' post.id comment.id %}"><input type="button" class="btn btn-dark" value ='신고'></a>
                             {% endif %}
                         </div>
                         <div class="cmt_tit">

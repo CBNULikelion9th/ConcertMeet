@@ -1,55 +1,27 @@
-#main {
-  top: 0;
-  background: #e2e2e2;
-  width: 100%;
-  height: 500px;
-  margin-top: 20px;
-}
-
-/* 오늘 진행되고 있는 공연 */
-
-.today_concert {
-  max-width: 2060px;
+/* 공통 */
+section {
+  width: 90%;
+  height: auto;
+  padding: 20px 0 100px;
   margin: 0 auto;
+  text-align: center;
 }
 
-.today_concert .metadata {
+.metadata {
   display: flex;
-  width: 100%;
-  /* padding-top: 20px; */
-}
-
-.today_concert .title {
-  font-size: 30px;
-  font-weight: bold;
-  margin: 2rem 2rem 1rem 2rem;
-}
-
-.today_concert a {
-  margin-top: 2.9rem;
-}
-
-/* 콘서트 메이트 */
-
-.concert_mate {
-  max-width: 2060px;
   margin: 0 auto;
+  width: 95%;
+  border-bottom: solid 2px black;
+  padding-bottom: 5px;
 }
 
-.concert_mate .title {
-  display: inline-block;
+.title {
   font-size: 30px;
   font-weight: bold;
-  padding-left: 2vh;
-  padding-top: 5rem;
+  margin: 1rem;
 }
 
-.concert_mate .more_info {
-  display: inline-block;
-  font-size: var(--font-small);
-  padding-left: 2%;
-}
-
+/* 콘서트 */
 .home_list {
   margin-top: 30px;
   display: flex;
@@ -79,7 +51,14 @@
   padding-top: 3px;
 }
 
-/* card list -> 메인 페이지의 콘서트 메이트 구해요 및*/
+/* 인기글 */
+.popular_list table {width: 90%; padding: 10px 0; margin: 0 auto; table-layout: fixed;}
+.popular_list table tr {width: 100%; padding: 3px 0; border-bottom: solid 1px black;}
+.popular_list table tr:last-child {border: none;}
+.popular_list table tr th {padding: 3px 0;}
+.popular_list table tr td p {display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;}
+.popular_list table tr td .pop_link:hover {color: rgb(165, 165, 103); transition: all 0.2s ease-out;}
+
 .card-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, auto));
