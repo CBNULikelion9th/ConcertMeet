@@ -33,10 +33,10 @@
                     {% if post.user.username == request.user.username %}
                     <a href="{% url 'meetapp:post_edit' post.id %}"><button>수정</button></a>
                     <a href="{% url 'meetapp:post_delete' post.id %}"><button>삭제</button></a>
-                    {% if is_pcp %}
-                    <a href="{% url 'account:review_new' info.username %}" class='btn btn-primary float-end'>후기 작성</a>
-                    {% endif %}
                     {% else %}
+                    {% if is_pcp %}
+                    <a href="{% url 'account:review_new' post.user.username %}"><button>후기 작성</button></a>
+                    {% endif %}
                     <a>
                         <button class="like" name="{{ post.id }}" onclick="onClick()">
                             <span class="fa fa-heart"></span>
@@ -73,7 +73,7 @@
                             </a>
                             <a>
                                 <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
-                                <button onclick="deletefunc();">삭제</button>
+                                <button onclick="deletecmtfunc();">삭제</button>
                             </a>
                             {% endif %}
                             {% if request.user.username == post.user.username and comment.user.username != request.user.username %}
@@ -124,19 +124,20 @@
     });
     function deletefunc() {
         if (confirm('정말 삭제하시겠습니까?'))
-            window.location = document.getElementById("del_post_url").value;;
+            window.location = document.getElementById("del_post_url").value;
     }
 
-    $(".cmt_edit").click(function () {
-        var cid = $(this).attr("name");
-        var form_str = '<form action="{{ comment.get_edit_url }}" method="POST">{% csrf_token %}<textarea cols="40" rows="3" class="form-control" name="message" id="message" value="{{ comment.message|linebreaks }}"></textarea></form>';
-        $(".cmt_edit_msg_" + cid).html(form_str);
-    });
+    // $(".cmt_edit").click(function () {
+    //     var cid = $(this).attr("name");
+    //     var form_str = '<form action="{{ comment.get_edit_url }}" method="POST">{% csrf_token %}<textarea cols="40" rows="3" class="form-control" name="message" id="message" value="{{ comment.message|linebreaks }}"></textarea></form>';
+    //     $(".cmt_edit_msg_" + cid).html(form_str);
+    // });
 
     function deletecmtfunc() {
         if (confirm('정말 삭제하시겠습니까?'))
             window.location = document.getElementById("delete_url").value;
     }
+    
     function addpcpfunc() {
         
         if (confirm('해당 사용자를 추가하시겠습니까?')) {
