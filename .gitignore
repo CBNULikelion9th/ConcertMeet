@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# Byte-compiled / optimized / DLL files
+__pycache__/
+=======
 # Created by https://www.toptal.com/developers/gitignore/api/windows,python,django,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,python,django,visualstudiocode
 
@@ -20,6 +24,7 @@ meetapp/image
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 *.py[cod]
 *$py.class
 
@@ -34,11 +39,19 @@ dist/
 downloads/
 eggs/
 .eggs/
+<<<<<<< HEAD
+lib/
+lib64/
+=======
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 parts/
 sdist/
 var/
 wheels/
+<<<<<<< HEAD
+=======
 pip-wheel-metadata/
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -68,12 +81,26 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+<<<<<<< HEAD
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+=======
 pytestdebug.log
 
 # Translations
 *.mo
 
 # Django stuff:
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 
 # Flask stuff:
 instance/
@@ -84,9 +111,15 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+<<<<<<< HEAD
+
+# PyBuilder
+.pybuilder/
+=======
 doc/_build/
 
 # PyBuilder
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 target/
 
 # Jupyter Notebook
@@ -97,7 +130,13 @@ profile_default/
 ipython_config.py
 
 # pyenv
+<<<<<<< HEAD
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+=======
 .python-version
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
@@ -106,9 +145,12 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
+<<<<<<< HEAD
+=======
 # poetry
 #poetry.lock
 
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
 
@@ -120,15 +162,23 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+<<<<<<< HEAD
+.env
+.venv
+=======
 # .env
 .env/
 .venv/
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+<<<<<<< HEAD
+=======
 pythonenv*
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
 
 # Spyder project settings
 .spyderproject
@@ -151,6 +201,12 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 
+<<<<<<< HEAD
+# Cython debug symbols
+cython_debug/
+
+uploads/
+=======
 # operating system-related files
 # file properties cache/storage on macOS
 *.DS_Store
@@ -269,3 +325,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,django,visualstudiocode 
+>>>>>>> 1a68f7a46bb339d887c7f6a95dd957e861857958
