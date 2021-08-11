@@ -1,6 +1,6 @@
 /* 공통 */
 section {
-  max-width: 2060px;
+  width: 90%;
   height: auto;
   padding: 20px 0 100px;
   margin: 0 auto;
@@ -89,49 +89,20 @@ section {
 }
 
 @media (max-width: 1920px) {
-  #main {
-    height: 29rem;
-  }
-  .today_concert {
-    max-width: 1480px;
-  }
-  .concert_mate {
+  section {
     max-width: 1480px;
   }
 }
 
 @media (max-width: 1680px) {
-  #main {
-    height: 29rem;
-  }
-  .today_concert {
-    max-width: 1180px;
-  }
-  .concert_mate {
+  section {
     max-width: 1180px;
   }
 }
 
-@media (max-width: 1366px) {
-  #main {
-    height: 29rem;
-  }
-}
-
-@media (max-width: 1280px) {
-  #main {
-    height: 29rem;
-  }
-}
 
 @media (max-width: 1152px) {
-  #main {
-    height: 29rem;
-  }
-  .today_concert {
-    max-width: 852px;
-  }
-  .concert_mate {
+  section {
     max-width: 852px;
   }
   .home_concert:nth-child(n + 4) {
