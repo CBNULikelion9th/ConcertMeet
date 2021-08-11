@@ -25,7 +25,7 @@
             </section>
         
             <section id="content">
-                <p>{{ post.content }}</p>
+                {{ post.content }}
             </section>
         
             <section id="edit">
@@ -93,7 +93,7 @@
                             {{ comment.user.name }} | {{ comment.created_at }} <br>
                         </div>
                         <div class="cmt_msg">
-                            {{ comment.message }}<br>
+                            {{ comment.message }}
                         </div>
                         
                     </li>
@@ -104,6 +104,7 @@
     </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(".btn-icon").click(function () {
         var pk = $(this).attr("name"); 
@@ -122,6 +123,17 @@
         });
     });
     function deletefunc() {
+        if (confirm('정말 삭제하시겠습니까?'))
+            window.location = document.getElementById("del_post_url").value;;
+    }
+
+    $(".cmt_edit").click(function () {
+        var cid = $(this).attr("name");
+        var form_str = '<form action="{{ comment.get_edit_url }}" method="POST">{% csrf_token %}<textarea cols="40" rows="3" class="form-control" name="message" id="message" value="{{ comment.message|linebreaks }}"></textarea></form>';
+        $(".cmt_edit_msg_" + cid).html(form_str);
+    });
+
+    function deletecmtfunc() {
         if (confirm('정말 삭제하시겠습니까?'))
             window.location = document.getElementById("delete_url").value;
     }
