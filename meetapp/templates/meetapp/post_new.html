@@ -8,23 +8,24 @@
 
 <section id="main">
     <form action="{% url 'meetapp:post_new' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="title">
-        <h1>콘서트메이트 구하기</h1>
-        <a><input type="submit" value=' 완료 ' class="btn btn-dark"></a>
-    </div>
+        {% csrf_token %}
+        <div class="title">
+            <h1>콘서트메이트 구하기</h1>
+            <a><input type="submit" value=' 완료 ' class="btn btn-dark"></a>
+        </div>
 
-    <div class="form">
-        <h2>카테고리</h2>
-        <h4>힙합 | 발라드 | 클래식 | 팝 | 락 | 재즈 | 뮤지컬 | 국악 | 기타 </h4>
-        {{ form.category }}
+        <div class="form">
+            <h2>카테고리</h2><br>
+            <h4>힙합 | 발라드 | 클래식 | 팝 | 락 | 재즈 | 뮤지컬 | 국악 | 기타 </h4><br>
+            {{ form.category }}
 
-        <h2>제목</h2>
-        {{ form.title }}
-        
-        <h2>내용</h2>
-        {{ form.content }}
-    </div>
+            <h2>제목</h2>
+            {{ form.title }}
+
+
+            <h2 style="margin-top: 3%;">내용</h2>
+            {{ form.content }}
+        </div>
 
     </form>
 

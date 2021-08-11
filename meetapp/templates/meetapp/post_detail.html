@@ -1,125 +1,131 @@
 {% extends 'meetapp/base.html' %} {% block content %} {% load static %} <br />
 <html>
-    <title>{{post.title}} - ConcertMeet</title>
-    <head>
-        <link rel="stylesheet" href="{% static 'css/post_detail.css' %}" />
-        <script src="{% static 'js/likes.js' %}"></script>
-    </head>
+<title>{{post.title}} - ConcertMeet</title>
 
-    <body>
-        <section class="det_container">
-            <section id="title">
-                <h2>{{ post.title }}</h2>
+<head>
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}" />
+    <script src="{% static 'js/likes.js' %}"></script>
+</head>
 
-                <div class="user_and_pcp">
-                    <p>
-                        #{{ post.category }}
-                        | 
-                        <span id="pcp_user_cnt" value="{{ post.pcp.pcp_user_count }}">{{ post.pcp.pcp_user_count }}</span>
-                        /
-                        <span id="pcp_total_cnt" value="{{ post.pcp.pcp_user_total }}">{{ post.pcp.pcp_user_total }}</span> 명
-                        <br>
-                        <a href="{% url 'account:user' post.user.username %}">{{ post.user.name }}</a>
-                    </p>
-                </div>
-            </section>
-        
-            <section id="content">
-                {{ post.content }}
-            </section>
-        
-            <section id="edit">
-                <div class="manage">
-                    {% if post.user.username == request.user.username %}
-                    <a href="{% url 'meetapp:post_edit' post.id %}"><button class="btn btn-dark">수정</button></a>
-                    <a href="{% url 'meetapp:post_delete' post.id %}"><button class="btn btn-dark">삭제</button></a>
-                    {% else %}
-                    {% if is_pcp %}
-                    <a href="{% url 'account:review_new' post.user.username %}"><button>후기 작성</button></a>
-                    {% endif %}
-                    <a>
-                        <button class="like" name="{{ post.id }}" onclick="onClick()">
-                            <span class="fa fa-heart"></span>
-                        </button>
-                    </a>
-                    <a href="{% url 'meetapp:post_declaration' post.id %}"><button class="btn btn-dark">신고</button></a>
-                    {% endif %}
-                    <a href="{% url 'meetapp:post_list' %}"><button class="btn btn-dark">목록</button></a>
-                </div>
-            </section>
+<body>
+    <section class="det_container">
+        <section id="title">
+            <h2>{{ post.title }}</h2><br>
 
-            <hr>
-
-            <section id="comment">
-                <h4>댓글</h4>
-                <form action="{% url 'meetapp:comment_new' post.id %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <textarea cols="40" rows="3" class="form-control" name="message" id="message"
-                            value="{{ form.message.value|default_if_none:'' }}" placeholder="댓글로 참가 의사를 표현하세요"></textarea>
-                    </div>
-                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
-                        <input type="submit" class="btn btn-dark" value="작성">
-                    </div>
-                </form>
-
-                <ul>
-                    {% for comment in post.comment_set.all %}
-                    <li>
-                        <div>
-                            {% if comment.user.username == request.user.username %}
-                            <a href="{{ comment.get_edit_url }}">
-                                <button class="btn btn-dark">수정</button>
-                            </a>
-                            <a>
-                                <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
-                                
-                                <button onclick="deletecmtfunc();" class="btn btn-dark">삭제</button>
-                            </a>
-                            {% endif %}
-                            {% if request.user.username == post.user.username and comment.user.username != request.user.username %}
-                            <a>
-                                <input type="hidden" id="pcp_url" name="pcp_url" value="{% url 'meetapp:pcp_add' post.id comment.id %}">
-                                <input type="hidden" id="del_pcp_url" name="del_pcp_url"
-                                    value="{% url 'meetapp:pcp_delete' post.id comment.id %}">
-                                <button id="pcp_btn" onclick="addpcpfunc();" class="btn btn-dark">참가자 추가</button>
-                                <button id="del_pcp_btn" onclick="delpcpfunc();" class="btn btn-dark">참가자 삭제</button>
-                            </a>
-                            {% endif %}
-                            {% if comment.user.username != request.user.username %}
-                            <a href="{% url 'meetapp:comment_declaration' post.id comment.id %}"><input type="button" class="btn btn-dark" value ='신고'></a>
-                            {% endif %}
-                        </div>
-                        <div class="cmt_tit">
-                            {{ comment.user.name }} | {{ comment.created_at }} <br>
-                        </div>
-                        <div class="cmt_msg">
-                            {{ comment.message }}
-                        </div>
-                        
-                    </li>
-                    {% endfor %}
-                </ul>
-            </section>
+            <div class="user_and_pcp">
+                <p>
+                    #{{ post.category }}
+                    |
+                    <span id="pcp_user_cnt" value="{{ post.pcp.pcp_user_count }}">{{ post.pcp.pcp_user_count }}</span>
+                    /
+                    <span id="pcp_total_cnt" value="{{ post.pcp.pcp_user_total }}">{{ post.pcp.pcp_user_total }}</span>
+                    명
+                    <br>
+                    <a href="{% url 'account:user' post.user.username %}">{{ post.user.name }}</a>
+                </p>
+            </div>
         </section>
-    </body>
+
+        <section id="content">
+            {{ post.content }}
+        </section>
+
+        <section id="edit">
+            <div class="manage">
+                {% if post.user.username == request.user.username %}
+                <a href="{% url 'meetapp:post_edit' post.id %}"><button class="btn btn-dark">수정</button></a>
+                <a href="{% url 'meetapp:post_delete' post.id %}"><button class="btn btn-dark">삭제</button></a>
+                {% else %}
+                {% if is_pcp %}
+                <a href="{% url 'account:review_new' post.user.username %}"><button>후기 작성</button></a>
+                {% endif %}
+                <a>
+                    <button class="like" name="{{ post.id }}" onclick="onClick()">
+                        <span class="fa fa-heart"></span>
+                    </button>
+                </a>
+                <a href="{% url 'meetapp:post_declaration' post.id %}"><button class="btn btn-dark"
+                        style="margin-right: 1%;">신고</button></a>
+                {% endif %}
+                <a href="{% url 'meetapp:post_list' %}"><button class="btn btn-dark">목록</button></a>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="comment"><br>
+            <h4>댓글</h4><br>
+            <form action="{% url 'meetapp:comment_new' post.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea cols="40" rows="3" class="form-control" name="message" id="message"
+                        value="{{ form.message.value|default_if_none:'' }}" placeholder="댓글로 참가 의사를 표현하세요"></textarea>
+                </div><br>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                    <input type="submit" class="btn btn-dark" value="작성">
+                </div>
+            </form>
+
+            <ul>
+                {% for comment in post.comment_set.all %}
+                <li>
+                    <div>
+                        {% if comment.user.username == request.user.username %}
+                        <a href="{{ comment.get_edit_url }}">
+                            <button class="btn btn-dark">수정</button>
+                        </a>
+                        <a>
+                            <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
+
+                            <button onclick="deletecmtfunc();" class="btn btn-dark">삭제</button>
+                        </a>
+                        {% endif %}
+                        {% if request.user.username == post.user.username and comment.user.username !=
+                        request.user.username %}
+                        <a>
+                            <input type="hidden" id="pcp_url" name="pcp_url"
+                                value="{% url 'meetapp:pcp_add' post.id comment.id %}">
+                            <input type="hidden" id="del_pcp_url" name="del_pcp_url"
+                                value="{% url 'meetapp:pcp_delete' post.id comment.id %}">
+                            <button id="pcp_btn" onclick="addpcpfunc();" class="btn btn-dark">참가자 추가</button>
+                            <button id="del_pcp_btn" onclick="delpcpfunc();" class="btn btn-dark">참가자 삭제</button>
+                        </a>
+                        {% if comment.user.username != request.user.username %}
+                        <a href="{% url 'meetapp:comment_declaration' post.id comment.id %}"><input type="button"
+                                class="btn btn-dark" value='신고'></a>
+                        {% endif %}
+                    </div>
+                    <div class="cmt_tit">
+                        {{ comment.user.name }} | {{ comment.created_at }} <br>
+                    </div>
+                    <div class="cmt_msg">
+                        {{ comment.message }}
+                    </div>
+
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </section>
+</body>
+
 </html>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(".btn-icon").click(function () {
-        var pk = $(this).attr("name"); 
+        var pk = $(this).attr("name");
         $.ajax({
-            type: "POST", 
-            url: "{% url 'meetapp:post_like' %}", 
-            data: { pk: pk, csrfmiddlewaretoken: "{{ csrf_token }}" }, 
+            type: "POST",
+            url: "{% url 'meetapp:post_like' %}",
+            data: { pk: pk, csrfmiddlewaretoken: "{{ csrf_token }}" },
             dataType: "json",
             success: function (response) {
-                $("#count-" + pk).html(response.likes_count); 
+                $("#count-" + pk).html(response.likes_count);
             },
             error: function (request, status, error) {
                 alert("로그인이 필요합니다.");
-                window.location.replace("/user/login/"); 
+                window.location.replace("/user/login/");
             },
         });
     });
@@ -138,33 +144,33 @@
         if (confirm('정말 삭제하시겠습니까?'))
             window.location = document.getElementById("delete_url").value;
     }
-    
+
     function addpcpfunc() {
-        
+
         if (confirm('해당 사용자를 추가하시겠습니까?')) {
             var cur = document.getElementById("pcp_user_cnt").value;
             console.log(cur)
             var tot = document.getElementById("pcp_total_cnt").value;
             console.log(tot)
-            if(tot - cur == 0)
+            if (tot - cur == 0)
                 alert("최대인원을 초과하여 추가할 수 없습니다.");
             else {
                 $.ajax({
-                type: "POST",
-                url: document.getElementById("pcp_url").value,
-                data: { 'csrfmiddlewaretoken': '{{ csrf_token }}' },
-                dataType: "json",
-                success: function (response) {
-                    alert("성공적으로 추가되었습니다.");
-                    $("#pcp_user_cnt").text(response.pcp_user_count);
-                },
-                error: function (request, status, error) {
-                    if (status == 0)
-                        alert("이미 등록된 사용자입니다.");
-                    else
-                        alert("추가에 실패하였습니다.");
-                },
-            });
+                    type: "POST",
+                    url: document.getElementById("pcp_url").value,
+                    data: { 'csrfmiddlewaretoken': '{{ csrf_token }}' },
+                    dataType: "json",
+                    success: function (response) {
+                        alert("성공적으로 추가되었습니다.");
+                        $("#pcp_user_cnt").text(response.pcp_user_count);
+                    },
+                    error: function (request, status, error) {
+                        if (status == 0)
+                            alert("이미 등록된 사용자입니다.");
+                        else
+                            alert("추가에 실패하였습니다.");
+                    },
+                });
             }
         }
     }

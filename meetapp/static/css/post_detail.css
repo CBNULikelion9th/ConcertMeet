@@ -5,6 +5,10 @@
   --gray: #a5a5a5;
 }
 
+.post_title > h2{
+  font-weight: bold;
+}
+
 .like {
   transition: 1s cubic-bezier(0.21, 0.04, 0.26, 0.99);
   color: var(--gray);
@@ -19,8 +23,8 @@
 
 .det_container {width: 900px; margin: auto; padding-top: 30px;}
 
-#title h2 {font-size: 35px;}
-#title .user_and_pcp {font-size: 22px;}
+#title h2 {font-size: 20px; font-weight: bold;}
+#title .user_and_pcp {font-size: 17px;}
 
 #content {margin-bottom: 30px; font-size: 18px; white-space: pre-line;}
 #edit {text-align: right;}
