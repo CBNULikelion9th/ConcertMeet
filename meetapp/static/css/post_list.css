@@ -27,6 +27,33 @@ a, a:hover {text-decoration: none; color: black;}
 
 #page_nav {text-align: center;}
 
+.btn_list {
+  margin-top: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.btn_list button {
+  margin-right: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+@media (max-width: 1980px) {
+  #main {
+    width: 1480px;
+    margin: 0 auto;
+  }
+  .post_element {
+    width: 1300px;
+  }
+  .post_element > p {
+    margin: 5% 0 0 3.5%;
+  }
+}
+
 @media screen and (max-width: 720px) {
     .page {margin: 0 30px;}
     .likes {width: 15%;}
