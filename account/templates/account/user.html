@@ -62,7 +62,7 @@
                 <button style="font-size: 17px;"><a href="{% url 'account:user_edit' info.username %}">정보
                         수정</a></button>
                 {% endif %}
-                <button style="font-size: 17px;"><a href="{% url 'account:follow_list' info.username %}">팔로우
+                <button style="font-size: 17px;"><a href="{% url 'account:follow_list' info.username %}?order=following">팔로우
                         리스트</a></button>
             </div>
         </div>
