@@ -33,7 +33,9 @@ class UserInfo(models.Model):
 
 class Follow(models.Model):
     follow_user_id = models.CharField(max_length=30)
+    follow_user_username = models.CharField(max_length=100)
     followed_user_id = models.CharField(max_length=30)
+    followed_user_username = models.CharField(max_length=100)
 
     def __str__(self):
         return f'팔로우: {self.follow_user_id}'

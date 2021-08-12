@@ -1,6 +1,7 @@
 from django.db.models.fields.related import ForeignObject
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
+from django.db.models import Q
 import json
 from .forms import *
 from . import models
@@ -115,8 +116,8 @@ def follow(request, user_id):
     user.save()
     tguser.save()
 
-    following = Follow.objects.create(
-        follow_user_id=request.user.username, followed_user_id=user_id)
+    following = Follow.objects.create(follow_user_id=user.username, follow_user_username=user.name,
+    followed_user_id=tguser.username, followed_user_username=tguser.name)
     following.save()
     return redirect('account:user', user_id)
 
@@ -148,11 +149,20 @@ def unfollow(request, user_id):
 
 
 def follow_list(request, user_id):
-
-    follower = Follow.objects.filter(followed_user_id=user_id)
+    order = request.GET.get("order")
+    print(order)
+    follow = Follow.objects.filter(Q(followed_user_id=user_id) & Q(follow_user_id=user_id))
+    if(order == "follower"):
+        follow = Follow.objects.filter(followed_user_id=user_id)
+    elif(order == "following"):
+        follow = Follow.objects.filter(follow_user_id=user_id)
+    else:
+        redirect("/")
 
     return render(request, 'account/follow_list.html', {
-        "follower": follower
+        "tguser_id":user_id,
+        "order":order,
+        "follow": follow,
     })
 
 
