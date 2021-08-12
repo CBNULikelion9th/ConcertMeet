@@ -6,6 +6,7 @@
   const jazz_btn = document.querySelector("#jazz");
   const fes_btn = document.querySelector("#fes");
   const indi_btn = document.querySelector("#indi");
+  const all_btn = document.querySelector("#all");
   
   const target = document.querySelectorAll(".concert_genre");
   target.forEach((item) => {
@@ -24,7 +25,7 @@
       item.parentNode.classList.add("festival");
     } else if (gen === "인디") {
       item.parentNode.classList.add("indi");
-    } 
+    }
   });
 
   hip_btn.addEventListener("click", () => {
@@ -117,4 +118,11 @@
       item.classList.toggle("hide");
     });
   });
+
+  all_btn.addEventListener("click", () => {
+    const clear = document.querySelectorAll("div.line");
+    clear.forEach((item) => {
+      item.classList.remove("hide");
+    });
+  })
 })();
