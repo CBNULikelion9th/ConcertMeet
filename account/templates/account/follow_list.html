@@ -1,5 +1,37 @@
-welcome
-<br>
-{% for f in follower%}
-    <h3>{{f}}<h3>
-{% endfor %}
+{% extends 'meetapp/base.html' %}
+{% block content %}
+
+<head>
+    <style>
+        .box {
+            text-align: center;
+        }
+
+        .title {
+            margin-top: 3%;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .list-box {
+            margin-top: 2%;
+            margin-bottom: 15%;
+        }
+
+        .list {
+
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<div class="box">
+    <h3 class="title">회원님의 팔로우 리스트</h3>
+    {% for f in follower%}
+    <div class="list-box">
+        <h3 class="list">{{f}}<h3>
+                {% endfor %}
+    </div>
+
+    {% endblock %}
+</div>
