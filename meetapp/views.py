@@ -103,6 +103,11 @@ def post_new(request):
             post = form.save(commit=False)
             post.user = UserInfo.objects.get(userkey=request.user)
             pcp = Participant.objects.create(created_user=post.user)
+            try:
+                max_pcp = request.POST.get('max_pcp')
+                pcp.pcp_user_total = max_pcp
+            except:
+                pass
             pcp.save()
             post.pcp = pcp
             post.save()
