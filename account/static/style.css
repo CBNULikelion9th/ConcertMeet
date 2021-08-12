@@ -1,0 +1,20 @@
+/* follow_list */
+#follow_list {width: 1000px; margin: 0 auto;}
+#follow_list ul {width: 100%; margin: 10px auto 5px; text-align: center;}
+#follow_list ul li {width: 49%; padding: 5px 0; font-size: 20px; background-color: #aaa; margin: 2px; border-radius: 10px;}
+#follow_list ul li:hover {transition: all 0.2s ease; background-color: #888;}
+#follow_list .content {width: 100%; margin: 30px auto 100px;}
+#follow_list .content h2 {font-weight: bold; text-align: center;} /* 에러창 */
+#follow_list .content h3 {color: #aaa; text-align: center;} /* 에러창 */
+#follow_list .content .element {margin: 2px 0; padding: 20px 0; border-bottom: solid 1px #aaa; border-left: solid 10px #555;}
+#follow_list .content .element:last-child {border-bottom: none;}
+#follow_list .content .element h2 {text-align: left; padding-left: 20%;}
+
+
+@media screen and (max-width: 1260px) {
+    #follow_list {width: 100%; padding: 0 120px;}
+}
+
+@media screen and (max-width: 720px) {
+    #follow_list {width: 100%; padding: 0 50px;}
+}
