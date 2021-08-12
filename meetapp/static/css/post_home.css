@@ -16,7 +16,7 @@ section {
 }
 
 .title {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   margin: 1rem;
 }
@@ -52,12 +52,33 @@ section {
 }
 
 /* 인기글 */
-.popular_list table {width: 90%; padding: 10px 0; margin: 0 auto; table-layout: fixed;}
-.popular_list table tr {width: 100%; padding: 3px 0; border-bottom: solid 1px black;}
-.popular_list table tr:last-child {border: none;}
-.popular_list table tr th {padding: 3px 0;}
-.popular_list table tr td p {display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;}
-.popular_list table tr td .pop_link:hover {color: rgb(165, 165, 103); transition: all 0.2s ease-out;}
+.popular_list table {
+  width: 90%; 
+  padding: 10px 0; 
+  margin: 0 auto; 
+  table-layout: fixed;
+}
+.popular_list table tr {
+  width: 100%; 
+  padding: 3px 0; 
+  border-bottom: solid 1px black;
+}
+.popular_list table tr:last-child {
+  border: none;
+}
+.popular_list table tr th {
+  padding: 3px 0;
+}
+.popular_list table tr td p {
+  display: block; 
+  white-space: nowrap; 
+  overflow: hidden; text-overflow: 
+  ellipsis; width: 100%;
+}
+.popular_list table tr td .pop_link:hover {
+  color: rgb(165, 165, 103); 
+  transition: all 0.2s ease-out;
+}
 
 .card-list {
   display: grid;
@@ -85,7 +106,6 @@ section {
 }
 
 .title {
-  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -120,9 +140,7 @@ section {
 
 /* 800 x 600 */
 @media (max-width: 800px) {
-  #main {
-    height: 29rem;
-  }
+  
   .today_concert {
     max-width: 650px;
   }
@@ -131,5 +149,22 @@ section {
   }
   .home_concert:nth-child(n + 3) {
     display: none;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 420px){
+  .today_concert{ 
+    max-width: 350px;
+  }
+  .title{
+    font-size: 12px;
+  }
+  .home_concert_info img {
+    width: 75px;
+    height: 110px;
+  }
+  .home_concert_info {
+    font-size: 10px;
   }
 }
