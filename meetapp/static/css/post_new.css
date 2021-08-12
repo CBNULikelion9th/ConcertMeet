@@ -1,5 +1,5 @@
 #main {
-    max-width: 2060px;
+    width: 1000px;
     margin: 0 auto;
 }
   
@@ -47,20 +47,6 @@
     margin-top:10px;
     width: 50px;
     height: 30px;
-}
-  
-@media (max-width: 1980px) {
-    #main {
-        width: 1480px;
-        margin: 0 auto;
-    }
-}
-    
-@media (max-width: 1680px) {
-    #main {
-        width: 1180px;
-        margin: 0 auto;
-    }
 }
 
 @media screen and (max-width: 1152px) {

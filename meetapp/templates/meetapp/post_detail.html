@@ -36,16 +36,15 @@
                 <a href="{% url 'meetapp:post_edit' post.id %}"><button class="btn btn-dark">수정</button></a>
                 <a href="{% url 'meetapp:post_delete' post.id %}"><button class="btn btn-dark">삭제</button></a>
                 {% else %}
-                {% if is_pcp %}
-                <a href="{% url 'account:review_new' post.user.username %}"><button>후기 작성</button></a>
-                {% endif %}
                 <a>
                     <button class="like" name="{{ post.id }}" onclick="onClick()">
                         <span class="fa fa-heart"></span>
                     </button>
                 </a>
-                <a href="{% url 'meetapp:post_declaration' post.id %}"><button class="btn btn-dark"
-                        style="margin-right: 1%;">신고</button></a>
+                {% if is_pcp %}
+                <a href="{% url 'account:review_new' post.user.username %}"><button class="btn btn-dark">후기 작성</button></a>
+                {% endif %}
+                <a href="{% url 'meetapp:post_declaration' post.id %}"><button class="btn btn-dark">신고</button></a>
                 {% endif %}
                 <a href="{% url 'meetapp:post_list' %}"><button class="btn btn-dark">목록</button></a>
             </div>
@@ -71,9 +70,9 @@
                 <li>
                     <div>
                         {% if comment.user.username == request.user.username %}
-                        <a href="{{ comment.get_edit_url }}">
+                        <!-- <a href="{{ comment.get_edit_url }}">
                             <button class="btn btn-dark">수정</button>
-                        </a>
+                        </a> -->
                         <a>
                             <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
                             <button onclick="deletecmtfunc();" class="btn btn-dark">삭제</button>

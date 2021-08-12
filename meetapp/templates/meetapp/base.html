@@ -47,7 +47,7 @@
           >로그아웃</a>
       </div>
       <div>
-        <a href=" {% url 'account:user' user.username %}">마이페이지</a>
+        <a href="{% url 'account:user' user.username %}">마이페이지</a>
       </div>
       {% else %}
       <div>
@@ -62,16 +62,15 @@
 
   </header>
   <ul class="menu">
-    <li class="menu-item"><a href="{% url 'meetapp:post_home' %}" class="menu-link">Home</a></li>
-    <li class="menu-item"><a href="{% url 'meetapp:content_list' %}" class="menu-link">Now showing</a></li>
-    <li class="menu-item"><a href="{% url 'meetapp:post_list' %}" class="menu-link">Concert mate</a></li>
-    <li class="menu-item"><a href="http://ticket.interpark.com/" class="menu-link">Reservation</a></li>
+    <li class="menu-item"><a href="{% url 'meetapp:post_home' %}" class="menu-link">메인</a></li>
+    <li class="menu-item"><a href="{% url 'meetapp:content_list' %}" class="menu-link">공연</a></li>
+    <li class="menu-item"><a href="{% url 'meetapp:post_list' %}" class="menu-link">커뮤니티</a></li>
+    <li class="menu-item"><a href="http://ticket.interpark.com/" class="menu-link">예매</a></li>
   </ul>
 
   <div class="quickmenu">
     <ul>
       <li><a href="#" class="go-to-top">top</a></li>
-      <!-- <li><a href="#">test1</a></li>  -->
       <li><a href="#" class="go-to-down">down</a></li>
     </ul>
   </div>
