@@ -47,7 +47,7 @@ a, a:hover {text-decoration: none; color: black;}
   .post_info .participants {width: 10%;}
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 600px) {
   #title h1,
   .post_info .post_middle .title {font-size: 15px;}
 
