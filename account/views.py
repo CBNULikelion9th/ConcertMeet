@@ -5,6 +5,7 @@ import json
 from .forms import *
 from . import models
 
+
 def user(request, user_id):
     print("request user:" + request.user.username)
     users = User.objects.get(username=user_id)
@@ -148,7 +149,7 @@ def unfollow(request, user_id):
 
 def follow_list(request, user_id):
 
-    follower = models.Follow.objects.all()
+    follower = Follow.objects.filter(followed_user_id=user_id)
 
     return render(request, 'account/follow_list.html', {
         "follower": follower
