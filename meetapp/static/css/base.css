@@ -147,3 +147,33 @@ a, a:hover {
     max-width: 650px;
   }
 }
+
+@media (max-width: 420px){
+  .header{ 
+    max-width: 350px;
+  }
+  .header a,
+  .right_one a,
+  .right_two a {
+    font-size: 11px;
+  }
+  .search-form{
+    width: 100px;
+  }
+  .menu {
+    max-width: 350px;
+  }
+  .menu-link {
+    font-size: 10px;
+  }
+  .quickmenu {
+    position:absolute;
+    width:50px;
+    top:50%;
+    margin-top:-50px;
+    right:1%;
+  }
+  .metadata {
+    
+  }
+}
