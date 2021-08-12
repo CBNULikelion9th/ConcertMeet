@@ -7,6 +7,7 @@ a, a:hover {text-decoration: none; color: black;}
 
 .btn_list {margin: 30px auto 50px;text-align: center;}
 .btn_list button {margin: 0 10px; border: none; background-color: white;}
+.btn_list button:hover {color: #a5a5a5; transition: all 0.2s ease;}
 .hide {display: none;}
 
 .post {height: 100px; width: 90%; background-color: #e2e2e2; margin: 3px auto; border-radius: 10px; display: flex; flex-direction: row;}
