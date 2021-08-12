@@ -41,11 +41,9 @@ a, a:hover {
   font-size: 20px;
 }
 
-/* .search-form {
-  margin-left: auto;
-  margin-right: 5vw;
-  width: 1vw;
-} */
+.header .search-form {
+  margin-left: 30px;
+}
 
 .top_right {
   margin-left: auto;
@@ -65,13 +63,13 @@ a, a:hover {
 .menu-item {
   /* flex-grow: 1; */
   width: 25%;
-  background: gold;
+  background:#e2e2e2;
   transition: 0.5s;
 }
 .menu-item:hover {
   /* flex-grow: 1.5; */
   width: 35%;
-  background: crimson;
+  background:rgb(117, 115, 115);
 }
 .menu-link {
   display: block;
@@ -105,10 +103,11 @@ a, a:hover {
 }
 
 .df .copyright {
-  margin: 10rem 0;
+  /* margin: 10rem 0; */
+  margin-left: 3%;
   padding: 3rem 0;
   border-top: 1px solid gainsboro;
-  font-size: 30px;
+  font-size: 10px;
   text-decoration:gainsboro;
   color: gray;
 }

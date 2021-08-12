@@ -88,3 +88,16 @@
     font-size: 1vw;
   }
 }
+
+
+@media (max-width: 1680px) {
+  #concert_list {
+    max-width: 1180px;
+    font-size: 1vw;
+  }
+}
+
+
+
+
+

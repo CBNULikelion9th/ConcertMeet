@@ -16,7 +16,7 @@ section {
 }
 
 .title {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   margin: 1rem;
 }
@@ -85,53 +85,25 @@ section {
 }
 
 .title {
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
 @media (max-width: 1920px) {
-  #main {
-    height: 29rem;
-  }
-  .today_concert {
-    max-width: 1480px;
-  }
-  .concert_mate {
+  section {
     max-width: 1480px;
   }
 }
 
 @media (max-width: 1680px) {
-  #main {
-    height: 29rem;
-  }
-  .today_concert {
-    max-width: 1180px;
-  }
-  .concert_mate {
+  section {
     max-width: 1180px;
   }
 }
 
-@media (max-width: 1366px) {
-  #main {
-    height: 29rem;
-  }
-}
-
-@media (max-width: 1280px) {
-  #main {
-    height: 29rem;
-  }
-}
 
 @media (max-width: 1152px) {
-  #main {
-    height: 29rem;
-  }
-  .today_concert {
-    max-width: 852px;
-  }
-  .concert_mate {
+  section {
     max-width: 852px;
   }
   .home_concert:nth-child(n + 4) {
