@@ -168,3 +168,9 @@ section {
     font-size: 10px;
   }
 }
+
+@media (min-width: 2175px) {
+  section{
+    max-width: 2060px;
+  }
+}

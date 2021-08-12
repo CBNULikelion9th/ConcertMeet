@@ -146,32 +146,27 @@
 }
 
 .comment_user_etc {
-  position: relative;
   margin: -8% 0% 0% 10%;
 }
 
-/*.comment_concert {
-  position: relative;
-  margin-left: 10%;
-  margin-top:2%;
-}*/
-
 .comment_date {
-  position: relative;
   margin-left: 10%;
   margin-top: 3%;
 }
 
 .message {
-  position: absolute;
-  margin: -5% 0% 0% 35%;
+  margin: -7% 0% 0% 10%;
+  font-size: 20px;
   width: 450px;
   height: 90px;
 }
 
+.comment_date > p {
+  margin: 7% 0 0 70%;
+}
+
 .message_button {
-  position: relative;
-  margin: 0.5% 0% 0% 10%;
+  margin: -5% 0% 0% 90%;
 }
 
 .message_button > button {
@@ -179,6 +174,7 @@
   outline: 0;
   background-color: rgb(138, 138, 138);
   border-radius: 10px;
+  padding: 3px;
 }
 
 @media (max-width: 1920px) {
@@ -204,6 +200,8 @@
   #profile_main {
     max-width: 350px;
     height: 400px;
+    margin-top: 10px;
+    margin-bottom: 30px;
   }
   .user_name {
     margin: 0;
@@ -239,5 +237,28 @@
   .follow > p {
     font-size: 15px;
     margin-left: 10px;
+  }
+  .comment > ul > li {
+    width: 300px;
+  }
+  .comment_user_etc {
+    font-size: 12px;
+    margin: -23% 0% 0% 24%;
+  }
+  .comment_date {
+    font-size: 10px;
+  }
+  .comment_date > p {
+    margin: 23% 0 0 50%;
+  }
+  .message {
+    font-size: 13px;
+    margin: -20% 0 0 23%;
+  }
+  .message_button {
+    margin: -10% 0 0 75%;
+  }
+  .message_button > button{
+    font-size: 12px;
   }
 }

@@ -8,14 +8,15 @@
   text-align: center;
 }
 
-.btns {
-  margin-top: 30px;
-  margin-bottom: 50px;
+.btn_list {
+  margin: 30px auto 50px;
   text-align: center;
 }
 
-.btns button {
-  margin-right: 20px;
+.btn_list button {
+  margin: 0 10px;
+  border: none;
+  background-color: white;
 }
 
 .info_tag {
@@ -97,7 +98,33 @@
   }
 }
 
-
-
-
-
+@media (max-width: 420px) {
+  #concert_list {
+    max-width: 350px;
+  }
+  .line {
+    font-weight: 100;
+    height: 100px;
+  }
+  .line > img {
+    width: 80px;
+    height: 80px;
+  }
+  .line .concert_title,
+  .line .concert_date,
+  .line .concert_location {
+    font-size: 8px;
+  }
+  .line .concert_title {
+    margin: 0 0 10px 10px;
+    width: 35%;
+  }
+  .line .concert_location {
+    text-align: center;
+    margin-left: 10px;
+    width: 35%;
+  }
+  .line .concert_date {
+    margin-left: 5px;
+  }
+}
