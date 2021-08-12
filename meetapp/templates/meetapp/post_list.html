@@ -12,70 +12,76 @@
 </head>
 
 <body>
-  <section id="main">
-    <div class="title">
-      <h1>콘서트 메이트 구해요</h1>
-
-      <a href="{% url 'meetapp:post_new' %}" class="btn btn-ligt float-end">새 글 쓰기</a>
+  <section class="page">
+    <div id="title">
+      <h1>전체 글 보기</h1>
     </div>
+
     <div class="btn_list">
-      <button id="hip">힙합</button><button id="bal">발라드</button><button id="pop">내한공연</button><button
-        id="rock">락</button>
-      <button id="jazz">재즈</button><button id="fes">페스티벌</button><button id="indi">인디</button><button id="all">전체
-        보기</button>
+      <button id="all">전체보기</button> |
+      <button id="hip">힙합</button> |
+      <button id="bal">발라드</button> |
+      <button id="pop">팝</button>
+      <br>
+      <button id="rock">락</button> |
+      <button id="jazz">재즈</button> |
+      <button id="fes">페스티벌</button> | 
+      <button id="indi">인디</button>
     </div>
 
+    <div id="content">
     {% for post in page.object_list %}
-    <div class="post_element">
-      <script src="{% static 'js/likes.js' %}"></script>
+        <div class="post">
+            <div class="likes">
+                <button class="like" name="{{ post.id }}" onclick="onClick()">
+                    <span class="fa fa-heart"></span>
+                </button>
+                <p id="count-{{ post.id }}">{{ post.likes_user.all.count }}</p>
+            </div>
 
-      <button class="btn-icon btn--icon-default" name="{{ post.id }}" onclick="onClick()">
-        <span class="fa fa-heart" style="font-size: 35px" onclick="onClick()"></span>
-      </button>
-      <button class="btn-icon btn--icon-liked" name="{{ post.id }}" onclick="onClick()">
-        <span class="fa fa-heart" style="font-size: 35px" onclick="onClick()"></span>
-      </button>
-
-      <p id="count-{{ post.id }}">{{ post.likes_user.all.count }}</p>
-
-      <a href="{% url 'meetapp:post_detail' post.id %}">
-        <div class="page_title">{{ post.title }}&nbsp;[{{ post.hit }}]</div>
-
-        <div class="info">
-          <div class="hashtag">
-            <p>#{{ post.category }}</p>
-          </div>
-          <div class="matching">
-            <p>{{ post.pcp.pcp_user_count }}/{{ post.pcp.pcp_user_total }}</p>
-          </div>
+            <div class="post_info">
+                <a href="{% url 'meetapp:post_detail' post.id %}">
+                    <div class="post_middle">
+                        <div class="title"><span>{{ post.title }}</span></div>
+                        <div class="title_wrap">
+                            <div class="hashtag">
+                                <span class="category">#{{ post.category }}</span>
+                                <span class="hit">조회수 [{{ post.hit }}]회</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="participants">
+                    <p>{{ post.pcp.pcp_user_count }}/{{ post.pcp.pcp_user_total }}</p>
+                </div>
+            </div>
         </div>
-        <!-- <div class="matching">
-          <p>0/3</p>
-        </div> -->
-      </a>
-    </div>
     {% endfor %}
-
-    <div class="chapter">
-      {% if page.has_previous %}
-      <a href="?page={{page.previous_page_number}}"><i class="fas fa-arrow-left text-gray-700"></i></a>
-      {% endif %}
-
-      <span class="mx-3 font-medium">{{page.number}} of {{page.paginator.num_pages}}</span>
-
-      {% if page.has_next %}
-      <a href="?page={{page.next_page_number}}"><i class="fas fa-arrow-right text-gray-700"></i></a>
-      {% endif %}
+    </div>
+    
+    <div id="page_nav">
+        {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}"><i class="fas fa-arrow-left text-gray-700"></i></a>
+        {% endif %}
+    
+        <span class="mx-3 font-medium">{{page.number}} of {{page.paginator.num_pages}}</span>
+    
+        {% if page.has_next %}
+        <a href="?page={{page.next_page_number}}"><i class="fas fa-arrow-right text-gray-700"></i></a>
+        {% endif %}
+    </div>
+    
+    <div id="new_post">
+      <a href="{% url 'meetapp:post_new' %}" class="btn btn-light float-end">새 글 쓰기</a>
     </div>
   </section>
 </body>
 
 </html>
-<script src="../../static/js/likes.js"></script>
 <script src="../../static/js/kategorie.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-  $(".btn-icon").click(function () {
+  $(".like").click(function () {
     var pk = $(this).attr("name");
     $.ajax({
       type: "POST",

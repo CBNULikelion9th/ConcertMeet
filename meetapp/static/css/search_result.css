@@ -1,4 +1,4 @@
-.page {margin: 0 100px;}
+.page {margin: 0 auto; width: 1150px;}
 a, a:hover {text-decoration: none; color: black;}
 
 #title { justify-content: space-between; font-family: notosans; margin: 3rem auto 2rem;}
@@ -27,9 +27,22 @@ a, a:hover {text-decoration: none; color: black;}
 
 #page_nav {text-align: center;}
 
+@media screen and (max-width: 1260px) {
+    .page {margin: 0 100px; width: auto;}
+}
+
 @media screen and (max-width: 720px) {
     .page {margin: 0 30px;}
     .likes {width: 15%;}
-    .post_info {width: 80%;}
-    .post_info .participants {width: 15%;}
+    .post_info {width: 85%;}
+    .post_info .participants {width: 10%;}
+
+    #title h1,
+    .post_info .post_middle .title {font-size: 15px;}
+
+    .post_info .hashtag  > .category,
+    .post_info .hashtag > .hit,
+    #page_nav span,
+    .post_info .participants p {font-size: 11px;}
+
 }
