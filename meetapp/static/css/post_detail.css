@@ -38,7 +38,7 @@
 #comment ul li > div {margin: 4px auto;}
 #comment ul li > div:first-child {float: right;}
 #comment .cmt_tit {font-size: 14px;}
-#comment .cmt_msg {font-size: 16px; white-space: pre-line; transform: translateY(-8px);}
+#comment .cmt_msg {font-size: 16px; white-space: pre-line;}
 
 @media screen and (max-width: 980px) {
   .det_container {width: auto; margin: 0 70px;}
