@@ -23,11 +23,6 @@ a, a:hover {
   text-decoration: none;
 }
 
-#clock {
-  padding-right: 1.5%;
-  font-size: 20px;
-}
-
 .header {
   max-width: 2060px;
   display: flex;
@@ -108,7 +103,7 @@ a, a:hover {
   margin: 10rem 0;
   padding: 3rem 0;
   border-top: 1px solid gainsboro;
-  font-size: 30px;
+  font-size: 15px;
   text-decoration:gainsboro;
   color: gray;
 }
@@ -146,5 +141,35 @@ a, a:hover {
   }
   .menu {
     max-width: 650px;
+  }
+}
+/* 모바일 */
+@media (max-width: 420px){
+  .header{ 
+    max-width: 350px;
+  }
+  .header a,
+  .right_one a,
+  .right_two a {
+    font-size: 11px;
+  }
+  .search-form{
+    width: 100px;
+  }
+  .menu {
+    max-width: 350px;
+  }
+  .menu-link {
+    font-size: 10px;
+  }
+  .quickmenu {
+    position:absolute;
+    width:50px;
+    top:50%;
+    margin-top:-50px;
+    right:1%;
+  }
+  .metadata {
+    
   }
 }

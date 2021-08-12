@@ -1,91 +1,64 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- fontawesome -->
-    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
-      crossorigin="anonymous"
-    />
+  <!-- fontawesome -->
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined"
-      rel="stylesheet"
-    />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" />
 
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet" />
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/ui.css' %}" />  
-  
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-      crossorigin="anonymous"
-    ></script>
-  </head>
+  <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/ui.css' %}" />
 
-  <body>
-    <header class="header">
-      <a href="{% url 'meetapp:post_home' %}"
-        >ConcertMeet</a
-      >
-      <form class="search-form" action="{% url 'meetapp:search_result' %}">
-        <input type="search" id="keyword" name="keyword">
-        <input type="submit" value="찾기" />
-      </form>
-      <h4 id="clock">00:00:00</h4>
-      <div class="top_right">
-          {% if user.is_authenticated %}
-          <div>
-            <a
-            aria-current="page"
-              id="logout"
-              onclick="logout();"
-              href="{% url 'account:logout' %}"
-              >로그아웃</a
-            >
-          </div>
-          <div>
-            <a  href="{% url 'account:user' user.username %}"
-              >마이페이지</a
-            >
-          </div>
-          {% else %}
-          <div>
-            <a href="{% url 'account:login' %}">로그인</a>
-          </div>
-          <div>
-            <a
-              
-              href="{% url 'account:sign' %}"
-              >회원가입</a
-            >
-          </li>
-          {% endif %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header class="header">
+    <a href="{% url 'meetapp:post_home' %}">ConcertMeet</a>
+    <form class="search-form" action="{% url 'meetapp:search_result' %}"
+      style="box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);">
+      <input type="search" id="keyword" name="keyword" placeholder="검색하기" style="padding-left: 5%;">
+      <!-- <input type="submit" value="찾기" /> -->
+    </form>
+    <!-- <h4 id="clock" style="margin-left: 3%;">00:00:00</h4> -->
+    <div class="top_right" style="justify-content: center;">
+      {% if user.is_authenticated %}
+      <div>
+        <a aria-current="page" id="logout" onclick="logout();" href="{% url 'account:logout' %}"
+          class="right_one">로그아웃</a>
+      </div>
+      <div>
+        <a href=" {% url 'account:user' user.username %}" class="right_two">마이페이지</a>
+      </div>
+      {% else %}
+      <div class="right_one">
+        <a href="{% url 'account:login' %}" class="right_one">로그인</a>
+      </div>
+      <div>
+        <a href="{% url 'account:sign' %}" class="right_two">회원가입</a>
+        </li>
+        {% endif %}
         </ul>
       </div>
       
