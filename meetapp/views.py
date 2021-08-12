@@ -248,6 +248,10 @@ def pcp_add(request, post_id, comment_id):
         post.pcp.pcp_user_count += 1
         post.pcp.save()
         post.save()
+        add_user = UserInfo.objects.get(username=comment.user.username)
+        print(add_user.concertnum)
+        add_user.concertnum += 1
+        add_user.save()
         context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
 
     return HttpResponse(json.dumps(context), content_type="application/json")
@@ -261,6 +265,11 @@ def pcp_delete(request, post_id, comment_id):
         post.pcp.pcp_user_count -= 1
         post.pcp.save()
         post.save()
+        del_user = UserInfo.objects.get(username=comment.user.username)
+        del_user.concertnum -= 1
+        if del_user.concertnum < 0:
+            del_user.concertnum = 0
+        del_user.save()
         context = {'status': 1, 'pcp_user_count': post.pcp.pcp_user_count}
     else:
         context = {'status': 0}
