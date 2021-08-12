@@ -103,6 +103,11 @@ def post_new(request):
             post = form.save(commit=False)
             post.user = UserInfo.objects.get(userkey=request.user)
             pcp = Participant.objects.create(created_user=post.user)
+            try:
+                max_pcp = request.POST.get('max_pcp')
+                pcp.pcp_user_total = max_pcp
+            except:
+                pass
             pcp.save()
             post.pcp = pcp
             post.save()
@@ -123,6 +128,12 @@ def post_edit(request, post_id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post.hit -= 1
+            try:
+                max_pcp = request.POST.get('max_pcp')
+                post.pcp.pcp_user_total = max_pcp
+                post.pcp.save()
+            except:
+                pass
             post = form.save()
             return redirect('meetapp:post_detail', post_id=post.id)
 
