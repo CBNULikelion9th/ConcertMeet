@@ -1,13 +1,51 @@
 {% extends 'meetapp/base.html' %}
 
 {% block content %}
-<h1>글 수정하기</h1>
-<hr>
-<form action="{% url 'meetapp:post_edit' post.id %}" method="POST">
+{% load static %}
+
+<title>글 수정하기 - ConcertMeet</title>
+<head>
+    <link rel="stylesheet" href="{% static 'css/post_edit.css' %}" />
+</head>
+
+<section id="main">
+    <form action="{% url 'meetapp:post_edit' post.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p}}
-    <input type="submit" value='수정완료'>
-    <a href="{% url 'meetapp:post_detail' post.id %}"><input type="button" value ='취소'></a>
-</form>
+
+    <div class="title">
+        <h1>콘서트메이트 구하기</h1>
+    </div>
+
+    <div class="form">
+        <h2>카테고리</h2>
+        <h4>힙합 | 발라드 | 내한공연 | 락 | 재즈 | 페스티벌 | 인디 | 기타 </h4>
+        # {{ form.category }}
+
+        <h2>총 참가 인원수</h2>
+        <input type="number" id="max_pcp" name="max_pcp" value="{{ post.pcp.pcp_user_total }}" step="1" min="2"> 명
+        
+        <h2>제목</h2>
+        {{ form.title }}
+        
+        <h2>내용</h2>
+        {{ form.content }}
+    </div>
+
+    <div class="submit">
+        <input type="submit" value=' 완료 ' class="btn btn-dark">
+        <a href="{% url 'meetapp:post_detail' post.id %}"><input type="button" class="btn btn-dark" value =' 취소 '></a>
+    </div>
+
+    </form>
+
+</section>
+
+<script>
+    $("#max_pcp").change('propertychange change keyup mouseup paste input', function (){
+        var cur_pcp = $(this).val;
+        if(cur_pcp < 2)
+            alert("참가자는 2명 이상이어야 합니다.");
+    });
+</script>
 
 {% endblock content %}
