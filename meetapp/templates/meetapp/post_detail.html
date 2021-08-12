@@ -80,8 +80,7 @@
                             <button onclick="deletecmtfunc();" class="btn btn-dark">삭제</button>
                         </a>
                         {% endif %}
-                        {% if request.user.username == post.user.username and comment.user.username !=
-                        request.user.username %}
+                        {% if request.user.username == post.user.username and comment.user.username != request.user.username %}
                         <a>
                             <input type="hidden" id="pcp_url" name="pcp_url"
                                 value="{% url 'meetapp:pcp_add' post.id comment.id %}">
@@ -90,6 +89,7 @@
                             <button id="pcp_btn" onclick="addpcpfunc();" class="btn btn-dark">참가자 추가</button>
                             <button id="del_pcp_btn" onclick="delpcpfunc();" class="btn btn-dark">참가자 삭제</button>
                         </a>
+                        {% endif %}
                         {% if comment.user.username != request.user.username %}
                         <a href="{% url 'meetapp:comment_declaration' post.id comment.id %}"><input type="button"
                                 class="btn btn-dark" value='신고'></a>

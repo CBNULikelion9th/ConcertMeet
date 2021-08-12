@@ -20,3 +20,9 @@
   font-size: 1rem;
   background: gold;
 }
+
+@media (max-width: 420px){
+  .search-form {
+    height: 25px;
+  }
+}
