@@ -13,16 +13,14 @@
 }
 .title > h1 {
     display: block;
-    font-size: 20px;
     margin-left: 2rem;
     font-family: notosans;
     font-weight: bold;
 }
   
-.title > a {
-    margin-right: 5%;
+.button {
+    margin-right:5%;
 }
-
 .form {
     margin-left:2rem;
 }
@@ -62,6 +60,7 @@
     height: 30px;
 }
   
+
 @media (max-width: 1980px) {
     #main {
         width: 1480px;
