@@ -2,9 +2,12 @@
 {% block content %}
 {% load static %}
 
+<title>새 글 쓰기 - ConcertMeet</title>
+
 <head>
     <link rel="stylesheet" href="{% static 'css/post_new.css' %}" />
 </head>
+
 
 <section id="main">
     <div class="title">
@@ -19,7 +22,7 @@
             # {{ form.category }}
 
             <h2>참가자</h2>
-            <input type="number" id="max_pcp" name="max_pcp"> 명
+            <input type="number" id="max_pcp" name="max_pcp" step="1" min="2"> 명
 
             <h2>제목</h2>
             {{ form.title }}
@@ -36,4 +39,14 @@
     </form>
 
 </section>
+
+<script>
+    $("#max_pcp").bind('keyup mouseup', function(){
+        var cur_pcp = $(this).val;
+        console.log(cur_pcp);
+        if(cur_pcp < 2)
+            alert("참가자는 2명 이상이어야 합니다.");
+    });
+</script>
+
 {% endblock content %}

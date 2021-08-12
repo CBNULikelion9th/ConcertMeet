@@ -128,6 +128,12 @@ def post_edit(request, post_id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post.hit -= 1
+            try:
+                max_pcp = request.POST.get('max_pcp')
+                post.pcp.pcp_user_total = max_pcp
+                post.pcp.save()
+            except:
+                pass
             post = form.save()
             return redirect('meetapp:post_detail', post_id=post.id)
 
