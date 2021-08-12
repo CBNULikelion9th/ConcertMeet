@@ -45,6 +45,11 @@ a, a:hover {
   margin-left: 30px;
 }
 
+.header .search-form button {
+  border: none;
+  background-color: white;
+}
+
 .top_right {
   margin-left: auto;
   display: flex;
