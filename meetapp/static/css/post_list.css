@@ -31,7 +31,7 @@ a:hover {
 .post_element {
   position: relative;
   text-decoration: none;
-  margin-left: 2vw;
+  margin-left: 8.5%;
   background-color: #e2e2e2;
   max-width: 1860px;
   height: 120px;
@@ -79,6 +79,12 @@ a:hover {
   font-style: normal;
   line-height: 18px;
   color: #000000;
+}
+
+.chapter {
+  margin-top: 5%;
+  padding-bottom: 7%;
+  margin-left: 48%;
 }
 
 .info {

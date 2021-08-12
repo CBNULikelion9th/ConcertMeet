@@ -1,55 +1,63 @@
 {% extends 'meetapp/base.html' %} {% block content %} {% load static %}
 <br />
 <html>
-  <title>ConcertMeet</title>
-  <head>
-    <link rel="stylesheet" href="{% static 'css/post_home.css' %}" />
-  </head>
-  <body>
-    <!-- 곧 진행될 공연 -->
-    <section id="today_concert">
-      <div class="metadata">
-        <a href="{% url 'meetapp:content_list' %}"><span class="title">곧 진행될 콘서트</span></a>
-      </div>
+<title>ConcertMeet</title>
 
-      <div class="home_list">
-        {% for concert in concert_list %}
-        <div class="home_concert">
-          <div class="home_concert_info">
-            <img src="{{ concert.image_url}}" />
-            <div>{{concert.title}}</div>
-            <div>{{concert.location}}</div>
-            <div>{{concert.date}}</div>
-          </div>
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="{% static 'css/post_home.css' %}" />
+</head>
+
+<body>
+  <!-- 곧 진행될 공연 -->
+  <section id="today_concert">
+    <div class="metadata">
+      <a href="{% url 'meetapp:content_list' %}"><span class="title">현재 진행중인 공연</span></a>
+    </div>
+
+    <div class="home_list">
+      {% for concert in concert_list %}
+      <div class="home_concert">
+        <div class="home_concert_info">
+          <img src="{{ concert.image_url}}" />
+          <div>{{concert.title}}</div>
+          <div>{{concert.location}}</div>
+          <div>{{concert.date}}</div>
         </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- 콘서트 메이트 -->
+  <section id="concert_mate">
+    <div class="metadata">
+      <a href="{% url 'meetapp:post_list' %}"><span class="title">인기글</span></a>
+    </div>
+
+    <div class="popular_list">
+      <table>
+        <tr>
+          <th colspan="3">제목</th>
+          <th colspan="1">작성자</th>
+          <th colspan="1">조회수</th>
+        </tr>
+        {% for post in posts %}
+        <tr>
+          <td colspan="3"><a href="{% url 'meetapp:post_detail' post.id %}" class="pop_link">
+              <p>{{ post.title }}</p>
+            </a></td>
+          <td colspan="1">
+            <p>{{ post.user.name }}</p>
+          </td>
+          <td colspan="1">{{ post.hit }}</td>
+        </tr>
         {% endfor %}
-      </div>
-    </section>
+      </table>
+    </div>
+  </section>
+</body>
 
-    <!-- 콘서트 메이트 -->
-    <section id="concert_mate">
-      <div class="metadata">
-        <a href="{% url 'meetapp:post_list' %}"><span class="title">인기글</span></a>
-      </div>
-      
-      <div class="popular_list">
-        <table>
-          <tr>
-            <th colspan="3">제목</th>
-            <th colspan="1">작성자</th>
-            <th colspan="1">조회수</th>
-          </tr>
-          {% for post in posts %}
-          <tr>
-            <td colspan="3"><a href="{% url 'meetapp:post_detail' post.id %}" class="pop_link"><p>{{ post.title }}</p></a></td>
-            <td colspan="1"><p>{{ post.user.name }}</p></td>
-            <td colspan="1">{{ post.hit }}</td>
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
-    </section>
-  </body>
+{% endblock content %}
 
-  {% endblock content %}
 </html>

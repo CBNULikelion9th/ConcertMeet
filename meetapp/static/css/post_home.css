@@ -154,31 +154,17 @@ section {
 
 /* 모바일 */
 @media (max-width: 420px){
-  .header{ 
+  .today_concert{ 
     max-width: 350px;
   }
-  .header a,
-  .right_one a,
-  .right_two a {
-    font-size: 11px;
+  .title{
+    font-size: 12px;
   }
-  .search-form{
-    width: 100px;
+  .home_concert_info img {
+    width: 75px;
+    height: 110px;
   }
-  .menu {
-    max-width: 350px;
-  }
-  .menu-link {
+  .home_concert_info {
     font-size: 10px;
-  }
-  .quickmenu {
-    position:absolute;
-    width:50px;
-    top:50%;
-    margin-top:-50px;
-    right:1%;
-  }
-  .metadata {
-    
   }
 }

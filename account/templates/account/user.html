@@ -2,149 +2,161 @@
 {% block content %}
 {% load static %}
 <html>
-    <head>
-        <title>{{ info.name }}의 프로필 - ConcertMeet</title>
-        <link rel="stylesheet" href="{% static 'post_user.css' %}">
-        <style>
-            ul {
-                list-style: none;
-                padding-left: 0px;
-            }
-            a {
-                text-decoration: none;
-                color: black;
-            }
-            a:hover {
-                text-decoration: none;
-                color: black;
-            }
-        </style>
-    </head>
 
-    <body>
-        <section id="profile_main">
-            <div class="part_one">
-                <div class="user_name">
-                    <h1>{{ info.name }}</h1>
-                    &nbsp;&nbsp;
-                    <p>{{ age }}세 {{ info.gender }}</p>
-                    &nbsp;&nbsp;
-                    {% if info.interests %}
-                    {% for interest in info.interests %}
-                    <p style="color: blueviolet;">&nbsp;#{{ interest }}&nbsp;</p>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-                        
-                <div class="self_photo">
-                    {% if info.profpic %}
-                    <img src="{{ info.profpic.url }}" width="210px", height="210px" style="border-radius: 50%;">
-                    {% else %}
-                    <img src="{% static 'defpropic/default-profile-pic.png' %}" width="210px", height="210px" style="border-radius: 50%;">
-                    {% endif %}
-                </div>
+<head>
+    <title>{{ info.name }}의 프로필 - ConcertMeet</title>
+    <link rel="stylesheet" href="{% static 'post_user.css' %}">
+    <style>
+        ul {
+            list-style: none;
+            padding-left: 0px;
+        }
 
-                <div class="follow_button">
-                    {% if isFollowed == 2 %}
-                    <button><a href ="{% url 'account:unfollow' info.username %}">언팔로우</a></button>
-                    {% elif isFollowed == 3 %}
-                        {% if user.is_authenticated %}
-                        <button><a href ="{% url 'account:follow' info.username %}">팔로우</a></button>
-                        {% else %}
-                        <button onclick="alert('로그인하세요');"><a href ="{% url 'account:login' %}">팔로우</a></button>
-                        {% endif %}
-                    {% elif isFollowed == -1 %}
-                    <button><a href ="{% url 'account:user_edit' info.username %}">정보 수정</a></button>
-                    {% endif %}
-                </div>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="profile_main">
+        <div class="part_one">
+            <div class="user_name">
+                <h1>{{ info.name }}</h1>
+                &nbsp;&nbsp;
+                <p>{{ age }}세 {{ info.gender }}</p>
+                &nbsp;&nbsp;
+                {% if info.interests %}
+                {% for interest in info.interests %}
+                <p style="color: blueviolet;">&nbsp;#{{ interest }}&nbsp;</p>
+                {% endfor %}
+                {% endif %}
             </div>
 
-            <div class="self_content">
-                <br>
-                <p>{{ info.introduction }}</p>
+            <div class="self_photo">
+                {% if info.profpic %}
+                <img src="{{ info.profpic.url }}" width="210px" , height="210px" style="border-radius: 50%;">
+                {% else %}
+                <img src="{% static 'defpropic/default-profile-pic.png' %}" width="210px" , height="210px"
+                    style="border-radius: 50%;">
+                {% endif %}
             </div>
 
-            <div class="follow">
-                <p>팔로잉수</p>
-                <p>{{ info.following }}</p>
-                <hr>
-                <p>팔로워수</p>
-                <p>{{ info.follower }}</p>
-                <hr>
-                <p>다녀온공연</p>
-                <p>{{ info.concertnum }}</p>
-            </div>           
-        </section>
+            <div class="follow_button">
+                {% if isFollowed == 2 %}
+                <button style="font-size: 17px;"><a href="{% url 'account:unfollow' info.username %}">언팔로우</a></button>
+                {% elif isFollowed == 3 %}
+                {% if user.is_authenticated %}
+                <button style="font-size: 17px;"><a href="{% url 'account:follow' info.username %}">팔로우</a></button>
+                {% else %}
+                <button style="font-size: 17px;" onclick="alert('로그인하세요');"><a
+                        href="{% url 'account:login' %}">팔로우</a></button>
+                {% endif %}
+                {% elif isFollowed == -1 %}
+                <button style="font-size: 17px;"><a href="{% url 'account:user_edit' info.username %}">정보
+                        수정</a></button>
+                {% endif %}
+                <button style="font-size: 17px;"><a href="{% url 'account:follow_list' info.username %}">팔로우
+                        리스트</a></button>
+            </div>
+        </div>
 
-        <section id="review">
-            <!-- <div class="review_title">
+        <div class="self_content">
+            <br>
+            <p style="font-size: 15px;">{{ info.introduction }}</p>
+        </div>
+
+        <div class="follow">
+            <p>팔로잉수</p>
+            <p style="font-size: 30px;">{{ info.following }}</p>
+            <hr>
+            <p>팔로워수</p>
+            <p style="font-size: 30px;">{{ info.follower }}</p>
+            <hr>
+            <p>다녀온공연</p>
+            <p style="font-size: 30px;">{{ info.concertnum }}</p>
+        </div>
+    </section>
+
+    <section id="review">
+        <!-- <div class="review_title">
                 <p>후기</p>
                 {% if user.is_authenticated %}
                 <a href="{% url 'account:review_new' info.username %}" class='btn btn-primary float-end'>후기 작성</a>
                 {% endif %}
             </div> -->
-            
-            <div class="comment">
-                <ul>
-                    {% for review in reviews %}  
-                    <li>
-                        <br>
-                        <div class="comment_user_info">
 
-                            <div class="comment_user_photo">
-                                {% if review.user_info.profpic %}
-                                <img src="{{ review.user_info.profpic.url }}" width="50px", height="50px" style="border-radius: 50%;">
-                                {% else %}
-                                <img src="{% static 'defpropic/default-profile-pic.png' %}" width="50px", height="50px" style="border-radius: 50%;">
-                                {% endif %}
-                            </div>
-                         
-                            <div class="comment_user_etc">
-                                <strong style="display: inline-block;"><a href="{% url 'account:user' review.user_id %}">{{ review.user_id }}</a></strong>
-                                <p style="display: inline-block;">{{ review.age }}세 {{ review.user_info.gender }}</p>
-                            </div>
-                                
-                        
-                            {% comment %} <div class="comment_concert">
-                                <p>{{ review.post.title }}</p>
-                            </div> {% endcomment %}
-                            
-                            <div class="comment_date">
-                                <p>{{ review.created_at|date:"Y.m.d A h:i" }}</p>
-                            </div>
-                              
-                        </div>
-
-                        <div class="message">
-                            &nbsp;&nbsp;{{ review.message }}
-                        </div>
-                            {% if review.user_id == user.username %}
-                            <div class="message_button">
-                                <button><a href="{% url 'account:review_edit' info.username review.id %}">
-                                    수정
-                                </a></button>
-                                <button onclick="delete_alert()" >삭제</button>
-                                <script>
-                                    function delete_alert() {
-                                        var res = confirm("정말 삭제하시겠습니까?");
-                                        if(res) {
-                                            location.href="{% url 'account:review_delete' info.username review.id %}";
-                                        }
-                                        else {
-                                            alert("취소되었습니다.");
-                                        }
-                                    }
-                                </script>
-                            </div>  
-                            {% endif %}
-
-                    </li>
+        <div class="comment">
+            <ul>
+                {% for review in reviews %}
+                <li>
                     <br>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-        </section>
-        {% endblock content %}
-    </body>
+                    <div class="comment_user_info">
+
+                        <div class="comment_user_photo">
+                            {% if review.user_info.profpic %}
+                            <img src="{{ review.user_info.profpic.url }}" width="50px" , height="50px"
+                                style="border-radius: 50%;">
+                            {% else %}
+                            <img src="{% static 'defpropic/default-profile-pic.png' %}" width="50px" , height="50px"
+                                style="border-radius: 50%;">
+                            {% endif %}
+                        </div>
+
+                        <div class="comment_user_etc">
+                            <strong style="display: inline-block;"><a href="{% url 'account:user' review.user_id %}">{{
+                                    review.user_id }}</a></strong>
+                            <p style="display: inline-block;">{{ review.age }}세 {{ review.user_info.gender }}</p>
+                        </div>
+
+
+                        {% comment %} <div class="comment_concert">
+                            <p>{{ review.post.title }}</p>
+                        </div> {% endcomment %}
+
+                        <div class="comment_date">
+                            <p>{{ review.created_at|date:"Y.m.d A h:i" }}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="message">
+                        &nbsp;&nbsp;{{ review.message }}
+                    </div>
+                    {% if review.user_id == user.username %}
+                    <div class="message_button">
+                        <button><a href="{% url 'account:review_edit' info.username review.id %}">
+                                수정
+                            </a></button>
+                        <button onclick="delete_alert()">삭제</button>
+                        <script>
+                            function delete_alert() {
+                                var res = confirm("정말 삭제하시겠습니까?");
+                                if (res) {
+                                    location.href = "{% url 'account:review_delete' info.username review.id %}";
+                                }
+                                else {
+                                    alert("취소되었습니다.");
+                                }
+                            }
+                        </script>
+                    </div>
+                    {% endif %}
+
+                </li>
+                <br>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </section>
+    {% endblock content %}
+</body>
+
 </html>
