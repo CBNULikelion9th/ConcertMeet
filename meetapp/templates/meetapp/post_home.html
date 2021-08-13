@@ -1,135 +1,63 @@
 {% extends 'meetapp/base.html' %} {% block content %} {% load static %}
 <br />
 <html>
-  <head>
-    <link rel="stylesheet" href="{% static 'css/post_home.css' %}" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+<title>ConcertMeet</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- 곧 진행될 공연 -->
-    <section id="main" class="today_concert">
-      <div class="metadata">
-        <span class="title">오늘 진행되고 있는 공연</span>
-      </div>
-      <div class="home_list">
-        {% for concert in concert_list %}
-        <div class="home_concert">
-          <div class="home_concert_info">
-            <img src="{{ concert.image_url}}" />
-            <div>{{concert.title}}</div>
-            <div>{{concert.location}}</div>
-            <div>{{concert.date}}</div>
-          </div>
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="{% static 'css/post_home.css' %}" />
+</head>
+
+<body>
+  <!-- 곧 진행될 공연 -->
+  <section id="today_concert">
+    <div class="metadata">
+      <a href="{% url 'meetapp:content_list' %}"><span class="title">현재 진행중인 공연</span></a>
+    </div>
+
+    <div class="home_list">
+      {% for concert in concert_list %}
+      <div class="home_concert">
+        <div class="home_concert_info">
+          <img src="{{ concert.image_url}}" />
+          <div>{{concert.title}}</div>
+          <div>{{concert.location}}</div>
+          <div>{{concert.date}}</div>
         </div>
-        {% endfor %}
       </div>
-    </section>
+      {% endfor %}
+    </div>
+  </section>
 
-    <!-- 콘서트 메이트 -->
-    <section class="concert_mate">
-      <span class="title">콘서트 메이트 구해요</span>
-      <a href="{% url 'meetapp:post_list' %}"
-        ><span class="more_info">더보기</span></a
-      >
-      <ul class="card-list">
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">Lorem ipsum.</div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam! Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Sit libero in
-            ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-        <li class="card-item">
-          <figure class="card-image" style="background-image: url()">
-            <img src="" alt="" />
-          </figure>
-          <div class="card-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit libero
-            in ratione dicta nihil corporis illo odio, voluptatem a nam!
-          </div>
-        </li>
-      </ul>
-      <footer class="footer"><h4 id="clock">00:00:00</h4></footer>
-    </section>
+  <!-- 콘서트 메이트 -->
+  <section id="concert_mate">
+    <div class="metadata">
+      <a href="{% url 'meetapp:post_list' %}"><span class="title">인기글</span></a>
+    </div>
 
-    <!-- javascript -->
-    <script src="{% static 'js/clock.js' %}"></script>
-  </body>
+    <div class="popular_list">
+      <table>
+        <tr>
+          <th colspan="3">제목</th>
+          <th colspan="1">작성자</th>
+          <th colspan="1">조회수</th>
+        </tr>
+        {% for post in posts %}
+        <tr>
+          <td colspan="3"><a href="{% url 'meetapp:post_detail' post.id %}" class="pop_link">
+              <p>{{ post.title }}</p>
+            </a></td>
+          <td colspan="1">
+            <p>{{ post.user.name }}</p>
+          </td>
+          <td colspan="1">{{ post.hit }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </section>
+</body>
 
-  {% endblock content %}
+{% endblock content %}
+
 </html>

@@ -102,6 +102,21 @@
   #concert_list {
     max-width: 350px;
   }
+  .info_tag{
+    font-size: 15px;
+  }
+  .info_tag p:first-child {
+    width: 150px;
+    padding-left: 75px;
+  }
+  .info_tag p:nth-child(2) {
+    width: 100px;
+    padding-left: 50px;
+  }
+  .info_tag p:last-child {
+    width: 150px;
+    padding-left: 25px;
+  }
   .line {
     font-weight: 100;
     height: 100px;
@@ -117,7 +132,7 @@
   }
   .line .concert_title {
     margin: 0 0 10px 10px;
-    width: 35%;
+    width: 45%;
   }
   .line .concert_location {
     text-align: center;
@@ -125,6 +140,6 @@
     width: 35%;
   }
   .line .concert_date {
-    margin-left: 5px;
+    margin-left: 10px;
   }
 }
