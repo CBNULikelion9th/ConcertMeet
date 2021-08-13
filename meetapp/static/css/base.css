@@ -68,25 +68,25 @@ a, a:hover {
 .menu-item {
   /* flex-grow: 1; */
   width: 25%;
-  background:#64C9CF;
+  background:#4D4C7D;
   transition: 0.5s;
 }
 .menu-item:hover {
   /* flex-grow: 1.5; */
   width: 35%;
-  background:rgb(117, 115, 115);
+  background:#363062;
 }
 .menu-link {
   display: block;
   padding: 1em;
   /* font-size: 15px; */
   font-weight: bold;
-  color: #555;
+  color: #827397;
   text-decoration: none;
   text-align: center;
 }
 .menu-link:hover {
-  color: white;
+  color: #D8B9C3;
 }
 
 .footer {
