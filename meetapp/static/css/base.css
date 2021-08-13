@@ -68,7 +68,7 @@ a, a:hover {
 .menu-item {
   /* flex-grow: 1; */
   width: 25%;
-  background:#e2e2e2;
+  background:#64C9CF;
   transition: 0.5s;
 }
 .menu-item:hover {
