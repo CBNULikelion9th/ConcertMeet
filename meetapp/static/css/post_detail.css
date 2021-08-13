@@ -11,15 +11,15 @@
 
 .like {
   transition: 1s cubic-bezier(0.21, 0.04, 0.26, 0.99);
-  color: var(--gray);
+  color: var(--red);
   border: 0;
   background-color: white;
   font-size: 20px;
 }
 
-.like:hover {
+/* .like:hover {
   color: var(--red);
-}
+} */
 
 .det_container {width: 900px; margin: auto; padding-top: 30px;}
 
