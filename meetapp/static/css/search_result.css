@@ -1,0 +1,48 @@
+.page {margin: 0 auto; width: 1150px;}
+a, a:hover {text-decoration: none; color: black;}
+
+#title { justify-content: space-between; font-family: notosans; margin: 3rem auto 2rem;}
+#title h1 {font-size: 20px; font-weight: bold;}
+
+.post {height: 100px; width: 90%; background-color: #e2e2e2; margin: 3px auto; border-radius: 10px; display: flex; flex-direction: row;}
+
+/*likes*/
+.likes {display: flex; flex-direction: column; width: 10%; text-align: center; margin: auto 0;}
+.like {transition: 1s cubic-bezier(0.21, 0.04, 0.26, 0.99); color: #a5a5a5; border: 0; background-color: #e2e2e2; font-size: 20px; }
+.like:hover {color: rgb(209, 3, 3);}
+
+.post_info {width: 90%; font-family: notosans; flex-direction: row; display: inherit;}
+.post_info a {width: inherit;}
+.post_info .post_middle {width:80%; display: flex; flex-direction: column;}
+.post_info .post_middle .title {width: 100%; font-size: 20px; font-weight: bold; transform: translateY(20px);}
+.post_info .post_middle .title span {display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+.post_info .post_middle .title_wrap {display: flex; flex-direction: row;}
+.post_info .hashtag {margin-top: 2rem; display: inline-block;}
+.post_info .hashtag > .category {white-space: nowrap; background: #adc4ff; border-radius: 11px; font-weight: bold; font-size: 13px; padding: 0% 1rem 0% 1rem;}
+.post_info .hashtag > .hit {font-weight: bold; font-size: 13px; transform: translateX(20%);}
+
+
+.post_info .participants {width: 10%; margin: auto 0; font-weight: bold;}
+
+#page_nav {text-align: center;}
+
+@media screen and (max-width: 1260px) {
+    .page {margin: 0 100px; width: auto;}
+}
+
+@media screen and (max-width: 720px) {
+    .page {margin: 0 30px;}
+    .likes {width: 15%;}
+    .post_info {width: 85%;}
+    .post_info .participants {width: 10%;}
+
+    #title h1,
+    .post_info .post_middle .title {font-size: 15px;}
+
+    .post_info .hashtag  > .category,
+    .post_info .hashtag > .hit,
+    #page_nav span,
+    .post_info .participants p {font-size: 11px;}
+
+}

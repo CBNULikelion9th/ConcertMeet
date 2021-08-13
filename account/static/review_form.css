@@ -1,0 +1,27 @@
+#main {
+    width: 1000px;
+    margin: 0 auto;
+}
+  
+.title {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.title > h1 {
+    font-size: 20px;
+    font-family: notosans;
+    font-weight: bold;
+}
+
+#id_message {width: 100%; border-radius: 10px;}
+.submit {text-align: right; margin: 10px 0 50px;}
+
+
+@media screen and (max-width: 1152px) {
+    #main {width: 852px;}
+}
+
+@media screen and (max-width: 960px) {
+    #main {width: 100%; padding: 0 30px;}
+}

@@ -1,0 +1,49 @@
+{% extends 'meetapp/base.html' %}
+{% block content %}
+
+<head>
+    <title>팔로우</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+</head>
+
+<section id="follow_list">
+    <ul class="menu">
+        {% if order == "following" %}
+        <li style="background-color: #ccc;"><a href="{% url 'account:follow_list' tguser_id %}?order=following">팔로잉</a></li>
+        <li><a href="{% url 'account:follow_list' tguser_id %}?order=follower">팔로워</a></li>
+        {% elif order == "follower" %}
+        <li><a href="{% url 'account:follow_list' tguser_id %}?order=following">팔로잉</a></li>
+        <li style="background-color: #ccc;"><a href="{% url 'account:follow_list' tguser_id %}?order=follower">팔로워</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="content">
+        {% if order == "following" %}
+        {% if follow %}
+        {% for f in follow %}
+        <div class="element">
+            <a href="{% url 'account:user' f.followed_user_id %}"><h2>{{ f.followed_user_username }}</h2></a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>팔로우한 사람이 없습니다.</h2>
+        {% endif %}
+        {% elif order == "follower" %}
+        {% if follow %}
+        {% for f in follow %}
+        <div class="element">
+            <a href="{% url 'account:user' f.follow_user_id %}"><h2>{{ f.follow_user_username }}</h2></a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>나를 팔로우하는 사람이 없습니다.</h2>
+        {% endif %}
+        {% else %}
+        <h2>일시적인 오류가 발생했습니다</h2>
+        <h3>다시 시도해 주세요.</h3>
+        {% endif %}
+        
+    </div>
+</section>
+{% endblock content %}

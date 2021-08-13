@@ -50,6 +50,7 @@
                 {% endif %}
             </div>
         </section>
+<<<<<<< HEAD
         <section id="greet">
             <div class="comment">
                 <p>댓글</p>
@@ -67,6 +68,60 @@
                     </a>
                 {% endif %}
             </li><hr>
+=======
+
+        <hr>
+
+        <section id="comment"><br>
+            <h4>댓글</h4><br>
+            <form action="{% url 'meetapp:comment_new' post.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea cols="40" rows="3" class="form-control" name="message" id="message"
+                        value="{{ form.message.value|default_if_none:'' }}" placeholder="댓글로 참가 의사를 표현하세요"></textarea>
+                </div><br>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+                    <input type="submit" class="btn btn-dark" value="작성">
+                </div>
+            </form>
+
+            <ul>
+                {% for comment in post.comment_set.all %}
+                <li>
+                    <div>
+                        {% if comment.user.username == request.user.username %}
+                        <!-- <a href="{{ comment.get_edit_url }}">
+                            <button class="btn btn-dark">수정</button>
+                        </a> -->
+                        <a>
+                            <input type="hidden" id="delete_url" name="delete_url" value="{{ comment.get_delete_url }}">
+                            <button onclick="deletecmtfunc();" class="btn btn-dark">삭제</button>
+                        </a>
+                        {% endif %}
+                        {% if request.user.username == post.user.username and comment.user.username != request.user.username %}
+                        <a>
+                            <input type="hidden" id="pcp_url" name="pcp_url"
+                                value="{% url 'meetapp:pcp_add' post.id comment.id %}">
+                            <input type="hidden" id="del_pcp_url" name="del_pcp_url"
+                                value="{% url 'meetapp:pcp_delete' post.id comment.id %}">
+                            <button id="pcp_btn" onclick="addpcpfunc();" class="btn btn-dark">참가자 추가</button>
+                            <button id="del_pcp_btn" onclick="delpcpfunc();" class="btn btn-dark">참가자 삭제</button>
+                        </a>
+                        {% endif %}
+                        {% if comment.user.username != request.user.username %}
+                        <a href="{% url 'meetapp:comment_declaration' post.id comment.id %}"><input type="button"
+                                class="btn btn-dark" value='신고'></a>
+                        {% endif %}
+                    </div>
+                    <div class="cmt_tit">
+                        {{ comment.user.name }} | {{ comment.created_at }} <br>
+                    </div>
+                    <div class="cmt_msg">
+                        {{ comment.message }}
+                    </div>
+
+                </li>
+>>>>>>> 877f5f4b7a603aa5db0cb6e062290ad5cee7927b
                 {% endfor %}
             </div>
             <div class="comment_submit">

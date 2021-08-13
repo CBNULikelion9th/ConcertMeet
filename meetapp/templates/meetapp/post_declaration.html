@@ -1,0 +1,24 @@
+{% extends 'meetapp/base.html' %}
+{% block content %}
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/post_declaration.css' %}" />
+</head>
+
+<section id="main">
+    <form method="POST" enctype="multipart/form-data">
+        <div class="title">
+            <h1>신고 사유</h1>
+        </div>
+    {% csrf_token %}
+    <div class="form_message">
+        {{ form.message }}
+    </div>
+    <br>
+    <div class="d-grid gap-2 col-5 mx-auto">
+        <button class="btn btn-outline-secondary" type="submit">접수</button>
+    </div>
+    </form>
+</section>
+{% endblock content %}

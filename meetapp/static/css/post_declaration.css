@@ -1,0 +1,37 @@
+#main {
+  max-width: 2060px;
+  margin: 0 auto;
+}
+
+.title > h1 {
+  position: relative;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  font-family: notosans;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.form_message {
+  text-align: center;
+}
+
+#id_message {
+  width: 500px;
+  height: 300px;
+}
+
+@media (max-width: 1980px) {
+    #main {
+      width: 1480px;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (max-width: 1680px) {
+    #main {
+      width: 1180px;
+      margin: 0 auto;
+    }
+  }
