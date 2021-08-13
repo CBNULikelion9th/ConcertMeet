@@ -28,7 +28,7 @@
     <section id="profile_main">
         <div class="part_one">
             <div class="user_name">
-                <h1>{{ info.name }}</h1>
+                <h1 style="font-size: 20px;">{{ info.name }}</h1>
                 &nbsp;&nbsp;
                 <p>{{ age }}세 {{ info.gender }}</p>
                 &nbsp;&nbsp;
@@ -62,7 +62,7 @@
                 <button style="font-size: 17px;"><a href="{% url 'account:user_edit' info.username %}">정보
                         수정</a></button>
                 {% endif %}
-                
+
             </div>
         </div>
 
@@ -70,7 +70,7 @@
             <p>{{ info.introduction }}</p>
         </div>
 
-        <div class="follow">
+        <div class="follow" style="font-size: 20px;">
             <a href="{% url 'account:follow_list' info.username %}?order=following">
                 <p>팔로잉수</p>
                 <p>{{ info.following }}</p>
@@ -105,7 +105,8 @@
                         </div>
 
                         <div class="comment_user_etc">
-                            <strong style="display: inline-block;"><a href="{% url 'account:user' review.user_id %}">{{review.user_id }}</a></strong>
+                            <strong style="display: inline-block;"><a
+                                    href="{% url 'account:user' review.user_id %}">{{review.user_id }}</a></strong>
                             <!-- <p style="display: inline-block;">{{ review.age }}세 {{ review.user_info.gender }}</p> -->
                         </div>
 

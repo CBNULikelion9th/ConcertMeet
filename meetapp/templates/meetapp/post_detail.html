@@ -42,7 +42,8 @@
                     </button>
                 </a>
                 {% if is_pcp %}
-                <a href="{% url 'account:review_new' post.user.username %}"><button class="btn btn-dark">후기 작성</button></a>
+                <a href="{% url 'account:review_new' post.user.username %}"><button class="btn btn-dark">후기
+                        작성</button></a>
                 {% endif %}
                 <a href="{% url 'meetapp:post_declaration' post.id %}"><button class="btn btn-dark">신고</button></a>
                 {% endif %}
@@ -78,7 +79,8 @@
                             <button onclick="deletecmtfunc();" class="btn btn-dark">삭제</button>
                         </a>
                         {% endif %}
-                        {% if request.user.username == post.user.username and comment.user.username != request.user.username %}
+                        {% if request.user.username == post.user.username and comment.user.username !=
+                        request.user.username %}
                         <a>
                             <input type="hidden" id="pcp_url" name="pcp_url"
                                 value="{% url 'meetapp:pcp_add' post.id comment.id %}">
