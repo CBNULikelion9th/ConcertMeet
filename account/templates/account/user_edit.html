@@ -77,14 +77,13 @@
                 <div class="form-group">
                     <label>생년월일</label>
                     <br>
-                    <input type="date" class="form-control" name="date_of_birth" id="date_of_birth"
+                    <input type="text" class="form-control" name="date_of_birth" id="date_of_birth"
                     value="{{ infoform.date_of_birth.value|default_if_none:'' }}">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display: none;">
                     <label>성별</label>
                     <br>
-                    남자 <input type="radio" name="gender" value="남자">&nbsp;
-                    여자 <input type="radio" name="gender" value="여자">&nbsp;
+                    {{infoform.gender}}
                 </div>
                 <div>
                     <label>프로필 사진</label>
