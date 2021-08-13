@@ -28,7 +28,7 @@
     <section id="profile_main">
         <div class="part_one">
             <div class="user_name">
-                <h1 style="font-size: 20px;">{{ info.name }}</h1>
+                <h1>{{ info.name }}</h1>
                 &nbsp;&nbsp;
                 <p>{{ age }}세 {{ info.gender }}</p>
                 &nbsp;&nbsp;
@@ -70,7 +70,7 @@
             <p>{{ info.introduction }}</p>
         </div>
 
-        <div class="follow" style="font-size: 20px;">
+        <div class="follow">
             <a href="{% url 'account:follow_list' info.username %}?order=following">
                 <p>팔로잉수</p>
                 <p>{{ info.following }}</p>

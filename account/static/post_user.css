@@ -25,6 +25,7 @@
 .user_name > h1 {
   font-style: normal;
   font-weight: bold;
+  font-size: 20px;
 }
 .user_name > p {
   font-size: 17px;
@@ -91,7 +92,6 @@
   font-weight: bolder;
   text-align: center;
   font-size: 20px;
-  
 }
 
 .follow > p {
@@ -236,6 +236,10 @@
     position: absolute;
     top: 90%;
   }
+  .follow a {
+    display: flex;
+  }
+  .follow > a > p,
   .follow > p {
     font-size: 15px;
     margin-left: 10px;

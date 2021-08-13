@@ -45,17 +45,17 @@
       {% if user.is_authenticated %}
       <div>
         <a aria-current="page" id="logout" onclick="logout();" href="{% url 'account:logout' %}"
-          style="font-size: 15px;">로그아웃</a>
+          >로그아웃</a>
       </div>
       <div>
-        <a href="{% url 'account:user' user.username %}" style="font-size: 15px;">마이페이지</a>
+        <a href="{% url 'account:user' user.username %}">마이페이지</a>
       </div>
       {% else %}
       <div>
-        <a href="{% url 'account:login' %}" style="font-size: 15px;">로그인</a>
+        <a href="{% url 'account:login' %}">로그인</a>
       </div>
       <div>
-        <a href="{% url 'account:sign' %}" style="font-size: 15px;">회원가입</a>
+        <a href="{% url 'account:sign' %}">회원가입</a>
         </li>
         {% endif %}
         </ul>
@@ -63,12 +63,12 @@
 
   </header>
   <ul class="menu">
-    <li class="menu-item"><a href="{% url 'meetapp:post_home' %}" class="menu-link" style="font-size: 17px;">메인</a></li>
-    <li class="menu-item"><a href="{% url 'meetapp:content_list' %}" class="menu-link" style="font-size: 17px;">공연</a>
+    <li class="menu-item"><a href="{% url 'meetapp:post_home' %}" class="menu-link">메인</a></li>
+    <li class="menu-item"><a href="{% url 'meetapp:content_list' %}" class="menu-link">공연</a>
     </li>
-    <li class="menu-item"><a href="{% url 'meetapp:post_list' %}" class="menu-link" style="font-size: 17px;">커뮤니티</a>
+    <li class="menu-item"><a href="{% url 'meetapp:post_list' %}" class="menu-link">커뮤니티</a>
     </li>
-    <li class="menu-item"><a href="http://ticket.interpark.com/" class="menu-link" style="font-size: 17px;">예매</a></li>
+    <li class="menu-item"><a href="http://ticket.interpark.com/" class="menu-link">예매</a></li>
   </ul>
 
   <div class="quickmenu">
