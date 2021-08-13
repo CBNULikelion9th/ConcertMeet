@@ -30,7 +30,14 @@
             <div class="user_name">
                 <h1>{{ info.name }}</h1>
                 &nbsp;&nbsp;
-                <p>{{ age }}세 {{ info.gender }}</p>
+                <p>
+                    {% if age >= 0 %}
+                    {{ age }}세
+                    {% endif %}
+                    {% if info.gender %}
+                    {{ info.gender }}
+                    {% endif %}
+                </p>
                 &nbsp;&nbsp;
                 {% if info.interests %}
                 {% for interest in info.interests %}
@@ -107,7 +114,6 @@
                         <div class="comment_user_etc">
                             <strong style="display: inline-block;"><a
                                     href="{% url 'account:user' review.user_id %}">{{review.user_id }}</a></strong>
-                            <!-- <p style="display: inline-block;">{{ review.age }}세 {{ review.user_info.gender }}</p> -->
                         </div>
 
 

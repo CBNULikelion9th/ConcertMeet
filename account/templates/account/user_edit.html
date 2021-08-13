@@ -39,23 +39,32 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-5">
-                    <div class="form-group">
-                        <label>비밀번호 <b>*</b></label>
-                        <input type="password" class="form-control" name="password1" id="password1" placeholder="8자 이상 입력"
-                        value="{{ infoform.password1.value|default_if_none:'' }}" disabled>
+                    <div class="col-sm-8">
+                        <label for="id_old_password">기존 비밀번호</label>
+                        <input type="password" class="form-control" name="old_password" autocomplete="current-password" autofocus="" required="" id="id_old_password">
                     </div>
+                    <div class="col-sm-8">
+                        <label for="id_new_password1">새 비밀번호</label>
+                        <input type="password" class="form-control" name="new_password1" autocomplete="new-password" required="" id="id_new_password1">
                     </div>
-                    <div class="col-sm-5">
-                    <div class="form-group">
-                        <label>비밀번호 확인 <b>*</b></label>
-                        <input type="password" class="form-control" name="password2" id="password2" placeholder="8자 이상 입력"
-                        value="{{ infoform.password2.value|default_if_none:'' }}" disabled>
-                    </div>
+                    <div class="col-sm-8">
+                        <label for="id_new_password2">새 비밀번호 (확인)</label>
+                        <input type="password" class="form-control" name="new_password2" autocomplete="new-password" required="" id="id_new_password2">
                     </div>
                     <div class="col-sm-2">
                     <br>
                     <input type="button" id="confirm" class="btn btn-dark" value="확인" onclick="con();" disabled>
+                    </div>
+                    <div class="col-sm-12">
+                        <span class="helptext" style="font-family: notosans; font-size: 8px;">
+                            <ul>
+                                <li>* 다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.</li>
+                                <li>* 비밀번호는 최소 8자 이상이어야 합니다.</li>
+                                <li>* 통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.</li>
+                                <li>* 숫자로만 이루어진 비밀번호는 사용할 수 없습니다.</li>
+                            </ul>
+                            <br>
+                        </span>
                     </div>
                 </div>
             
@@ -119,6 +128,17 @@
             </div>
             <div style="height: 100px;"></div>
         </section>
+
+        {% if infoform.interests %}
+        {% for interest in infoform.interests %}
+        {{ interest }}
+        <input type="text" id="{{ interest.key }}" value="{{ interest.value }}">
+        {% endfor %}
+        {% endif %}
+
+        <script>
+
+        </script>
         {% endblock content %}
     </body>
 </html>

@@ -1,4 +1,6 @@
 from django.db.models.fields.related import ForeignObject
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.db.models import Q
@@ -15,7 +17,10 @@ def user(request, user_id):
         reviews = Review.objects.filter(tguser_id=user_id)
     except Review.DoesNotExist:
         reviews = ""
-    age = infos.get_age()
+    if infos.date_of_birth:
+        age = infos.get_age()
+    else:
+        age = -1
 
     if request.user.username != user_id:
         if request.user.username:
@@ -51,21 +56,32 @@ def user_edit(request, user_id):
 
     info = UserInfo.objects.get(username=user_id)
     if request.method == 'POST':
+        psForm = PasswordChangeForm(request.user, request.POST)
         infoForm = UserInfoForm(request.POST, instance=info)
         infoForm.gender = request.POST.get('gender')
         tempinterests = request.POST.getlist('interests')
         M = dict(zip(tempinterests, range(1, len(tempinterests) + 1)))
 
+        if psForm.is_valid():
+            user = psForm.save()
+            update_session_auth_hash(request, user)  # Important!
+        else:
+            print("invalid")
+
         if infoForm.is_valid():
             info = infoForm.save(commit=False)
             info.interests = json.dumps(M)
+            if request.POST.get('password1'):
+                print(request.POST.get('password1'))
+                info.userkey.password = request.POST.get('password1')
             info.save()
             return redirect('account:user', user_id)
         else:
             print("invalid")
     else:
+        passwordForm = PasswordChangeForm(request.user)
         infoForm = UserInfoForm(instance=info)
-    return render(request, 'account/user_edit.html', {'user_id': user_id, 'infoform': infoForm, 'cur_info': info})
+    return render(request, 'account/user_edit.html', {'user_id': user_id, 'psform': passwordForm, 'infoform': infoForm, 'cur_info': info})
 
 
 def login(request):
